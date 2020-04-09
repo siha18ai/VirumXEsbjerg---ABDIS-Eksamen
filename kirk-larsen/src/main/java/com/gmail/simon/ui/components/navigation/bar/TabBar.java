@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.components.navigation.bar;
 
+import com.gmail.simon.ui.views.StartPage;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
@@ -51,7 +52,7 @@ public class TabBar extends FlexBoxLayout {
 
 		addTab = UIUtils.createSmallButton(VaadinIcon.PLUS);
 		addTab.addClickListener(e -> tabs
-				.setSelectedTab(addClosableTab("New Tab", Home.class)));
+				.setSelectedTab(addClosableTab("New Tab", StartPage.class)));
 		addTab.setClassName(CLASS_NAME + "__add-tab");
 
 		tabs = new NaviTabs();

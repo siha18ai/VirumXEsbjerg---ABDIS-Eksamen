@@ -8,6 +8,7 @@ import java.util.*;
 
 public class DummyData {
 
+
 	private static final Map<Long, Report> REPORTS = new HashMap<>();
 	private static final Map<Long, Person> PERSONS = new HashMap<>();
 	private static final Map<Long, Transaction> TRANSACTIONS = new HashMap<>();
@@ -71,6 +72,7 @@ public class DummyData {
 			"YY24 KIHB 1247 6423 1259 1594 7930 9152 68",
 			"ZZ25 VLQT 3823 3223 3206 5880 1131 3776 421"};
 	private static final String[] COMPANIES = new String[]{
+
 			"Brewer Holding Century Training", "Broadcast Electric",
 			"Chemical General Development", "Digital Agricultural Dynamics",
 			"Demondu Semiconductors", "Cota Realisations",

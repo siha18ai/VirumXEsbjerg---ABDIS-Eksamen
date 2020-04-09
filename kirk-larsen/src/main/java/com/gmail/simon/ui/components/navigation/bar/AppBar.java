@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.components.navigation.bar;
 
+import com.gmail.simon.ui.views.StartPage;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasValue;
@@ -141,7 +142,7 @@ public class AppBar extends FlexBoxLayout {
 	private void initTabs(NaviTab... tabs) {
 		addTab = UIUtils.createSmallButton(VaadinIcon.PLUS);
 		addTab.addClickListener(e -> this.tabs
-				.setSelectedTab(addClosableNaviTab("New Tab", Home.class)));
+				.setSelectedTab(addClosableNaviTab("New Tab", StartPage.class)));
 		addTab.setVisible(false);
 
 		this.tabs = tabs.length > 0 ? new NaviTabs(tabs) : new NaviTabs();
