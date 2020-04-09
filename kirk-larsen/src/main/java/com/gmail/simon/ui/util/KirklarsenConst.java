@@ -9,6 +9,7 @@ public class KirklarsenConst {
     public static final String PAGE_STATISTICS = "statistics";
     public static final String PAGE_ACCOUNTANTS = "accountants";
     public static final String PAGE_MANAGERS = "managers";
+    public static final String PAGE_EJENDOMME = "ejendomme";
 
     public static final String TITLE_LOGIN = "Login";
     public static final String TITLE_STARTPAGE = "Forside";
@@ -17,6 +18,7 @@ public class KirklarsenConst {
     public static final String TITLE_STATISTICS = "Statistics";
     public static final String TITLE_ACCOUNTANTS = "Accountants";
     public static final String TITLE_MANAGERS = "Managers";
+    public static final String TITLE_EJENDOMME = "Ejendomme";
 
 
 }
