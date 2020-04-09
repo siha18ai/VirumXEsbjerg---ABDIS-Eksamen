@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 @CssImport("./styles/misc/box-shadow-borders.css")
 @CssImport(value = "./styles/styles.css", include = "lumo-badge")
 @JsModule("@vaadin/vaadin-lumo-styles/badge")
-@PWA(name = "Kirk Larsen", shortName = "Kirk Larsen", iconPath = "images/logo-18.png", backgroundColor = "#233348", themeColor = "#233348")
+@PWA(name = "Kirk Larsen", shortName = "Kirk Larsen", iconPath = "images/logos/KirkLarsen.PNG", backgroundColor = "#233348", themeColor = "#233348")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends FlexBoxLayout
 		implements RouterLayout, PageConfigurator, AfterNavigationObserver {
@@ -122,6 +122,8 @@ public class MainLayout extends FlexBoxLayout
 		menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
 		menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payments", Payments.class);
 		menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
+		menu.addNaviItem(VaadinIcon.CIRCLE, "Esbjerg", Esbjerg.class);
+
 
 		NaviItem personnel = menu.addNaviItem(VaadinIcon.USERS, "Personnel",
 				null);

@@ -18,10 +18,9 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.*;
 
 
-
 @PageTitle(KirklarsenConst.TITLE_LOGIN)
 @Route(KirklarsenConst.PAGE_LOGIN)
-public class Login extends ViewFrame {
+public class Login extends LoginOverlay {
 
 
     public Login() {
@@ -33,8 +32,6 @@ public class Login extends ViewFrame {
         header.setFlexGrow(1, title);
         header.setPadding(true);
         header.setSpacing(true);
-
-        setViewHeader(header);
 
         LoginOverlay component = new LoginOverlay();
 
