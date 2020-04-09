@@ -15,7 +15,7 @@ import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.FlexWrap;
 
-@PageTitle("Welcome")
+@PageTitle("Home")
 @Route(value = "Home", layout = MainLayout.class)
 public class Home extends ViewFrame {
 

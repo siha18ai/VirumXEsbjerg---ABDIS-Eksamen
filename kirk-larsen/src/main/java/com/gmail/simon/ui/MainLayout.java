@@ -1,5 +1,6 @@
 package com.gmail.simon.ui;
 
+import com.gmail.simon.ui.views.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -23,10 +24,6 @@ import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
-import com.gmail.simon.ui.views.Accounts;
-import com.gmail.simon.ui.views.Home;
-import com.gmail.simon.ui.views.Payments;
-import com.gmail.simon.ui.views.Statistics;
 import com.gmail.simon.ui.views.personnel.Accountants;
 import com.gmail.simon.ui.views.personnel.Managers;
 import org.slf4j.Logger;
@@ -121,7 +118,7 @@ public class MainLayout extends FlexBoxLayout
 	 */
 	private void initNaviItems() {
 		NaviMenu menu = naviDrawer.getMenu();
-		menu.addNaviItem(VaadinIcon.HOME, "Home", Home.class);
+		menu.addNaviItem(VaadinIcon.HOME, "Forside", StartPage.class);
 		menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
 		menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payments", Payments.class);
 		menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
@@ -252,7 +249,7 @@ public class MainLayout extends FlexBoxLayout
 		NaviItem active = getActiveItem(e);
 		if (active == null) {
 			if (tabBar.getTabCount() == 0) {
-				tabBar.addClosableTab("", Home.class);
+				tabBar.addClosableTab("", StartPage.class);
 			}
 		} else {
 			if (tabBar.getTabCount() > 0) {
