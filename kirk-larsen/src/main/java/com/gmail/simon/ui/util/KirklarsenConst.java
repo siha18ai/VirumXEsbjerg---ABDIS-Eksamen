@@ -3,6 +3,7 @@ package com.gmail.simon.ui.util;
 public class KirklarsenConst {
 
     public static final String PAGE_LOGIN = "login";
+    public static final String PAGE_SIGNUP = "opret";
     public static final String PAGE_STARTPAGE = "forside";
     public static final String PAGE_ACCOUNTS = "accounts";
     public static final String PAGE_PAYMENTS = "payments";
@@ -12,6 +13,7 @@ public class KirklarsenConst {
     public static final String PAGE_EJENDOMME = "ejendomme";
 
     public static final String TITLE_LOGIN = "Login";
+    public static final String TITLE_SIGNUP = "Opret";
     public static final String TITLE_STARTPAGE = "Forside";
     public static final String TITLE_ACCOUNTS = "Accounts";
     public static final String TITLE_PAYMENTS = "Payments";
