@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.views;
 
+import com.gmail.simon.ui.FrontPage;
 import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.util.KirklarsenConst;
 import com.vaadin.flow.component.Component;
@@ -20,12 +21,13 @@ import com.vaadin.flow.router.*;
 
 @PageTitle(KirklarsenConst.TITLE_LOGIN)
 @Route(KirklarsenConst.PAGE_LOGIN)
-public class Login extends LoginOverlay {
+public class Login extends FrontPage {
 
 
     public Login() {
 
         Label title = new Label("Kirk Larsen");
+
 
         HorizontalLayout header = new HorizontalLayout(title);
         header.setAlignItems(FlexComponent.Alignment.CENTER);

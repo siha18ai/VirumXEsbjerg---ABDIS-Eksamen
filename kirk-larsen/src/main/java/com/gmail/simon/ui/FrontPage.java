@@ -87,6 +87,8 @@ public class FrontPage extends FlexBoxLayout
     private void initNaviItems() {
         NaviMenu naviMenu = naviDrawer.getMenu();
         naviMenu.addNaviItem(VaadinIcon.CHECK, "Forside", FrontPage1.class);
+        naviMenu.addNaviItem(VaadinIcon.USER, "Login", Login.class);
+        naviMenu.addNaviItem(VaadinIcon.CREDIT_CARD, "Opret", SignUp.class);
     }
     @Override
     public void configurePage(InitialPageSettings settings) {
