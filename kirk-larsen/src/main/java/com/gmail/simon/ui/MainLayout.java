@@ -1,6 +1,7 @@
 package com.gmail.simon.ui;
 
 import com.gmail.simon.ui.views.*;
+import com.gmail.simon.ui.views.brugere.Medarbejdere;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -24,8 +25,8 @@ import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
-import com.gmail.simon.ui.views.personnel.Accountants;
-import com.gmail.simon.ui.views.personnel.Managers;
+import com.gmail.simon.ui.views.brugere.Accountants;
+import com.gmail.simon.ui.views.brugere.Managers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,17 +119,19 @@ public class MainLayout extends FlexBoxLayout
 	 */
 	private void initNaviItems() {
 		NaviMenu menu = naviDrawer.getMenu();
-		menu.addNaviItem(VaadinIcon.HOME, "Forside", StartPage.class);
-		menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
-		menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payments", Payments.class);
-		menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
-		menu.addNaviItem(VaadinIcon.CIRCLE, "Esbjerg", Esbjerg.class);
+		menu.addNaviItem(VaadinIcon.HOME, "Ejendomme", Ejendomme.class);
+		//menu.addNaviItem(VaadinIcon.HOME, "Forside", StartPage.class);
+		//menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
+		//menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payements", Payments.class);
+		//menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
+		//menu.addNaviItem(VaadinIcon.CIRCLE, "Esbjerg", Esbjerg.class);
 
 
-		NaviItem personnel = menu.addNaviItem(VaadinIcon.USERS, "Personnel",
+		NaviItem brugere = menu.addNaviItem(VaadinIcon.USERS, "Brugere",
 				null);
-		menu.addNaviItem(personnel, "Accountants", Accountants.class);
-		menu.addNaviItem(personnel, "Managers", Managers.class);
+		//menu.addNaviItem(brugere, "Accountants", Accountants.class);
+		//menu.addNaviItem(brugere, "Managers", Managers.class);
+		menu.addNaviItem(brugere, "Medarbejdere", Medarbejdere.class);
 	}
 
 	/**

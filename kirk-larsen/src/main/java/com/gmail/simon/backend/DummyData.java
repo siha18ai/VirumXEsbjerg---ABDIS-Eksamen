@@ -17,8 +17,34 @@ public class DummyData {
 	private static final Map<Long, Item> ITEMS = new HashMap<>();
 	private static final Map<Long, Order> ORDERS = new HashMap<>();
 	private static final Map<Long, Invoice> INVOICES = new HashMap<>();
+	private static final Map<Long, Ejendom> EJENDOM = new HashMap<>();
 
 	private static final Random random = new Random(1);
+
+	private static final String[] EJERNAVN = new String[] {
+			"Simon Oliver Hansen", "Simon Jannik", "Frederik Garrigues",
+			"Emil Torbensen", "Bjarne Jensen", "Kim Nielsen", "Søren Heidemeier",
+			"Bo Hansen Hansen", "Jacob Noebjerg"
+	};
+	private static final String[] KOMMUNENR = new String[] {
+			"1234", "4321", "4567", "7654", "2020"
+	};
+	private static final String[] ADRESSE = new String[] {
+			"Matthæusgade 14", "Classensgade 20", "Nørrebrogade 13",
+			"Kirkegade 12", "Norddalsvej 20", "Eriksensvej 13", "Vesterbrogade 33"
+	};
+	private static final String[] EJENDOMSNR = new String[] {
+			"34323", "33223", "43322", "34232"
+	};
+	private static final String[] GRUNDAREAL = new String[] {
+			"922m2", "3004m2", "2020m2", "700m2"
+	};
+	/* === Kirk Larsen data === */
+	private static String getEjer() {return EJERNAVN[random.nextInt(EJERNAVN.length)];}
+	private static String getKommune() {return KOMMUNENR[random.nextInt(KOMMUNENR.length)];}
+	private static String getAdresse() {return ADRESSE[random.nextInt(ADRESSE.length)];}
+	private static String getEjendomsNr() {return EJENDOMSNR[random.nextInt(EJENDOMSNR.length)];}
+	private static String getGrundAreal() {return GRUNDAREAL[random.nextInt(GRUNDAREAL.length)];}
 
 	private static final String[] IBANS = new String[]{
 			"AD12 0001 2030 2003 5910 0100", "AE07 0331 2345 6789 0123 456",
@@ -219,6 +245,13 @@ public class DummyData {
 							getBank(), getIBAN(), getPositiveAmount(),
 							getDate()));
 		}
+		/* === EJENDOMME ==== */
+		for (i = 0; i < 6; i++) {
+			EJENDOM.put(i,
+					new Ejendom(getEjendomStatus(), getEjer(), getKommune(), getAdresse(),
+							getEjendomsNr(), getGrundAreal()));
+		}
+
 
 		/* === ITEMS === */
 
@@ -514,6 +547,16 @@ public class DummyData {
 				.nextInt(Payment.Status.values().length)];
 	}
 
+	/*=== EJENDOM === */
+
+	public static Collection<Ejendom> getEjendom() {return EJENDOM.values();}
+
+	private static Ejendom.Status getEjendomStatus() {
+		return Ejendom.Status.values() [random.nextInt(Ejendom.Status.values().length)];
+	}
+
+
+
 	/* === MISC === */
 
 	private static String getIBAN() {
@@ -635,5 +678,4 @@ public class DummyData {
 	public static Address getAddress() {
 		return ADDRESSES.get(random.nextInt(ADDRESSES.size()));
 	}
-
 }
