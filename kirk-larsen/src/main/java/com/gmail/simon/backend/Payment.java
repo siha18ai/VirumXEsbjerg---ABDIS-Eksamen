@@ -20,11 +20,14 @@ public class Payment {
 	public enum Status {
 		PENDING(VaadinIcon.CLOCK, "Pending",
 				"Payment created, not yet submitted.",
-				BadgeColor.CONTRAST), SUBMITTED(VaadinIcon.QUESTION_CIRCLE,
+				BadgeColor.CONTRAST),
+		SUBMITTED(VaadinIcon.QUESTION_CIRCLE,
 				"Submitted", "Payment submitted for processing.",
-				BadgeColor.NORMAL), CONFIRMED(VaadinIcon.CHECK,
+				BadgeColor.NORMAL),
+		CONFIRMED(VaadinIcon.CHECK,
 				"Confirmed", "Payment sent successfully.",
-				BadgeColor.SUCCESS), FAILED(VaadinIcon.WARNING,
+				BadgeColor.SUCCESS),
+		FAILED(VaadinIcon.WARNING,
 				"Failed", "Payment failed.",
 				BadgeColor.ERROR);
 

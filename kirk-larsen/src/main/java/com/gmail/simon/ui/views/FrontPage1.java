@@ -2,6 +2,8 @@ package com.gmail.simon.ui.views;
 
 import com.gmail.simon.ui.FrontPage;
 import com.gmail.simon.ui.components.FlexBoxLayout;
+import com.gmail.simon.ui.layout.size.Horizontal;
+import com.gmail.simon.ui.layout.size.Uniform;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
@@ -30,9 +32,16 @@ public class FrontPage1 extends ViewFrame{
         return content;
     }
     private Component createPayments(){
-        Html html = new Html("<h1>Hej Esbjerg</h1>");
-        Html html1 = new Html("<p>Hvordan går det? </p>");
-        FlexBoxLayout flexBoxLayout = new FlexBoxLayout(html, html1);
+        Html overskrift = new Html("<h1>Hej Esbjerg</h1>");
+        Html body = new Html("<p>Hvordan går det? </p>");
+
+        FlexBoxLayout flexBoxLayout = new FlexBoxLayout(overskrift, body);
+        flexBoxLayout.setAlignItems(FlexComponent.Alignment.CENTER);
+        flexBoxLayout.setFlexDirection(FlexDirection.COLUMN);
+        flexBoxLayout.setMargin(Horizontal.AUTO);
+        flexBoxLayout.setMaxWidth("840px");
+        flexBoxLayout.setPadding(Uniform.RESPONSIVE_L);
+
         return flexBoxLayout;
     }
 

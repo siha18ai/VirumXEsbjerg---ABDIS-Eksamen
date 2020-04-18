@@ -12,7 +12,7 @@ module.exports = merge(flowDefaults, {
 /**
  * This file can be used to configure the flow plugin defaults.
  * <code>
- *   // Add a custom plugin
+ *   // Add a custom plugint
  *   flowDefaults.plugins.push(new MyPlugin());
  *
  *   // Update the rules to also transpile `.mjs` files

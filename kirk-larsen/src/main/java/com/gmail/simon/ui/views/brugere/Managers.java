@@ -1,4 +1,4 @@
-package com.gmail.simon.ui.views.personnel;
+package com.gmail.simon.ui.views.brugere;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -10,7 +10,6 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
-import com.vaadin.flow.component.radiobutton.RadioGroupVariant;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.upload.Upload;
 import com.vaadin.flow.data.provider.DataProvider;
@@ -36,9 +35,9 @@ import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.BoxSizing;
 import com.gmail.simon.ui.views.SplitViewFrame;
 
-@Route(value = "accountants", layout = MainLayout.class)
-@PageTitle("Accountants")
-public class Accountants extends SplitViewFrame {
+@Route(value = "managers", layout = MainLayout.class)
+@PageTitle("Managers")
+public class Managers extends SplitViewFrame {
 
 	private Grid<Person> grid;
 	private ListDataProvider<Person> dataProvider;
@@ -46,9 +45,10 @@ public class Accountants extends SplitViewFrame {
 	private DetailsDrawer detailsDrawer;
 	private DetailsDrawerHeader detailsDrawerHeader;
 
-	public Accountants() {
+	public Managers() {
 		setViewContent(createContent());
 		setViewDetails(createDetailsDrawer());
+		setViewDetailsPosition(Position.BOTTOM);
 
 		filter();
 	}
@@ -67,7 +67,7 @@ public class Accountants extends SplitViewFrame {
 				.ifPresent(this::showDetails));
 		dataProvider = DataProvider.ofCollection(DummyData.getPersons());
 		grid.setDataProvider(dataProvider);
-		grid.setHeightFull();
+		grid.setSizeFull();
 
 		grid.addColumn(Person::getId)
 				.setAutoWidth(true)
@@ -83,17 +83,12 @@ public class Accountants extends SplitViewFrame {
 				.setFlexGrow(0)
 				.setHeader("Active")
 				.setTextAlign(ColumnTextAlign.END);
-		grid.addColumn(new ComponentRenderer<>(this::createInvoices))
+		grid.addColumn(new ComponentRenderer<>(this::createApprovalLimit))
 				.setAutoWidth(true)
 				.setFlexGrow(0)
-				.setHeader("Invoices")
+				.setHeader("Approval Limit ($)")
 				.setTextAlign(ColumnTextAlign.END);
-		grid.addColumn(new ComponentRenderer<>(this::createCompanies))
-				.setAutoWidth(true)
-				.setFlexGrow(0)
-				.setHeader("Companies")
-				.setTextAlign(ColumnTextAlign.END);
-		grid.addColumn(new ComponentRenderer<>(this::createDate)).setFlexGrow(0)
+		grid.addColumn(new ComponentRenderer<>(this::createDate))
 				.setAutoWidth(true)
 				.setFlexGrow(0)
 				.setHeader("Last Report")
@@ -121,12 +116,10 @@ public class Accountants extends SplitViewFrame {
 		return icon;
 	}
 
-	private Component createInvoices() {
-		return UIUtils.createAmountLabel(DummyData.getRandomInt(0, 5000));
-	}
-
-	private Component createCompanies() {
-		return UIUtils.createUnitsLabel(DummyData.getRandomInt(0, 50));
+	private Component createApprovalLimit(Person person) {
+		int amount = person.getRandomInteger() > 0 ? person.getRandomInteger()
+				: 0;
+		return UIUtils.createAmountLabel(amount);
 	}
 
 	private Component createDate(Person person) {
@@ -134,7 +127,7 @@ public class Accountants extends SplitViewFrame {
 	}
 
 	private DetailsDrawer createDetailsDrawer() {
-		detailsDrawer = new DetailsDrawer(DetailsDrawer.Position.RIGHT);
+		detailsDrawer = new DetailsDrawer(DetailsDrawer.Position.BOTTOM);
 
 		// Header
 		detailsDrawerHeader = new DetailsDrawerHeader("");
@@ -169,7 +162,6 @@ public class Accountants extends SplitViewFrame {
 		lastName.setWidthFull();
 
 		RadioButtonGroup<String> gender = new RadioButtonGroup<>();
-		gender.addThemeVariants(RadioGroupVariant.LUMO_VERTICAL);
 		gender.setItems("Active", "Inactive");
 		gender.setValue(person.getRandomBoolean() ? "Active" : "Inactive");
 
@@ -191,23 +183,21 @@ public class Accountants extends SplitViewFrame {
 		form.setResponsiveSteps(
 				new FormLayout.ResponsiveStep("0", 1,
 						FormLayout.ResponsiveStep.LabelsPosition.TOP),
-				new FormLayout.ResponsiveStep("21em", 2,
+				new FormLayout.ResponsiveStep("600px", 2,
+						FormLayout.ResponsiveStep.LabelsPosition.TOP),
+				new FormLayout.ResponsiveStep("1024px", 3,
 						FormLayout.ResponsiveStep.LabelsPosition.TOP));
 		form.addFormItem(firstName, "First Name");
 		form.addFormItem(lastName, "Last Name");
-		FormLayout.FormItem statusItem = form.addFormItem(gender, "Status");
-		FormLayout.FormItem phoneItem = form.addFormItem(phone, "Phone");
-		FormLayout.FormItem emailItem = form.addFormItem(email, "Email");
-		FormLayout.FormItem companyItem = form.addFormItem(company, "Company");
-		FormLayout.FormItem uploadItem = form.addFormItem(new Upload(),
-				"Image");
-		UIUtils.setColSpan(2, statusItem, phoneItem, emailItem, companyItem,
-				uploadItem);
+		form.addFormItem(gender, "Status");
+		form.addFormItem(phone, "Phone");
+		form.addFormItem(email, "Email");
+		form.addFormItem(company, "Company");
+		form.addFormItem(new Upload(), "Image");
 		return form;
 	}
 
 	private void filter() {
-		dataProvider.setFilterByValue(Person::getRole, Person.Role.ACCOUNTANT);
+		dataProvider.setFilterByValue(Person::getRole, Person.Role.MANAGER);
 	}
-
 }
