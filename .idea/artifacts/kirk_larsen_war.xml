@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="kirk-larsen:war">
+    <output-path>$PROJECT_DIR$/kirk-larsen/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>kirk-larsen</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="kirk-larsen-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="kirk-larsen:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -6,21 +6,14 @@ import com.gmail.simon.ui.components.navigation.bar.TabBar;
 import com.gmail.simon.ui.components.navigation.drawer.NaviDrawer;
 import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
 import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
-import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
 import com.gmail.simon.ui.views.*;
-import com.gmail.simon.ui.views.personnel.Accountants;
-import com.gmail.simon.ui.views.personnel.Managers;
 import com.vaadin.flow.component.HasElement;
-import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.RouterLayout;
@@ -28,7 +21,7 @@ import com.vaadin.flow.server.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FrontPage extends FlexBoxLayout
+public class EndUserLayout extends FlexBoxLayout
         implements RouterLayout, PageConfigurator, AfterNavigationObserver {
 
     private Div appHeaderOuter;
@@ -48,10 +41,10 @@ public class FrontPage extends FlexBoxLayout
     private AppBar appBar;
 
 
-    private static final Logger log = LoggerFactory.getLogger(FrontPage.class);
-    private static final String CLASS_NAME = "forside";
+    private static final Logger log = LoggerFactory.getLogger(EndUserLayout.class);
+    private static final String CLASS_NAME = "end user";
 
-    public FrontPage() {
+    public EndUserLayout() {
         VaadinSession.getCurrent()
                 .setErrorHandler((ErrorHandler) errorEvent -> {
                     log.error("Uncaught UI exception",
@@ -86,7 +79,7 @@ public class FrontPage extends FlexBoxLayout
     }
     private void initNaviItems() {
         NaviMenu naviMenu = naviDrawer.getMenu();
-        naviMenu.addNaviItem(VaadinIcon.CHECK, "Forside", FrontPage1.class);
+        naviMenu.addNaviItem(VaadinIcon.CHECK, "Forside", EndUserFrontPage.class);
         naviMenu.addNaviItem(VaadinIcon.USER, "Login", Login.class);
         naviMenu.addNaviItem(VaadinIcon.CREDIT_CARD, "Opret", SignUp.class);
     }
@@ -106,9 +99,9 @@ public class FrontPage extends FlexBoxLayout
         return naviDrawer;
     }
 
-    public static FrontPage get() {
-        return (FrontPage) UI.getCurrent().getChildren()
-                .filter(component -> component.getClass() == FrontPage.class)
+    public static EndUserLayout get() {
+        return (EndUserLayout) UI.getCurrent().getChildren()
+                .filter(component -> component.getClass() == EndUserLayout.class)
                 .findFirst().get();
     }
     @Override

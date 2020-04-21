@@ -1,12 +1,12 @@
 package com.gmail.simon.ui.views;
 
+import com.gmail.simon.ui.MainLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
-import com.gmail.simon.ui.MainLayout;
 
 /**
  * A view frame that establishes app design guidelines. It consists of three
@@ -25,6 +25,7 @@ public class ViewFrame extends Composite<Div> implements HasStyle {
 	private Div header;
 	private Div content;
 	private Div footer;
+	private Div appHeaderInner;
 
 	public ViewFrame() {
 		setClassName(CLASS_NAME);
@@ -69,5 +70,13 @@ public class ViewFrame extends Composite<Div> implements HasStyle {
 	protected void onAttach(AttachEvent attachEvent) {
 		super.onAttach(attachEvent);
 		MainLayout.get().getAppBar().reset();
+	}
+	private void setAppHeaderInner(Component... components) {
+		if (appHeaderInner == null) {
+			appHeaderInner = new Div();
+			appHeaderInner.addClassName("app-header-inner");
+		}
+		appHeaderInner.removeAll();
+		appHeaderInner.add(components);
 	}
 }

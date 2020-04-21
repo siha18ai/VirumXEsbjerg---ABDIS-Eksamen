@@ -1,23 +1,23 @@
 package com.gmail.simon.ui.views;
 
-import com.gmail.simon.ui.FrontPage;
+import com.gmail.simon.ui.EndUserLayout;
+import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @PageTitle("Forside")
-@Route(value = "", layout = FrontPage.class)
+@Route(value = "EndUserFrontPage", layout = MainLayout.class)
 
-public class FrontPage1 extends ViewFrame{
+public class EndUserFrontPage extends ViewFrameFrontPage{
     private static final String CLASS_NAME = "esbjerg";
     public static final String MAX_WIDTH = "1024px";
 
-    public FrontPage1() {
+    public EndUserFrontPage() {
         setViewContent(createContent());
     }
 

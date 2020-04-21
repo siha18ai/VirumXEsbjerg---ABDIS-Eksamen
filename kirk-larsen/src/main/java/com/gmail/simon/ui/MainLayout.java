@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 @CssImport("./styles/misc/box-shadow-borders.css")
 @CssImport(value = "./styles/styles.css", include = "lumo-badge")
 @JsModule("@vaadin/vaadin-lumo-styles/badge")
-@PWA(name = "Kirk Larsen", shortName = "Kirk Larsen", iconPath = "images/logos/KirkLarsen.PNG", backgroundColor = "#233348", themeColor = "#233348")
+@PWA(name = "Kirk Larsen", shortName = "Kirk Larsen", iconPath = "images/logos/Kirk-Larsen-logo.png", backgroundColor = "#233348", themeColor = "#233348")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends FlexBoxLayout
 		implements RouterLayout, PageConfigurator, AfterNavigationObserver {
@@ -63,7 +63,7 @@ public class MainLayout extends FlexBoxLayout
 	private Div appFooterOuter;
 
 	private TabBar tabBar;
-	private boolean navigationTabs = false;
+	private boolean navigationTabs = true;
 	private AppBar appBar;
 
 	public MainLayout() {

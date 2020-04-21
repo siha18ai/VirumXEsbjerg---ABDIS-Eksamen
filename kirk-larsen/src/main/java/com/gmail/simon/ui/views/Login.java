@@ -1,17 +1,9 @@
 package com.gmail.simon.ui.views;
 
-import com.gmail.simon.ui.FrontPage;
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.EndUserLayout;
 import com.gmail.simon.ui.util.KirklarsenConst;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.HtmlImport;
 import com.vaadin.flow.component.html.Label;
-import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.login.LoginForm;
 import com.vaadin.flow.component.login.LoginI18n;
 import com.vaadin.flow.component.login.LoginOverlay;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -21,7 +13,7 @@ import com.vaadin.flow.router.*;
 
 @PageTitle(KirklarsenConst.TITLE_LOGIN)
 @Route(KirklarsenConst.PAGE_LOGIN)
-public class Login extends FrontPage {
+public class Login extends EndUserLayout {
 
 
     public Login() {
