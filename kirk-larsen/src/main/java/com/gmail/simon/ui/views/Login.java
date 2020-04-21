@@ -1,6 +1,5 @@
 package com.gmail.simon.ui.views;
 
-import com.gmail.simon.ui.EndUserLayout;
 import com.gmail.simon.ui.util.KirklarsenConst;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
@@ -13,7 +12,7 @@ import com.vaadin.flow.router.*;
 
 @PageTitle(KirklarsenConst.TITLE_LOGIN)
 @Route(KirklarsenConst.PAGE_LOGIN)
-public class Login extends EndUserLayout {
+public class Login {
 
 
     public Login() {
