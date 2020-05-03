@@ -46,6 +46,7 @@
             <url>https://maven.vaadin.com/vaadin-prereleases</url>
         </repository>
         -->
+
     </repositories>
 
     <dependencyManagement>
@@ -111,7 +112,6 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
-
 
     </dependencies>
 
@@ -185,6 +185,7 @@
                         <configuration>
                             <trimStackTrace>false</trimStackTrace>
                             <systemPropertyVariables>
+                                <!--suppress UnresolvedMavenProperty -->
                                 <webdriver.chrome.driver>${webdriver.chrome.driver}</webdriver.chrome.driver>
                                 <com.vaadin.testbench.Parameters.runLocally>chrome</com.vaadin.testbench.Parameters.runLocally>
                             </systemPropertyVariables>

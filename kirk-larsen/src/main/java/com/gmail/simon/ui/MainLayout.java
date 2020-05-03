@@ -1,5 +1,7 @@
 package com.gmail.simon.ui;
 
+import com.gmail.simon.ui.views.*;
+import com.gmail.simon.ui.views.brugere.Medarbejdere;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -45,7 +47,7 @@ import org.slf4j.LoggerFactory;
 @CssImport("./styles/misc/box-shadow-borders.css")
 @CssImport(value = "./styles/styles.css", include = "lumo-badge")
 @JsModule("@vaadin/vaadin-lumo-styles/badge")
-@PWA(name = "Kirk Larsen", shortName = "Kirk Larsen", iconPath = "images/logo-18.png", backgroundColor = "#233348", themeColor = "#233348")
+@PWA(name = "Kirk Larsen", shortName = "Kirk Larsen", iconPath = "images/logos/KirkLarsen.PNG", backgroundColor = "#233348", themeColor = "#233348")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
 public class MainLayout extends FlexBoxLayout
 		implements RouterLayout, PageConfigurator, AfterNavigationObserver {
@@ -121,15 +123,19 @@ public class MainLayout extends FlexBoxLayout
 	 */
 	private void initNaviItems() {
 		NaviMenu menu = naviDrawer.getMenu();
-		menu.addNaviItem(VaadinIcon.HOME, "Home", Home.class);
-		menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
-		menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payments", Payments.class);
-		menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
+		menu.addNaviItem(VaadinIcon.HOME, "Ejendomme", Ejendomme.class);
+		//menu.addNaviItem(VaadinIcon.HOME, "Forside", StartPage.class);
+		//menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
+		//menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payements", Payments.class);
+		//menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
+		//menu.addNaviItem(VaadinIcon.CIRCLE, "Esbjerg", Esbjerg.class);
 
-		NaviItem personnel = menu.addNaviItem(VaadinIcon.USERS, "Personnel",
+
+		NaviItem brugere = menu.addNaviItem(VaadinIcon.USERS, "Brugere",
 				null);
-		menu.addNaviItem(personnel, "Accountants", Accountants.class);
-		menu.addNaviItem(personnel, "Managers", Managers.class);
+		//menu.addNaviItem(brugere, "Accountants", Accountants.class);
+		//menu.addNaviItem(brugere, "Managers", Managers.class);
+		menu.addNaviItem(brugere, "Medarbejdere", Medarbejdere.class);
 	}
 
 	/**
@@ -252,7 +258,7 @@ public class MainLayout extends FlexBoxLayout
 		NaviItem active = getActiveItem(e);
 		if (active == null) {
 			if (tabBar.getTabCount() == 0) {
-				tabBar.addClosableTab("", Home.class);
+				tabBar.addClosableTab("", StartPage.class);
 			}
 		} else {
 			if (tabBar.getTabCount() > 0) {

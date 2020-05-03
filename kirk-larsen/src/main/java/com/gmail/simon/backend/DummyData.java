@@ -24,7 +24,7 @@ public class DummyData {
 
 	private static final ArrayList<Brugere> BRUGERE = new ArrayList<>();
 
-
+	private static final Random random = new Random(1);
 
 	private static final String[] EJERNAVN = new String[] {
 			"Simon Oliver Hansen", "Simon Jannik", "Frederik Garrigues",
@@ -695,4 +695,5 @@ public class DummyData {
 	public static ArrayList<Brugere> getBrugere(){
 		return BRUGERE;
 	}
+
 }

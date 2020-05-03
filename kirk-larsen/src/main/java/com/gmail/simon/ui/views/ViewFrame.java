@@ -71,6 +71,7 @@ public class ViewFrame extends Composite<Div> implements HasStyle {
 		super.onAttach(attachEvent);
 		MainLayout.get().getAppBar().reset();
 	}
+
 	private void setAppHeaderInner(Component... components) {
 		if (appHeaderInner == null) {
 			appHeaderInner = new Div();
@@ -79,4 +80,5 @@ public class ViewFrame extends Composite<Div> implements HasStyle {
 		appHeaderInner.removeAll();
 		appHeaderInner.add(components);
 	}
+
 }
