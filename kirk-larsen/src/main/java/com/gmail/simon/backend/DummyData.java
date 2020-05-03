@@ -8,6 +8,7 @@ import java.util.*;
 
 public class DummyData {
 
+
 	private static final Map<Long, Report> REPORTS = new HashMap<>();
 	private static final Map<Long, Person> PERSONS = new HashMap<>();
 	private static final Map<Long, Transaction> TRANSACTIONS = new HashMap<>();
@@ -16,6 +17,7 @@ public class DummyData {
 	private static final Map<Long, Item> ITEMS = new HashMap<>();
 	private static final Map<Long, Order> ORDERS = new HashMap<>();
 	private static final Map<Long, Invoice> INVOICES = new HashMap<>();
+	private static final Map<Long, Brugere> EMPLOYEES = new HashMap<>();
 
 	private static final Random random = new Random(1);
 
@@ -71,6 +73,7 @@ public class DummyData {
 			"YY24 KIHB 1247 6423 1259 1594 7930 9152 68",
 			"ZZ25 VLQT 3823 3223 3206 5880 1131 3776 421"};
 	private static final String[] COMPANIES = new String[]{
+
 			"Brewer Holding Century Training", "Broadcast Electric",
 			"Chemical General Development", "Digital Agricultural Dynamics",
 			"Demondu Semiconductors", "Cota Realisations",
@@ -162,6 +165,7 @@ public class DummyData {
 			"Griffin ", "Diaz", "Hayes"};
 
 	private static final ArrayList<Address> ADDRESSES = new ArrayList<>();
+	private static final ArrayList<Brugere> BRUGERE = new ArrayList<>();
 
 	private static Map<String, String> HEALTHCARE = new HashMap<>();
 	private static Map<String, String> DENTAL = new HashMap<>();
@@ -357,6 +361,12 @@ public class DummyData {
 					getFutureDate(30));
 			INVOICES.put(i, invoice);
 		}
+
+		//Brugere
+
+		BRUGERE.add(new Brugere(1, "Simse", "Haargaard", Brugere.Type.EMPLOYEE, "Simon@Haargaard.dk", "admin"));
+		BRUGERE.add(new Brugere(2, "Esbjerg", "Jylland", Brugere.Type.EMPLOYEE, "Esbjerg@Jylland.com", "admin"));
+		BRUGERE.add(new Brugere(3, "G", "Karse", Brugere.Type.EMPLOYEE, "G@karse.de", "admin"));
 
 		/* === ADDRESSES === */
 
@@ -632,6 +642,9 @@ public class DummyData {
 
 	public static Address getAddress() {
 		return ADDRESSES.get(random.nextInt(ADDRESSES.size()));
+	}
+	public static ArrayList<Brugere> getBrugere(){
+		return BRUGERE;
 	}
 
 }

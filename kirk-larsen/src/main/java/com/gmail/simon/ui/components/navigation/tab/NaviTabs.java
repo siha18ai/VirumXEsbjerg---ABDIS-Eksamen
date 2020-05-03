@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.components.navigation.tab;
 
+import com.gmail.simon.ui.views.StartPage;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.UI;
@@ -93,7 +94,7 @@ public class NaviTabs extends Tabs {
 				if (getTabCount() > 0) {
 					setSelectedIndex(getTabCount() - 1);
 				} else {
-					UI.getCurrent().navigate(Home.class);
+					UI.getCurrent().navigate(StartPage.class);
 				}
 			}
 		}

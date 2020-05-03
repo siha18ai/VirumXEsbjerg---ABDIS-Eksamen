@@ -26,8 +26,8 @@ import com.vaadin.flow.router.Route;
 import javax.swing.*;
 import java.awt.*;
 
-@Route(value = "", layout = MainLayout.class)
-@PageTitle("Start Page")
+@Route(value = "Forside", layout = MainLayout.class)
+@PageTitle("Welcome")
 public class StartPage extends ViewFrame {
 
     public StartPage () {
@@ -37,9 +37,6 @@ public class StartPage extends ViewFrame {
     private Component startPageContent() {
 
         //Header
-        Label title = UIUtils.createLabel(FontSize.M, TextColor.BODY, "Velkommen til ejendomsskatteafdelingens portal");
-        UIUtils.setOverflow(Overflow.HIDDEN, title);
-        UIUtils.setTextOverflow(TextOverflow.ELLIPSIS, title);
 
         Html velkommen = new Html("<h1> Velkommen til vores portal! </h1>");
 
@@ -48,15 +45,17 @@ public class StartPage extends ViewFrame {
 
         Button signUp = UIUtils.createButton("Sign Up", VaadinIcon.USER);
 
-        HorizontalLayout header = new HorizontalLayout(title, signUp);
+        HorizontalLayout header = new HorizontalLayout(signUp);
         header.setAlignItems(FlexComponent.Alignment.CENTER);
-        header.setFlexGrow(1, title);
+        header.setFlexGrow(1, signUp);
 
-        FlexBoxLayout content = new FlexBoxLayout(header, velkommen, intro);
+        FlexBoxLayout content = new FlexBoxLayout(velkommen, intro, header);
         content.setFlexDirection(FlexDirection.COLUMN);
         content.setMargin(Horizontal.AUTO);
         content.setMaxWidth("840px");
         content.setPadding(Uniform.RESPONSIVE_L);
+
+
 
 
         return content;
