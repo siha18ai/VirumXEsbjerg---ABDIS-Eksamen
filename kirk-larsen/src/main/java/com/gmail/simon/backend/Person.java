@@ -29,6 +29,7 @@ public class Person {
 		this.randomInteger = randomInteger;
 		this.lastModified = lastModified;
 	}
+	public Person() {}
 
 	public Long getId() {
 		return id;
@@ -45,6 +46,7 @@ public class Person {
 	public String getName() {
 		return firstName + " " + lastName;
 	}
+
 
 	public String getInitials() {
 		return (firstName.substring(0, 1) + lastName.substring(0, 1))
@@ -71,4 +73,23 @@ public class Person {
 		return lastModified;
 	}
 
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }
