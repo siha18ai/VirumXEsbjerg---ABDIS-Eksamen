@@ -18,6 +18,11 @@ public class DummyData {
 	private static final Map<Long, Order> ORDERS = new HashMap<>();
 	private static final Map<Long, Invoice> INVOICES = new HashMap<>();
 	private static final Map<Long, Ejendom> EJENDOM = new HashMap<>();
+	private static final Map<Long, Brugere> EMPLOYEES = new HashMap<>();
+
+	private static final Random random = new Random(1);
+
+	private static final ArrayList<Brugere> BRUGERE = new ArrayList<>();
 
 	private static final Random random = new Random(1);
 
@@ -39,6 +44,7 @@ public class DummyData {
 	private static final String[] GRUNDAREAL = new String[] {
 			"922m2", "3004m2", "2020m2", "700m2"
 	};
+
 	/* === Kirk Larsen data === */
 	private static String getEjer() {return EJERNAVN[random.nextInt(EJERNAVN.length)];}
 	private static String getKommune() {return KOMMUNENR[random.nextInt(KOMMUNENR.length)];}
@@ -200,6 +206,12 @@ public class DummyData {
 
 	static {
 		long i = 0;
+
+		//Brugere
+
+		BRUGERE.add(new Brugere(1, "Simse", "Haargaard", Brugere.Type.EMPLOYEE, "Simon@Haargaard.dk", "admin"));
+		BRUGERE.add(new Brugere(2, "Esbjerg", "Jylland", Brugere.Type.EMPLOYEE, "Esbjerg@Jylland.com", "admin"));
+		BRUGERE.add(new Brugere(3, "G", "Karse", Brugere.Type.EMPLOYEE, "G@karse.de", "admin"));
 
 		/* === REPORTS === */
 
@@ -678,4 +690,10 @@ public class DummyData {
 	public static Address getAddress() {
 		return ADDRESSES.get(random.nextInt(ADDRESSES.size()));
 	}
+
+	/* === BRUGERE === */
+	public static ArrayList<Brugere> getBrugere(){
+		return BRUGERE;
+	}
+
 }

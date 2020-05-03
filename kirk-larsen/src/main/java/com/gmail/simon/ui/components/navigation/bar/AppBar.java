@@ -58,7 +58,6 @@ public class AppBar extends FlexBoxLayout {
 
 	public AppBar(String title, NaviTab... tabs) {
 		setClassName(CLASS_NAME);
-
 		initMenuIcon();
 		initContextIcon();
 		initTitle(title);
