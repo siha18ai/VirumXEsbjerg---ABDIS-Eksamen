@@ -116,7 +116,7 @@ public class EndUserLayout extends FlexBoxLayout
         NaviItem active = getActiveItem(e);
         if (active == null) {
             if (tabBar.getTabCount() == 0) {
-                tabBar.addClosableTab("", StartPage.class);
+                tabBar.addClosableTab("", About.class);
             }
         } else {
             if (tabBar.getTabCount() > 0) {

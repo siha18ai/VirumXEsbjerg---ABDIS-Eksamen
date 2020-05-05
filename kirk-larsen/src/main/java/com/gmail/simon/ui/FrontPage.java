@@ -6,9 +6,11 @@ import com.gmail.simon.ui.components.navigation.bar.TabBar;
 import com.gmail.simon.ui.components.navigation.drawer.NaviDrawer;
 import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
 import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
+import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
 import com.gmail.simon.ui.views.*;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.html.Div;
@@ -18,8 +20,10 @@ import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.server.*;
+import com.vaadin.flow.theme.lumo.Lumo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class FrontPage extends FlexBoxLayout
         implements RouterLayout, PageConfigurator, AfterNavigationObserver {
@@ -42,7 +46,7 @@ public class FrontPage extends FlexBoxLayout
 
 
     private static final Logger log = LoggerFactory.getLogger(FrontPage.class);
-    private static final String CLASS_NAME = "forside";
+    private static final String CLASS_NAME = "root";
 
     public FrontPage() {
         VaadinSession.getCurrent()
@@ -62,6 +66,9 @@ public class FrontPage extends FlexBoxLayout
 
         // Populate the navigation drawer
         initNaviItems();
+
+        // Configure the headers and footers (optional)
+        initHeadersAndFooters();
     }
 
     private void initStructure(){
@@ -71,7 +78,13 @@ public class FrontPage extends FlexBoxLayout
         viewContainer.addClassName(CLASS_NAME + "__view-container");
         viewContainer.setOverflow(Overflow.HIDDEN);
 
-        row = new FlexBoxLayout(naviDrawer);
+        column = new FlexBoxLayout(viewContainer);
+        column.addClassName(CLASS_NAME + "__column");
+        column.setFlexDirection(FlexDirection.COLUMN);
+        column.setFlexGrow(1, viewContainer);
+        column.setOverflow(Overflow.HIDDEN);
+
+        row = new FlexBoxLayout(naviDrawer, column);
         row.addClassName(CLASS_NAME + "__row");
         row.setOverflow(Overflow.HIDDEN);
         add(row);
@@ -83,6 +96,7 @@ public class FrontPage extends FlexBoxLayout
         naviMenu.addNaviItem(VaadinIcon.USER, "Login", Login.class);
         naviMenu.addNaviItem(VaadinIcon.CREDIT_CARD, "Opret", SignUp.class);
     }
+
     @Override
     public void configurePage(InitialPageSettings settings) {
         settings.addMetaTag("apple-mobile-web-app-capable", "yes");
@@ -116,7 +130,7 @@ public class FrontPage extends FlexBoxLayout
         NaviItem active = getActiveItem(e);
         if (active == null) {
             if (tabBar.getTabCount() == 0) {
-                tabBar.addClosableTab("", StartPage.class);
+                tabBar.addClosableTab("", About.class);
             }
         } else {
             if (tabBar.getTabCount() > 0) {
@@ -148,4 +162,82 @@ public class FrontPage extends FlexBoxLayout
         return appBar;
     }
 
+    /**
+     * Configure the app's inner and outer headers and footers.
+     */
+    private void initHeadersAndFooters() {
+        // setAppHeaderOuter();
+        // setAppFooterInner();
+        // setAppFooterOuter();
+
+        // Default inner header setup:
+        // - When using tabbed navigation the view title, user avatar and main menu button will appear in the TabBar.
+        // - When tabbed navigation is turned off they appear in the AppBar.
+
+        appBar = new AppBar("");
+
+        // Tabbed navigation
+        if (navigationTabs) {
+            tabBar = new TabBar();
+            UIUtils.setTheme(Lumo.DARK, tabBar);
+
+            // Shift-click to add a new tab
+            for (NaviItem item : naviDrawer.getMenu().getNaviItems()) {
+                item.addClickListener(e -> {
+                    if (e.getButton() == 0 && e.isShiftKey()) {
+                        tabBar.setSelectedTab(tabBar.addClosableTab(item.getText(), item.getNavigationTarget()));
+                    }
+                });
+            }
+            appBar.getAvatar().setVisible(false);
+            setAppHeaderInner(tabBar, appBar);
+
+            // Default navigation
+        } else {
+            UIUtils.setTheme(Lumo.DARK, appBar);
+            setAppHeaderInner(appBar);
+        }
+    }
+
+    private void setAppHeaderOuter(Component... components) {
+        if (appHeaderOuter == null) {
+            appHeaderOuter = new Div();
+            appHeaderOuter.addClassName("app-header-outer");
+            getElement().insertChild(0, appHeaderOuter.getElement());
+        }
+        appHeaderOuter.removeAll();
+        appHeaderOuter.add(components);
+    }
+
+    private void setAppHeaderInner(Component... components) {
+        if (appHeaderInner == null) {
+            appHeaderInner = new Div();
+            appHeaderInner.addClassName("app-header-inner");
+            column.getElement().insertChild(0, appHeaderInner.getElement());
+        }
+        appHeaderInner.removeAll();
+        appHeaderInner.add(components);
+    }
+
+    private void setAppFooterInner(Component... components) {
+        if (appFooterInner == null) {
+            appFooterInner = new Div();
+            appFooterInner.addClassName("app-footer-inner");
+            column.getElement().insertChild(column.getElement().getChildCount(),
+                    appFooterInner.getElement());
+        }
+        appFooterInner.removeAll();
+        appFooterInner.add(components);
+    }
+
+    private void setAppFooterOuter(Component... components) {
+        if (appFooterOuter == null) {
+            appFooterOuter = new Div();
+            appFooterOuter.addClassName("app-footer-outer");
+            getElement().insertChild(getElement().getChildCount(),
+                    appFooterOuter.getElement());
+        }
+        appFooterOuter.removeAll();
+        appFooterOuter.add(components);
+    }
 }
