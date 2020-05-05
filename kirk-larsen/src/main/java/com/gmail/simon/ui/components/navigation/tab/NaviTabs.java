@@ -1,6 +1,6 @@
 package com.gmail.simon.ui.components.navigation.tab;
 
-import com.gmail.simon.ui.views.StartPage;
+import com.gmail.simon.ui.views.About;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.UI;
@@ -8,7 +8,6 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.Overflow;
-import com.gmail.simon.ui.views.Home;
 
 /**
  * NaviTabs supports tabs that can be closed, and that can navigate to a
@@ -94,7 +93,7 @@ public class NaviTabs extends Tabs {
 				if (getTabCount() > 0) {
 					setSelectedIndex(getTabCount() - 1);
 				} else {
-					UI.getCurrent().navigate(StartPage.class);
+					UI.getCurrent().navigate(About.class);
 				}
 			}
 		}

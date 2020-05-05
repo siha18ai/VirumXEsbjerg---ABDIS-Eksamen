@@ -2,6 +2,7 @@ package com.gmail.simon.ui;
 
 import com.gmail.simon.ui.views.*;
 import com.gmail.simon.ui.views.brugere.Medarbejdere;
+
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -25,10 +26,6 @@ import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
-import com.gmail.simon.ui.views.Accounts;
-import com.gmail.simon.ui.views.Home;
-import com.gmail.simon.ui.views.Payments;
-import com.gmail.simon.ui.views.Statistics;
 import com.gmail.simon.ui.views.brugere.Accountants;
 import com.gmail.simon.ui.views.brugere.Managers;
 import org.slf4j.Logger;
@@ -49,6 +46,7 @@ import org.slf4j.LoggerFactory;
 @JsModule("@vaadin/vaadin-lumo-styles/badge")
 @PWA(name = "Kirk Larsen", shortName = "Kirk Larsen", iconPath = "images/logos/KirkLarsen.PNG", backgroundColor = "#233348", themeColor = "#233348")
 @Viewport("width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes")
+
 public class MainLayout extends FlexBoxLayout
 		implements RouterLayout, PageConfigurator, AfterNavigationObserver {
 
@@ -123,7 +121,19 @@ public class MainLayout extends FlexBoxLayout
 	 */
 	private void initNaviItems() {
 		NaviMenu menu = naviDrawer.getMenu();
-		menu.addNaviItem(VaadinIcon.HOME, "Ejendomme", Ejendomme.class);
+		menu.addNaviItem(VaadinIcon.HOME, "Home", Home.class);
+		menu.addNaviItem(VaadinIcon.INSTITUTION, "About", About.class);
+		menu.addNaviItem(VaadinIcon.DOLLAR, "Benefits", Benefits.class);
+		//menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
+		//menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payments", Payments.class);
+		//menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
+
+		//NaviItem personnel = menu.addNaviItem(VaadinIcon.USERS, "Personnel",
+		//		null);
+		//menu.addNaviItem(personnel, "Accountants", Accountants.class);
+		//menu.addNaviItem(personnel, "Managers", Managers.class);
+
+		//menu.addNaviItem(VaadinIcon.HOME, "Ejendomme", Ejendomme.class);
 		//menu.addNaviItem(VaadinIcon.HOME, "Forside", StartPage.class);
 		//menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
 		//menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payements", Payments.class);
@@ -131,11 +141,12 @@ public class MainLayout extends FlexBoxLayout
 		//menu.addNaviItem(VaadinIcon.CIRCLE, "Esbjerg", Esbjerg.class);
 
 
-		NaviItem brugere = menu.addNaviItem(VaadinIcon.USERS, "Brugere",
-				null);
+		//NaviItem brugere = menu.addNaviItem(VaadinIcon.USERS, "Brugere",
+				//null);
 		//menu.addNaviItem(brugere, "Accountants", Accountants.class);
 		//menu.addNaviItem(brugere, "Managers", Managers.class);
-		menu.addNaviItem(brugere, "Medarbejdere", Medarbejdere.class);
+		//menu.addNaviItem(brugere, "Medarbejdere", Medarbejdere.class);
+
 	}
 
 	/**

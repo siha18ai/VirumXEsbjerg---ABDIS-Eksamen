@@ -1,4 +1,4 @@
 package com.gmail.simon.ui.views.brugere;
 
-public class Kunder {
+public class Advokater {
 }

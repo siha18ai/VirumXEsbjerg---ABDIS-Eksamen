@@ -21,13 +21,13 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @Route(value = "medarbejder", layout = MainLayout.class)
-@PageTitle("Medarbejdere")
-public class Medarbejdere extends SplitViewFrame {
+@PageTitle("Konsulenter")
+public class Konsulenter extends SplitViewFrame {
 
     private Grid<Person> grid;
     private ListDataProvider<Person> dataProvider;
 
-    public Medarbejdere() {
+    public Konsulenter() {
         setViewContent(createContent());
         filter();
 
