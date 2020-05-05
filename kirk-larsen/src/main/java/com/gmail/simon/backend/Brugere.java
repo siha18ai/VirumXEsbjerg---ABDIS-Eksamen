@@ -1,7 +1,8 @@
 package com.gmail.simon.backend;
 
 public class Brugere {
-    public enum Type {
+
+    private enum Type {
         EMPLOYEE, PRIVATE_PERSON
     }
     private long id;
@@ -12,12 +13,17 @@ public class Brugere {
     private String email;
 
     public Brugere (long id, String firstName, String lastName, Type type, String email, String password) {
+    private Type type;
+    private String email;
+    }
+    public Brugere (long id, String firstName, String lastName, Type type, String email, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
         this.email = email;
         this.password = password;
+
     }
 
     public long getId() {
@@ -46,4 +52,5 @@ public class Brugere {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }
