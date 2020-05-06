@@ -1,6 +1,7 @@
-package com.gmail.simon.ui.views;
+package com.gmail.simon.ui.views.frontPageView;
 
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.ViewFrame;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.layout.size.Horizontal;
 import com.gmail.simon.ui.layout.size.Uniform;
@@ -17,7 +18,6 @@ public class Benefits extends ViewFrame {
     public Benefits() {
         setId("Benefits");
         setViewContent(benefitContent());
-
     }
     private Component benefitContent() {
 

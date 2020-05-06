@@ -1,12 +1,13 @@
-package com.gmail.simon.ui.views;
+package com.gmail.simon.ui.views.frontPageView;
 
+import com.gmail.simon.ui.views.ViewFrame;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.layout.size.Horizontal;
 import com.gmail.simon.ui.layout.size.Right;
@@ -40,7 +41,7 @@ public class Home extends ViewFrame {
 				"\nØnsker du at vide mere om \t<a href=\"http://localhost:8080/About\">os</a> er du mere end velkommen" +
 				" til at læse om os. For at vi kan hjælpe dig må du oprette en bruger:</p>");
 
-		Anchor documentation = new Anchor("http://localhost:8080/login-again", UIUtils.createButton("Login", VaadinIcon.EXTERNAL_LINK));
+		Anchor documentation = new Anchor("http://localhost:8080/login", UIUtils.createButton("Login", VaadinIcon.EXTERNAL_LINK));
 		Anchor starter = new Anchor("http://localhost:8080/sign-up-frame", UIUtils.createButton("Opret dig", VaadinIcon.EXTERNAL_LINK));
 
 		FlexBoxLayout links = new FlexBoxLayout(documentation, starter);

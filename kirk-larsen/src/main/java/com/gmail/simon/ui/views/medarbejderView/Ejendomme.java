@@ -1,32 +1,26 @@
-package com.gmail.simon.ui.views;
+package com.gmail.simon.ui.views.medarbejderView;
 
 import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Ejendom;
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.backend.Ejendom2;
+import com.gmail.simon.backend.database.Data;
+import com.gmail.simon.ui.views.SplitViewFrame;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.Badge;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.ListItem;
-import com.gmail.simon.ui.components.detailsdrawer.DetailsDrawer;
-import com.gmail.simon.ui.components.detailsdrawer.DetailsDrawerHeader;
 import com.gmail.simon.ui.components.navigation.bar.AppBar;
-import com.gmail.simon.ui.layout.size.Bottom;
 import com.gmail.simon.ui.layout.size.Horizontal;
 import com.gmail.simon.ui.layout.size.Top;
 import com.gmail.simon.ui.layout.size.Vertical;
 import com.gmail.simon.ui.util.*;
 import com.gmail.simon.ui.util.css.BoxSizing;
-import com.gmail.simon.ui.util.css.WhiteSpace;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.tabs.Tab;
-import com.vaadin.flow.component.tabs.Tabs;
-import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -34,16 +28,18 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import java.awt.*;
-
 @PageTitle("Ejendomme")
 @Route(value = "ejendomme", layout = MainLayout.class)
 public class Ejendomme extends SplitViewFrame {
 
-    private Grid<Ejendom> grid;
+    private Grid<Ejendom2> grid;
     //private DetailsDrawer detailsDrawer;
-    private ListDataProvider<Ejendom> dataProvider;
+    private ListDataProvider<Ejendom2> dataProvider;
     private com.vaadin.flow.component.textfield.TextField searchBox;
+
+    public Ejendomme(){
+        grid = new Grid<>(Ejendom2.class);
+    }
 
 
     @Override
@@ -52,8 +48,9 @@ public class Ejendomme extends SplitViewFrame {
         initAppBar();
         initSearchBar();
         setViewContent(createContent());
+
         //setViewContent(createDetailsDrawer());
-        filter();
+        //filter();
     }
     private void initAppBar() {
         AppBar appBar = MainLayout.get().getAppBar();
@@ -61,7 +58,7 @@ public class Ejendomme extends SplitViewFrame {
             appBar.addTab(status.getName());
         }
         appBar.addTabSelectionListener(e -> {
-            filter();
+            //filter();
             //detailsDrawer.hide();
         });
 
@@ -84,35 +81,33 @@ public class Ejendomme extends SplitViewFrame {
     }
 
     private Grid createGrid() {
-        dataProvider = DataProvider.ofCollection(DummyData.getEjendom());
-        grid = new Grid<>();
-        //grid.addSelectionListener(event -> event.getFirstSelectedItem().ifPresent(this::showDetails));
+        dataProvider = DataProvider.ofCollection(Data.getEjendomme());
         grid.setDataProvider(dataProvider);
-        grid.setHeightFull();
-
-
-        ComponentRenderer<Badge, Ejendom> badgeEjendomComponentRenderer = new ComponentRenderer<>(
-                ejendom -> {
-                    Ejendom.Status status = ejendom.getStatus();
-                    Badge badge = new Badge(status.getName(), status.getTheme());
-                    UIUtils.setTooltip(status.getDesc(), badge);
-                    return badge;
-                }
-        );
-
-        grid.addColumn(badgeEjendomComponentRenderer)
+        grid.setHeightFull();/*
+        grid.addColumn("person_id")
                 .setAutoWidth(true)
                 .setFlexGrow(0)
-                .setHeader("Status");
-        grid.addColumn(new ComponentRenderer<>(this::createFromInfo))
-                .setHeader("Ejer")
+                .setHeader("Person id");
+        grid.addColumn("Ejd_nr")
+                .setHeader("EjendomsNummer")
                 .setWidth("200px");
-        grid.addColumn(new ComponentRenderer<>(this::createAreal))
-                .setHeader("Areal")
+        grid.addColumn("kommune")
+                .setHeader("Kommune")
                 .setWidth("200px");
-        grid.addColumn(new ComponentRenderer<>(this::createAdresse))
-                .setHeader("Adresse")
+        grid.addColumn("vej_navn")
+                .setHeader("Vej navn")
                 .setWidth("200px");
+        grid.addColumn("nr")
+                .setHeader("Vej-nummer")
+                .setWidth("200px");
+        grid.addColumn("Etage")
+                .setHeader("Etage")
+                .setWidth("200px");
+        grid.addColumn("Side_doer_nr")
+                .setHeader("Sidedørsnummer")
+                .setWidth("200px");
+                */
+
         return grid;
     }
     private Component createFromInfo (Ejendom ejendom) {
@@ -162,14 +157,14 @@ public class Ejendomme extends SplitViewFrame {
     public void filter() {
         Tab selectedTab = MainLayout.get().getAppBar().getSelectedTab();
         if (selectedTab != null) {
-            dataProvider.setFilterByValue(Ejendom::getStatus, Ejendom.Status
+            dataProvider.setFilterByValue(Ejendom2::getPerson_id, Ejendom.Status
                     .valueOf(selectedTab.getLabel().toUpperCase()));
         }
     }
     public void filterEjer() {
         Tab selectedTab = MainLayout.get().getAppBar().getSelectedTab();
         if (selectedTab != null) {
-            dataProvider.setFilterByValue(Ejendom::getEjerNavn, Ejendom.Status
+            dataProvider.setFilterByValue(Ejendom2::getPerson_id, Ejendom.Status
                     .valueOf(selectedTab.getLabel().toUpperCase()));
         }
     }
