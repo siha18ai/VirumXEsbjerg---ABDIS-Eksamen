@@ -12,6 +12,7 @@ public class Person {
 	private String firstName;
 	private String lastName;
 	private Role role;
+	private String role2;
 	private String email;
 	private boolean randomBoolean;
 	private int randomInteger;
@@ -28,6 +29,11 @@ public class Person {
 		this.randomBoolean = randomBoolean;
 		this.randomInteger = randomInteger;
 		this.lastModified = lastModified;
+	}
+	public Person(String firstName, String lastName, String role2){
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.role2 = role2;
 	}
 	public Person() {}
 
@@ -91,5 +97,13 @@ public class Person {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getRole2() {
+		return role2;
+	}
+
+	public void setRole2(String role2) {
+		this.role2 = role2;
 	}
 }

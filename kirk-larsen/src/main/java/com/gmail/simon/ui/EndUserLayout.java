@@ -79,9 +79,12 @@ public class EndUserLayout extends FlexBoxLayout
     }
     private void initNaviItems() {
         NaviMenu naviMenu = naviDrawer.getMenu();
+        naviMenu.addNaviItem(VaadinIcon.HOME, "Ejendomme", Ejendomme.class);
+        /*
         naviMenu.addNaviItem(VaadinIcon.CHECK, "Forside", EndUserFrontPage.class);
         naviMenu.addNaviItem(VaadinIcon.USER, "Login", Login.class);
         naviMenu.addNaviItem(VaadinIcon.CREDIT_CARD, "Opret", SignUp.class);
+         */
     }
     @Override
     public void configurePage(InitialPageSettings settings) {

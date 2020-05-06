@@ -2,6 +2,7 @@ package com.gmail.simon.ui.views;
 
 import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Ejendom;
+import com.gmail.simon.backend.Person;
 import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.Badge;
 import com.gmail.simon.ui.components.FlexBoxLayout;
@@ -43,6 +44,7 @@ public class Ejendomme extends SplitViewFrame {
     private Grid<Ejendom> grid;
     //private DetailsDrawer detailsDrawer;
     private ListDataProvider<Ejendom> dataProvider;
+    //private ListDataProvider<Person> dataProvider;
     private com.vaadin.flow.component.textfield.TextField searchBox;
 
 
@@ -85,6 +87,7 @@ public class Ejendomme extends SplitViewFrame {
 
     private Grid createGrid() {
         dataProvider = DataProvider.ofCollection(DummyData.getEjendom());
+        //dataProvider = DataProvider.ofCollection()
         grid = new Grid<>();
         //grid.addSelectionListener(event -> event.getFirstSelectedItem().ifPresent(this::showDetails));
         grid.setDataProvider(dataProvider);
