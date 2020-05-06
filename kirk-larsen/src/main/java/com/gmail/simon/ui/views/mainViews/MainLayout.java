@@ -1,8 +1,8 @@
-package com.gmail.simon.ui;
+package com.gmail.simon.ui.views.mainViews;
 
-import com.gmail.simon.ui.views.*;
-import com.gmail.simon.ui.views.brugere.Medarbejdere;
-
+import com.gmail.simon.ui.views.frontPageView.About;
+import com.gmail.simon.ui.views.frontPageView.Benefits;
+import com.gmail.simon.ui.views.frontPageView.Home;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -26,8 +26,6 @@ import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
-import com.gmail.simon.ui.views.brugere.Accountants;
-import com.gmail.simon.ui.views.brugere.Managers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,7 +84,7 @@ public class MainLayout extends FlexBoxLayout
 		initStructure();
 
 		// Populate the navigation drawer
-		initNaviItems();
+		//initNaviItems();
 
 		// Configure the headers and footers (optional)
 		initHeadersAndFooters();
@@ -119,6 +117,14 @@ public class MainLayout extends FlexBoxLayout
 	/**
 	 * Initialise the navigation items.
 	 */
+
+	public void changeNaviItems(NaviItem... naviItems){
+		naviDrawer.getMenu().removeAll();
+		NaviMenu menu = naviDrawer.getMenu();
+		for(NaviItem naviItem : naviItems){
+			menu.addNaviItem(naviItem);
+		}
+	}
 	private void initNaviItems() {
 		NaviMenu menu = naviDrawer.getMenu();
 		menu.addNaviItem(VaadinIcon.HOME, "Home", Home.class);
@@ -269,7 +275,7 @@ public class MainLayout extends FlexBoxLayout
 		NaviItem active = getActiveItem(e);
 		if (active == null) {
 			if (tabBar.getTabCount() == 0) {
-				tabBar.addClosableTab("", StartPage.class);
+				tabBar.addClosableTab("", Home.class);
 			}
 		} else {
 			if (tabBar.getTabCount() > 0) {

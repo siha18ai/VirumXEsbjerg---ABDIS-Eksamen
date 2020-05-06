@@ -15,7 +15,7 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.gmail.simon.backend.Payment;
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.DataSeriesItemWithRadius;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.ListItem;

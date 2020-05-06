@@ -3,10 +3,12 @@ package com.gmail.simon.backend;
 import com.vaadin.flow.component.html.Image;
 import com.gmail.simon.ui.util.UIUtils;
 
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
 
 public class DummyData {
+	private Connection connection = null;
 
 
 	private static final Map<Long, Report> REPORTS = new HashMap<>();
@@ -19,12 +21,13 @@ public class DummyData {
 	private static final Map<Long, Invoice> INVOICES = new HashMap<>();
 	private static final Map<Long, Ejendom> EJENDOM = new HashMap<>();
 	private static final Map<Long, Brugere> EMPLOYEES = new HashMap<>();
+	private static final Map<Long, Konsulenter2> KONSULENTER = new HashMap<>();
 
 	private static final Random random = new Random(1);
 
 	private static final ArrayList<Brugere> BRUGERE = new ArrayList<>();
+	private static final ArrayList<Konsulenter2> KONSULENTERS = new ArrayList<>();
 
-	private static final Random random = new Random(1);
 
 	private static final String[] EJERNAVN = new String[] {
 			"Simon Oliver Hansen", "Simon Jannik", "Frederik Garrigues",
@@ -204,6 +207,31 @@ public class DummyData {
 	private DummyData() {
 	}
 
+	public static ArrayList<Konsulenter2> getkonsultner() {
+		ResultSet resultSet = null;
+		ArrayList<Konsulenter2> konsulenters = new ArrayList<>();
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "pass123");
+			PreparedStatement ps = connection.prepareStatement("select * FROM kirk_larsen.medarbejder");
+			resultSet = ps.executeQuery();
+
+			while (resultSet.next()){
+				Konsulenter2 konsulenter2 = new Konsulenter2();
+				konsulenter2.setRolle(resultSet.getString("Role"));
+				konsulenter2.setUsername(resultSet.getString("Username"));
+				konsulenter2.setPassword(resultSet.getString("Password"));
+				konsulenters.add(konsulenter2);
+				KONSULENTERS.add(new Konsulenter2(resultSet.getString("Role"), resultSet.getString("Username"),
+						resultSet.getString("Password")));
+			}
+		}catch (SQLException | ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		return konsulenters;
+	}
+
 	static {
 		long i = 0;
 
@@ -212,6 +240,8 @@ public class DummyData {
 		BRUGERE.add(new Brugere(1, "Simse", "Haargaard", Brugere.Type.EMPLOYEE, "Simon@Haargaard.dk", "admin"));
 		BRUGERE.add(new Brugere(2, "Esbjerg", "Jylland", Brugere.Type.EMPLOYEE, "Esbjerg@Jylland.com", "admin"));
 		BRUGERE.add(new Brugere(3, "G", "Karse", Brugere.Type.EMPLOYEE, "G@karse.de", "admin"));
+
+
 
 		/* === REPORTS === */
 

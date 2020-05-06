@@ -1,34 +1,18 @@
-package com.gmail.simon.ui.views.signup;
+package com.gmail.simon.ui.views.login_signupView.login.signup;
 
-import com.gmail.simon.ui.layout.size.Vertical;
-import com.gmail.simon.ui.util.css.AlignSelf;
-import com.gmail.simon.ui.util.css.FlexDirection;
-import com.gmail.simon.ui.views.login.FrontPageAgain;
-import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.ComponentEventListener;
+import com.gmail.simon.ui.views.login_signupView.login.FrontPageLayout;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.charts.events.ClickEvent;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.polymertemplate.Id;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.renderer.ClickableRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
-import com.vaadin.flow.templatemodel.TemplateModel;
-import com.vaadin.flow.component.Tag;
-import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 
-import javax.xml.bind.annotation.XmlList;
 import java.text.DecimalFormat;
-
-import static com.gmail.simon.ui.components.FlexBoxLayout.FLEX_DIRECTION;
 
 /**
  * A Designer generated component for the signup-frame template.
@@ -38,7 +22,7 @@ import static com.gmail.simon.ui.components.FlexBoxLayout.FLEX_DIRECTION;
  */
 @PageTitle("Signup Frame")
 @Route(value = "sign-up-frame")
-public class SignupFrame extends FrontPageAgain {
+public class SignupFrame extends FrontPageLayout {
     private Button back;
     private Button forward;
     private VerticalLayout progressAndLabel;

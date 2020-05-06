@@ -1,4 +1,4 @@
-package com.gmail.simon.ui.views.signup;
+package com.gmail.simon.ui.views.login_signupView.login.signup;
 
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.textfield.TextField;
@@ -11,7 +11,7 @@ public class page3 extends SignupFrame{
     public page3() {
         changeContent(createLabel(), createTextField());
         removeRegistration();
-        changeButtonSettings("page2", "Home");
+        changeButtonSettings("page2", "ejendomme");
         setProgressBar(getProcent(3));
     }
     public Label createLabel(){
