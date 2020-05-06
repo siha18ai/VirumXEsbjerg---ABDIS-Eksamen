@@ -19,7 +19,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Payment;
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.Badge;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.ListItem;

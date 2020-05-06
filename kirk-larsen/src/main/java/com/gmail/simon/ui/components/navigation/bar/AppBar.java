@@ -1,7 +1,6 @@
 package com.gmail.simon.ui.components.navigation.bar;
 
-import com.gmail.simon.ui.FrontPage;
-import com.gmail.simon.ui.views.About;
+import com.gmail.simon.ui.views.frontPageView.About;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasValue;
@@ -81,7 +80,7 @@ public class AppBar extends FlexBoxLayout {
 		menuIcon = UIUtils.createTertiaryInlineButton(VaadinIcon.MENU);
 		menuIcon.addClassName(CLASS_NAME + "__navi-icon");
 		//menuIcon.addClickListener(e -> MainLayout.get().getNaviDrawer().toggle());
-		menuIcon.addClickListener(e -> FrontPage.get().getNaviDrawer().toggle());
+		//menuIcon.addClickListener(e -> FrontPage.get().getNaviDrawer().toggle());
 		UIUtils.setAriaLabel("Menu", menuIcon);
 		UIUtils.setLineHeight("1", menuIcon);
 	}

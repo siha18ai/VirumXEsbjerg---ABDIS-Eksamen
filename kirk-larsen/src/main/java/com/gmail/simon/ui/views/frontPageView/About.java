@@ -1,30 +1,20 @@
-package com.gmail.simon.ui.views;
+package com.gmail.simon.ui.views.frontPageView;
 
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.ViewFrame;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.layout.size.Horizontal;
-import com.gmail.simon.ui.layout.size.Right;
 import com.gmail.simon.ui.layout.size.Uniform;
-import com.gmail.simon.ui.util.FontSize;
-import com.gmail.simon.ui.util.TextColor;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
-import com.gmail.simon.ui.util.css.Overflow;
-import com.gmail.simon.ui.util.css.TextOverflow;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.Html;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-
-import javax.swing.*;
-import java.awt.*;
 
 @Route(value = "About", layout = MainLayout.class)
 @PageTitle("Welcome")

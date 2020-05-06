@@ -1,4 +1,4 @@
-package com.gmail.simon.ui.views.login;
+package com.gmail.simon.ui.views.login_signupView.login;
 
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
@@ -6,21 +6,16 @@ import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
-import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
-
-import static com.gmail.simon.ui.components.FlexBoxLayout.FLEX_DIRECTION;
 
 /**
  * A Designer generated component for the front-page-again template.
@@ -31,9 +26,8 @@ import static com.gmail.simon.ui.components.FlexBoxLayout.FLEX_DIRECTION;
 @Tag("front-page-again")
 @JsModule("./front-page-again.js")
 @PageTitle("Forside")
-@Route(value = "front-page-again")
-
-public class FrontPageAgain extends PolymerTemplate<FrontPageAgain.FrontPageAgainModel> {
+@Route("forside")
+public class FrontPageLayout extends PolymerTemplate<FrontPageLayout.FrontPageAgainModel> {
 
     @Id("Header")
     private HorizontalLayout header;
@@ -47,7 +41,7 @@ public class FrontPageAgain extends PolymerTemplate<FrontPageAgain.FrontPageAgai
     /**
      * Creates a new FrontPageAgain.
      */
-    public FrontPageAgain() {
+    public FrontPageLayout() {
         header.add(createHeader());
         changeFooter(createLoginButton(), createSignupButton());
     }
@@ -81,7 +75,7 @@ public class FrontPageAgain extends PolymerTemplate<FrontPageAgain.FrontPageAgai
         NaviMenu naviMenu = new NaviMenu();
         Image image = new Image();
         image.setSrc(UIUtils.IMG_PATH + "logos/Kirk-Larsen-logo.png");
-        naviMenu.addNaviItem(image, "", FrontPageAgain.class);
+        naviMenu.addNaviItem(image, "", FrontPageLayout.class);
         FlexBoxLayout flexBoxLayout = new FlexBoxLayout(naviMenu);
         flexBoxLayout.setFlexDirection(FlexDirection.COLUMN);
         flexBoxLayout.setAlignItems(FlexComponent.Alignment.CENTER);

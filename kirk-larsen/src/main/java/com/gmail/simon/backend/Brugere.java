@@ -2,7 +2,7 @@ package com.gmail.simon.backend;
 
 public class Brugere {
 
-    private enum Type {
+    public enum Type {
         EMPLOYEE, PRIVATE_PERSON
     }
     private long id;
@@ -12,10 +12,6 @@ public class Brugere {
     private Type type;
     private String email;
 
-    public Brugere (long id, String firstName, String lastName, Type type, String email, String password) {
-    private Type type;
-    private String email;
-    }
     public Brugere (long id, String firstName, String lastName, Type type, String email, String password) {
         this.id = id;
         this.firstName = firstName;

@@ -1,8 +1,8 @@
-package com.gmail.simon.ui.views.brugere;
+package com.gmail.simon.ui.views.medarbejderView;
 
 import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Person;
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.Initials;
 import com.gmail.simon.ui.components.ListItem;
