@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.views.medarbejderView;
 
+import com.gmail.simon.ui.views.mainViews.MedarbejderLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -19,7 +20,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Person;
-import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.Initials;
 import com.gmail.simon.ui.components.ListItem;
@@ -35,7 +35,7 @@ import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.BoxSizing;
 import com.gmail.simon.ui.views.SplitViewFrame;
 
-@Route(value = "managers", layout = MainLayout.class)
+@Route(value = "managers", layout = MedarbejderLayout.class)
 @PageTitle("Managers")
 public class Managers extends SplitViewFrame {
 

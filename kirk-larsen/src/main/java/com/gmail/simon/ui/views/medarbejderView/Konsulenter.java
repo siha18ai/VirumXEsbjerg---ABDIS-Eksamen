@@ -2,7 +2,6 @@ package com.gmail.simon.ui.views.medarbejderView;
 
 import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Person;
-import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.Initials;
 import com.gmail.simon.ui.components.ListItem;
@@ -12,6 +11,7 @@ import com.gmail.simon.ui.layout.size.Top;
 import com.gmail.simon.ui.layout.size.Vertical;
 import com.gmail.simon.ui.util.css.BoxSizing;
 import com.gmail.simon.ui.views.SplitViewFrame;
+import com.gmail.simon.ui.views.mainViews.MedarbejderLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.DataProvider;
@@ -20,7 +20,7 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-@Route(value = "medarbejder", layout = MainLayout.class)
+@Route(value = "medarbejder", layout = MedarbejderLayout.class)
 @PageTitle("Konsulenter")
 public class Konsulenter extends SplitViewFrame {
 

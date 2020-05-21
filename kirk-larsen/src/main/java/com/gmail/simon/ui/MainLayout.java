@@ -67,6 +67,8 @@ public class MainLayout extends FlexBoxLayout
 	private boolean navigationTabs = false;
 	private AppBar appBar;
 
+	private NaviMenu menu;
+
 	public MainLayout() {
 		VaadinSession.getCurrent()
 				.setErrorHandler((ErrorHandler) errorEvent -> {
@@ -84,7 +86,7 @@ public class MainLayout extends FlexBoxLayout
 		initStructure();
 
 		// Populate the navigation drawer
-		//initNaviItems();
+		initNaviItems();
 
 		// Configure the headers and footers (optional)
 		initHeadersAndFooters();
@@ -117,42 +119,11 @@ public class MainLayout extends FlexBoxLayout
 	/**
 	 * Initialise the navigation items.
 	 */
-
-	public void changeNaviItems(NaviItem... naviItems){
-		naviDrawer.getMenu().removeAll();
-		NaviMenu menu = naviDrawer.getMenu();
-		for(NaviItem naviItem : naviItems){
-			menu.addNaviItem(naviItem);
-		}
-	}
 	private void initNaviItems() {
-		NaviMenu menu = naviDrawer.getMenu();
+		menu = naviDrawer.getMenu();
 		menu.addNaviItem(VaadinIcon.HOME, "Home", Home.class);
 		menu.addNaviItem(VaadinIcon.INSTITUTION, "About", About.class);
 		menu.addNaviItem(VaadinIcon.DOLLAR, "Benefits", Benefits.class);
-		//menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
-		//menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payments", Payments.class);
-		//menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
-
-		//NaviItem personnel = menu.addNaviItem(VaadinIcon.USERS, "Personnel",
-		//		null);
-		//menu.addNaviItem(personnel, "Accountants", Accountants.class);
-		//menu.addNaviItem(personnel, "Managers", Managers.class);
-
-		//menu.addNaviItem(VaadinIcon.HOME, "Ejendomme", Ejendomme.class);
-		//menu.addNaviItem(VaadinIcon.HOME, "Forside", StartPage.class);
-		//menu.addNaviItem(VaadinIcon.INSTITUTION, "Accounts", Accounts.class);
-		//menu.addNaviItem(VaadinIcon.CREDIT_CARD, "Payements", Payments.class);
-		//menu.addNaviItem(VaadinIcon.CHART, "Statistics", Statistics.class);
-		//menu.addNaviItem(VaadinIcon.CIRCLE, "Esbjerg", Esbjerg.class);
-
-
-		//NaviItem brugere = menu.addNaviItem(VaadinIcon.USERS, "Brugere",
-				//null);
-		//menu.addNaviItem(brugere, "Accountants", Accountants.class);
-		//menu.addNaviItem(brugere, "Managers", Managers.class);
-		//menu.addNaviItem(brugere, "Medarbejdere", Medarbejdere.class);
-
 	}
 
 	/**

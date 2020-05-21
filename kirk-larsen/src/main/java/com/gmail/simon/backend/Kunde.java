@@ -65,5 +65,85 @@ public class Kunde {
     private String email;
     private String username;
     private String password;
+    private double telefon;
+    private String vejnavn;
+    private int etage;
+    private int husnummer;
+    private boolean boligLejlighed;
 
+    public Kunde(int id, String first_name, String last_name, String email, String username, String password, long telefon, String vejnavn, int etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
+        this.id = id;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.telefon = telefon;
+        this.vejnavn = vejnavn;
+        this.etage = etage;
+        this.husnummer = husnummer;
+        this.boligLejlighed = boligLejlighed;
+        this.ejendomGodkendt = ejendomGodkendt;
+        this.ejendom = ejendom;
+    }
+
+    private boolean ejendomGodkendt;
+
+    public double getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(double telefon) {
+        this.telefon = telefon;
+    }
+
+    public String getVejnavn() {
+        return vejnavn;
+    }
+
+    public void setVejnavn(String vejnavn) {
+        this.vejnavn = vejnavn;
+    }
+
+    public int getEtage() {
+        return etage;
+    }
+
+    public void setEtage(int etage) {
+        this.etage = etage;
+    }
+
+    public int getHusnummer() {
+        return husnummer;
+    }
+
+    public void setHusnummer(int husnummer) {
+        this.husnummer = husnummer;
+    }
+
+    public boolean isBoligLejlighed() {
+        return boligLejlighed;
+    }
+
+    public void setBoligLejlighed(boolean boligLejlighed) {
+        this.boligLejlighed = boligLejlighed;
+    }
+
+    public boolean isEjendomGodkendt() {
+        return ejendomGodkendt;
+    }
+
+    public void setEjendomGodkendt(boolean ejendomGodkendt) {
+        this.ejendomGodkendt = ejendomGodkendt;
+    }
+
+    public int getEjendom() {
+        return ejendom;
+    }
+
+    public void setEjendom(int ejendom) {
+        this.ejendom = ejendom;
+    }
+
+    private int ejendom;
 }

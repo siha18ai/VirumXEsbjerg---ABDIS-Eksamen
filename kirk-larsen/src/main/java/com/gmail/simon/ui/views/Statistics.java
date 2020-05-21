@@ -1,6 +1,5 @@
 package com.gmail.simon.ui.views;
 
-import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.views.mainViews.KundeLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.board.Row;
