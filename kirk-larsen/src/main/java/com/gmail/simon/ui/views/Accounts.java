@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.views;
 
+import com.gmail.simon.ui.MainLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.DetachEvent;
@@ -17,7 +18,6 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
 import com.gmail.simon.backend.BankAccount;
 import com.gmail.simon.backend.DummyData;
-import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.Badge;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.ListItem;

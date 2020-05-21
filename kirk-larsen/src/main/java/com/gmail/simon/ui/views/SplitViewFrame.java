@@ -1,6 +1,7 @@
 package com.gmail.simon.ui.views;
 
 import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
+import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.views.medarbejderView.Ejendomme;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
@@ -8,7 +9,6 @@ import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
-import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -63,6 +63,7 @@ public class SplitViewFrame extends Composite<Div> implements HasStyle {
 		NaviItem naviItem = new NaviItem(VaadinIcon.ARROW_LEFT, "Ejendomme", Ejendomme.class);
 		setNaviItems(naviItem);
 
+
 		getContent().add(header, wrapper, footer);
 	}
 
@@ -76,7 +77,9 @@ public class SplitViewFrame extends Composite<Div> implements HasStyle {
 	public void setNaviItems(NaviItem... naviItems){
 		MainLayout mainLayout = new MainLayout();
 		mainLayout.changeNaviItems(naviItems);
+
 	}
+
 
 	/**
 	 * Sets the content slot's components.

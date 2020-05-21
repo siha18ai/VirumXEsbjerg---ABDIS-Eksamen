@@ -1,5 +1,7 @@
 package com.gmail.simon.ui.views;
 
+import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.mainViews.KundeLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.board.Row;
 import com.vaadin.flow.component.button.Button;
@@ -15,7 +17,6 @@ import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.gmail.simon.backend.Payment;
-import com.gmail.simon.ui.views.mainViews.MainLayout;
 import com.gmail.simon.ui.components.DataSeriesItemWithRadius;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.ListItem;
@@ -28,8 +29,8 @@ import com.gmail.simon.ui.util.css.*;
 
 @CssImport("./styles/views/statistics.css")
 @PageTitle("Statistics")
-@Route(value = "statistics", layout = MainLayout.class)
-public class Statistics extends ViewFrame {
+@Route(value = "statistics", layout = KundeLayout.class)
+public class Statistics extends ViewFrameKunde {
 
 	private static final String CLASS_NAME = "statistics";
 	public static final String MAX_WIDTH = "1024px";

@@ -1,7 +1,7 @@
-package com.gmail.simon.ui.views.frontPageView;
+package com.gmail.simon.ui.views;
 
 import com.gmail.simon.ui.views.ViewFrame;
-import com.gmail.simon.ui.views.mainViews.MainLayout;
+import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.layout.size.Horizontal;
 import com.gmail.simon.ui.layout.size.Uniform;

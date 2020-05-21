@@ -7,6 +7,7 @@ import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -32,17 +33,20 @@ public class SignupFrame extends FrontPageLayout {
     private VerticalLayout buttons;
     public Registration registration1;
     public Registration registration2;
+    private EmailField emailField;
 
     /**
      * Creates a new SignupFrame.
      */
     public SignupFrame() {
         changeProgressAndLabel(initLabel(), initProgressBar());
-        changeContent(createLabel(), createTextField());
+        changeContent(createLabel(), createTextField(), createLabelPost(), createTextFieldPost(), createLabelEmail()
+        , createTextFieldEmail());
         changeFooter(initBack(), initForward());
         removeRegistration();
         changeButtonSettings("sign-up-frame", "page1");
         setProgressBar(0);
+        setProgressBarPost(0);
     }
     public Button initBack(){
         back = new Button("Back", new Icon(VaadinIcon.ARROW_LEFT));
@@ -58,6 +62,7 @@ public class SignupFrame extends FrontPageLayout {
         registration1 = back.addClickListener(e -> back.getUI().ifPresent(ui -> ui.navigate(backString)));
         registration2 = forward.addClickListener(e -> forward.getUI().ifPresent(ui -> ui.navigate(forwardString)));
     }
+    //Alder
     public Label createLabel(){
         Label label = new Label();
         label.setText("Hvor gammel er du?");
@@ -74,6 +79,38 @@ public class SignupFrame extends FrontPageLayout {
         String formateretTal = new DecimalFormat("0.00").format(i);
         label.setText("Your progress: " + formateretTal + "%");
     }
+    //Postnummer
+    public Label createLabelPost() {
+        Label label = new Label();
+        label.setText("Hvad er dit postnummer?");
+        return label;
+    }
+
+    public TextField createTextFieldPost(){
+        TextField textField = new TextField();
+        textField.setPlaceholder("Postnummer");
+        return textField;
+    }
+    public void setProgressBarPost(double value) {
+        progressBar.setValue(value);
+        double i = value*100;
+        String formateretTal = new DecimalFormat("0.00").format(i);
+        label.setText("Your progress: " + formateretTal + "%");
+    }
+
+    //Navn
+    public Label createLabelEmail(){
+        Label label = new Label();
+        label.setText("Hvad er din email?");
+        return label;
+    }
+    public TextField createTextFieldEmail(){
+        TextField textField = new TextField();
+        textField.setPlaceholder("Email");
+        return textField;
+    }
+
+
     public Label initLabel(){
         label = new Label("hej");
         return label;

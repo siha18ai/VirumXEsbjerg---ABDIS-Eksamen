@@ -1,19 +1,16 @@
 package com.gmail.simon.ui.views.medarbejderView;
 
-import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Ejendom;
 import com.gmail.simon.backend.Ejendom2;
 import com.gmail.simon.backend.database.Data;
 import com.gmail.simon.ui.views.SplitViewFrame;
-import com.gmail.simon.ui.views.mainViews.MainLayout;
-import com.gmail.simon.ui.components.Badge;
+import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.ListItem;
 import com.gmail.simon.ui.components.navigation.bar.AppBar;
 import com.gmail.simon.ui.layout.size.Horizontal;
 import com.gmail.simon.ui.layout.size.Top;
 import com.gmail.simon.ui.layout.size.Vertical;
-import com.gmail.simon.ui.util.*;
 import com.gmail.simon.ui.util.css.BoxSizing;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
@@ -24,7 +21,6 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
-import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
