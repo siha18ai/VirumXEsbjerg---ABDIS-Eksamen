@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.views.medarbejderView;
 
+import com.gmail.simon.ui.views.mainViews.MedarbejderLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
@@ -35,7 +36,7 @@ import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.BoxSizing;
 import com.gmail.simon.ui.views.SplitViewFrame;
 
-@Route(value = "managers", layout = MainLayout.class)
+@Route(value = "managers", layout = MedarbejderLayout.class)
 @PageTitle("Managers")
 public class Managers extends SplitViewFrame {
 

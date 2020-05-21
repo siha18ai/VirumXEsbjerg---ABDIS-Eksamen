@@ -47,6 +47,10 @@ public class Login extends FrontPageLayout {
     public LoginForm initButton(){
         loginForm = new LoginForm();
         span = new Span("Clicked");
+        loginForm.addForgotPasswordListener(e->{
+            Notification.show("We don't have a solution yet :(");
+                });
+        loginForm.setForgotPasswordButtonVisible(true);
         loginForm.addLoginListener(e -> {
             boolean isAuthenticated = false;
             boolean brugerAuthenticate = false;

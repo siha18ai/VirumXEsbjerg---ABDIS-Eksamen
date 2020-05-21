@@ -1,4 +1,6 @@
 package com.gmail.simon.ui.views.mainViews;
 
-public class KundeLayout {
+public class KundeLayout
+{
+
 }
