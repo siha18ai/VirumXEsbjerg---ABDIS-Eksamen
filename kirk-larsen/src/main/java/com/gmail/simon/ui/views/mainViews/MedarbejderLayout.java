@@ -1,5 +1,7 @@
 package com.gmail.simon.ui.views.mainViews;
 
+import com.gmail.simon.ui.views.frontPageView.About;
+import com.gmail.simon.ui.views.frontPageView.Benefits;
 import com.gmail.simon.ui.views.frontPageView.Home;
 import com.gmail.simon.ui.views.medarbejderView.Advokater;
 import com.gmail.simon.ui.views.medarbejderView.Ejendomme;

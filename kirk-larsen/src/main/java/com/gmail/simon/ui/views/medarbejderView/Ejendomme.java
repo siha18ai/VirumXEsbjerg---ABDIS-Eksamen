@@ -1,17 +1,24 @@
 package com.gmail.simon.ui.views.medarbejderView;
 
+import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.backend.Ejendom;
 import com.gmail.simon.backend.Ejendom2;
 import com.gmail.simon.backend.database.Data;
+import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
 import com.gmail.simon.ui.views.SplitViewFrame;
-import com.gmail.simon.ui.MainLayout;
+import com.gmail.simon.ui.views.ViewFrame;
+import com.gmail.simon.ui.views.kundeView.KundeEjendom;
+import com.gmail.simon.ui.views.mainViews.MainLayout;
+import com.gmail.simon.ui.components.Badge;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.ListItem;
 import com.gmail.simon.ui.components.navigation.bar.AppBar;
 import com.gmail.simon.ui.layout.size.Horizontal;
 import com.gmail.simon.ui.layout.size.Top;
 import com.gmail.simon.ui.layout.size.Vertical;
+import com.gmail.simon.ui.util.*;
 import com.gmail.simon.ui.util.css.BoxSizing;
+import com.gmail.simon.ui.views.mainViews.MedarbejderLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
@@ -21,22 +28,24 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @PageTitle("Ejendomme")
-@Route(value = "ejendomme", layout = MainLayout.class)
+@Route(value = "ejendomme", layout = MedarbejderLayout.class)
 public class Ejendomme extends SplitViewFrame {
 
     private Grid<Ejendom2> grid;
     //private DetailsDrawer detailsDrawer;
     private ListDataProvider<Ejendom2> dataProvider;
     private com.vaadin.flow.component.textfield.TextField searchBox;
+    private MainLayout mainLayout;
 
     public Ejendomme(){
         grid = new Grid<>(Ejendom2.class);
+        this.mainLayout = new MainLayout();
     }
-
 
     @Override
     protected void onAttach(AttachEvent attachEvent) {
@@ -49,7 +58,7 @@ public class Ejendomme extends SplitViewFrame {
         //filter();
     }
     private void initAppBar() {
-        AppBar appBar = MainLayout.get().getAppBar();
+        AppBar appBar = MedarbejderLayout.get().getAppBar();
         for (Ejendom.Status status : Ejendom.Status.values()) {
             appBar.addTab(status.getName());
         }
