@@ -1,6 +1,7 @@
 package com.gmail.simon.ui.views;
 
 import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
+import com.gmail.simon.ui.views.mainViews.MedarbejderLayout;
 import com.gmail.simon.ui.views.medarbejderView.Ejendomme;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
@@ -60,9 +61,6 @@ public class SplitViewFrame extends Composite<Div> implements HasStyle {
 
 		wrapper.add(content, details);
 
-		NaviItem naviItem = new NaviItem(VaadinIcon.ARROW_LEFT, "Ejendomme", Ejendomme.class);
-		setNaviItems(naviItem);
-
 		getContent().add(header, wrapper, footer);
 	}
 
@@ -72,10 +70,6 @@ public class SplitViewFrame extends Composite<Div> implements HasStyle {
 	public void setViewHeader(Component... components) {
 		header.removeAll();
 		header.add(components);
-	}
-	public void setNaviItems(NaviItem... naviItems){
-		MainLayout mainLayout = new MainLayout();
-		mainLayout.changeNaviItems(naviItems);
 	}
 
 	/**
@@ -114,6 +108,6 @@ public class SplitViewFrame extends Composite<Div> implements HasStyle {
 	@Override
 	protected void onAttach(AttachEvent attachEvent) {
 		super.onAttach(attachEvent);
-		MainLayout.get().getAppBar().reset();
+		MedarbejderLayout.get().getAppBar().reset();
 	}
 }

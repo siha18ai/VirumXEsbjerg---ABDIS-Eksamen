@@ -88,4 +88,11 @@ public class FrontPageLayout extends PolymerTemplate<FrontPageLayout.FrontPageAg
 
     public interface FrontPageAgainModel extends TemplateModel {
     }
+    public VerticalLayout getCenter1() {
+        return center1;
+    }
+
+    public void setCenter1(VerticalLayout center1) {
+        this.center1 = center1;
+    }
 }
