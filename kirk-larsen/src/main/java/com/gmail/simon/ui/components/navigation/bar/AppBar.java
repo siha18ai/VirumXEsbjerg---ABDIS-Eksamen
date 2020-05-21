@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.components.navigation.bar;
 
+import com.gmail.simon.ui.views.About;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.HasValue;
@@ -17,13 +18,11 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.shared.Registration;
-import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.navigation.tab.NaviTab;
 import com.gmail.simon.ui.components.navigation.tab.NaviTabs;
 import com.gmail.simon.ui.util.LumoStyles;
 import com.gmail.simon.ui.util.UIUtils;
-import com.gmail.simon.ui.views.Home;
 
 import java.util.ArrayList;
 
@@ -57,7 +56,6 @@ public class AppBar extends FlexBoxLayout {
 
 	public AppBar(String title, NaviTab... tabs) {
 		setClassName(CLASS_NAME);
-
 		initMenuIcon();
 		initContextIcon();
 		initTitle(title);
@@ -81,7 +79,8 @@ public class AppBar extends FlexBoxLayout {
 	private void initMenuIcon() {
 		menuIcon = UIUtils.createTertiaryInlineButton(VaadinIcon.MENU);
 		menuIcon.addClassName(CLASS_NAME + "__navi-icon");
-		menuIcon.addClickListener(e -> MainLayout.get().getNaviDrawer().toggle());
+		//menuIcon.addClickListener(e -> MainLayout.get().getNaviDrawer().toggle());
+		//menuIcon.addClickListener(e -> FrontPage.get().getNaviDrawer().toggle());
 		UIUtils.setAriaLabel("Menu", menuIcon);
 		UIUtils.setLineHeight("1", menuIcon);
 	}
@@ -141,7 +140,7 @@ public class AppBar extends FlexBoxLayout {
 	private void initTabs(NaviTab... tabs) {
 		addTab = UIUtils.createSmallButton(VaadinIcon.PLUS);
 		addTab.addClickListener(e -> this.tabs
-				.setSelectedTab(addClosableNaviTab("New Tab", Home.class)));
+				.setSelectedTab(addClosableNaviTab("New Tab", About.class)));
 		addTab.setVisible(false);
 
 		this.tabs = tabs.length > 0 ? new NaviTabs(tabs) : new NaviTabs();

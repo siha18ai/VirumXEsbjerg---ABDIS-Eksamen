@@ -82,7 +82,11 @@ public class ListItem extends FlexBoxLayout {
 		this(prefix, primary, "", suffix);
 	}
 
-	/* === MISC === */
+    public ListItem(int grundAreal, int kommuneNr) {
+        super();
+    }
+
+    /* === MISC === */
 
 	public FlexBoxLayout getContent() {
 		return content;

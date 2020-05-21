@@ -3,10 +3,13 @@ package com.gmail.simon.backend;
 import com.vaadin.flow.component.html.Image;
 import com.gmail.simon.ui.util.UIUtils;
 
+import java.sql.*;
 import java.time.LocalDate;
 import java.util.*;
 
 public class DummyData {
+	private Connection connection = null;
+
 
 	private static final Map<Long, Report> REPORTS = new HashMap<>();
 	private static final Map<Long, Person> PERSONS = new HashMap<>();
@@ -16,8 +19,41 @@ public class DummyData {
 	private static final Map<Long, Item> ITEMS = new HashMap<>();
 	private static final Map<Long, Order> ORDERS = new HashMap<>();
 	private static final Map<Long, Invoice> INVOICES = new HashMap<>();
+	private static final Map<Long, Ejendom> EJENDOM = new HashMap<>();
+	private static final Map<Long, Brugere> EMPLOYEES = new HashMap<>();
+	private static final Map<Long, Konsulenter2> KONSULENTER = new HashMap<>();
 
 	private static final Random random = new Random(1);
+
+	private static final ArrayList<Brugere> BRUGERE = new ArrayList<>();
+	private static final ArrayList<Konsulenter2> KONSULENTERS = new ArrayList<>();
+
+
+	private static final String[] EJERNAVN = new String[] {
+			"Simon Oliver Hansen", "Simon Jannik", "Frederik Garrigues",
+			"Emil Torbensen", "Bjarne Jensen", "Kim Nielsen", "Søren Heidemeier",
+			"Bo Hansen Hansen", "Jacob Noebjerg"
+	};
+	private static final String[] KOMMUNENR = new String[] {
+			"1234", "4321", "4567", "7654", "2020"
+	};
+	private static final String[] ADRESSE = new String[] {
+			"Matthæusgade 14", "Classensgade 20", "Nørrebrogade 13",
+			"Kirkegade 12", "Norddalsvej 20", "Eriksensvej 13", "Vesterbrogade 33"
+	};
+	private static final String[] EJENDOMSNR = new String[] {
+			"34323", "33223", "43322", "34232"
+	};
+	private static final String[] GRUNDAREAL = new String[] {
+			"922m2", "3004m2", "2020m2", "700m2"
+	};
+
+	/* === Kirk Larsen data === */
+	private static String getEjer() {return EJERNAVN[random.nextInt(EJERNAVN.length)];}
+	private static String getKommune() {return KOMMUNENR[random.nextInt(KOMMUNENR.length)];}
+	private static String getAdresse() {return ADRESSE[random.nextInt(ADRESSE.length)];}
+	private static String getEjendomsNr() {return EJENDOMSNR[random.nextInt(EJENDOMSNR.length)];}
+	private static String getGrundAreal() {return GRUNDAREAL[random.nextInt(GRUNDAREAL.length)];}
 
 	private static final String[] IBANS = new String[]{
 			"AD12 0001 2030 2003 5910 0100", "AE07 0331 2345 6789 0123 456",
@@ -71,6 +107,7 @@ public class DummyData {
 			"YY24 KIHB 1247 6423 1259 1594 7930 9152 68",
 			"ZZ25 VLQT 3823 3223 3206 5880 1131 3776 421"};
 	private static final String[] COMPANIES = new String[]{
+
 			"Brewer Holding Century Training", "Broadcast Electric",
 			"Chemical General Development", "Digital Agricultural Dynamics",
 			"Demondu Semiconductors", "Cota Realisations",
@@ -170,8 +207,41 @@ public class DummyData {
 	private DummyData() {
 	}
 
+	public static ArrayList<Konsulenter2> getkonsultner() {
+		ResultSet resultSet = null;
+		ArrayList<Konsulenter2> konsulenters = new ArrayList<>();
+		Connection connection = null;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/", "root", "pass123");
+			PreparedStatement ps = connection.prepareStatement("select * FROM kirk_larsen.medarbejder");
+			resultSet = ps.executeQuery();
+
+			while (resultSet.next()){
+				Konsulenter2 konsulenter2 = new Konsulenter2();
+				konsulenter2.setRolle(resultSet.getString("Role"));
+				konsulenter2.setUsername(resultSet.getString("Username"));
+				konsulenter2.setPassword(resultSet.getString("Password"));
+				konsulenters.add(konsulenter2);
+				KONSULENTERS.add(new Konsulenter2(resultSet.getString("Role"), resultSet.getString("Username"),
+						resultSet.getString("Password")));
+			}
+		}catch (SQLException | ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		return konsulenters;
+	}
+
 	static {
 		long i = 0;
+
+		//Brugere
+
+		BRUGERE.add(new Brugere(1, "Simse", "Haargaard", Brugere.Type.EMPLOYEE, "Simon@Haargaard.dk", "admin"));
+		BRUGERE.add(new Brugere(2, "Esbjerg", "Jylland", Brugere.Type.EMPLOYEE, "Esbjerg@Jylland.com", "admin"));
+		BRUGERE.add(new Brugere(3, "G", "Karse", Brugere.Type.EMPLOYEE, "G@karse.de", "admin"));
+
+
 
 		/* === REPORTS === */
 
@@ -217,6 +287,13 @@ public class DummyData {
 							getBank(), getIBAN(), getPositiveAmount(),
 							getDate()));
 		}
+		/* === EJENDOMME ==== */
+		for (i = 0; i < 6; i++) {
+			EJENDOM.put(i,
+					new Ejendom(getEjendomStatus(), getEjer(), getKommune(), getAdresse(),
+							getEjendomsNr(), getGrundAreal()));
+		}
+
 
 		/* === ITEMS === */
 
@@ -512,6 +589,16 @@ public class DummyData {
 				.nextInt(Payment.Status.values().length)];
 	}
 
+	/*=== EJENDOM === */
+
+	public static Collection<Ejendom> getEjendom() {return EJENDOM.values();}
+
+	private static Ejendom.Status getEjendomStatus() {
+		return Ejendom.Status.values() [random.nextInt(Ejendom.Status.values().length)];
+	}
+
+
+
 	/* === MISC === */
 
 	private static String getIBAN() {
@@ -632,6 +719,11 @@ public class DummyData {
 
 	public static Address getAddress() {
 		return ADDRESSES.get(random.nextInt(ADDRESSES.size()));
+	}
+
+	/* === BRUGERE === */
+	public static ArrayList<Brugere> getBrugere(){
+		return BRUGERE;
 	}
 
 }

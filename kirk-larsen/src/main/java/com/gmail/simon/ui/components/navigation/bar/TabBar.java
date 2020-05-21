@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.components.navigation.bar;
 
+import com.gmail.simon.ui.views.About;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
@@ -10,12 +11,10 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
-import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.navigation.tab.NaviTabs;
 import com.gmail.simon.ui.util.LumoStyles;
 import com.gmail.simon.ui.util.UIUtils;
-import com.gmail.simon.ui.views.Home;
 
 import static com.gmail.simon.ui.util.UIUtils.IMG_PATH;
 
@@ -34,7 +33,8 @@ public class TabBar extends FlexBoxLayout {
 
 		menuIcon = UIUtils.createTertiaryInlineButton(VaadinIcon.MENU);
 		menuIcon.addClassName(CLASS_NAME + "__navi-icon");
-		menuIcon.addClickListener(e -> MainLayout.get().getNaviDrawer().toggle());
+		//menuIcon.addClickListener(e -> MainLayout.get().getNaviDrawer().toggle());
+		//menuIcon.addClickListener(e -> FrontPage.get().getNaviDrawer().toggle());
 
 		avatar = new Image();
 		avatar.setClassName(CLASS_NAME + "__avatar");
@@ -51,7 +51,7 @@ public class TabBar extends FlexBoxLayout {
 
 		addTab = UIUtils.createSmallButton(VaadinIcon.PLUS);
 		addTab.addClickListener(e -> tabs
-				.setSelectedTab(addClosableTab("New Tab", Home.class)));
+				.setSelectedTab(addClosableTab("New Tab", About.class)));
 		addTab.setClassName(CLASS_NAME + "__add-tab");
 
 		tabs = new NaviTabs();

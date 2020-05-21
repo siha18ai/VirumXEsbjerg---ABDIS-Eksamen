@@ -3,3 +3,6 @@ target
 *.iml
 node_modules
 webpack.generated.js
+/node_modules
+/.idea
+

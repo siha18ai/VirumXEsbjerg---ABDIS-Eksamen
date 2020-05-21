@@ -1,12 +1,16 @@
 package com.gmail.simon.ui.views;
 
+import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
+import com.gmail.simon.ui.views.frontPageView.Benefits;
+import com.gmail.simon.ui.views.frontPageView.Home;
+import com.gmail.simon.ui.MainLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
-import com.gmail.simon.ui.MainLayout;
+import com.vaadin.flow.component.icon.VaadinIcon;
 
 /**
  * A view frame that establishes app design guidelines. It consists of three
@@ -25,6 +29,7 @@ public class ViewFrame extends Composite<Div> implements HasStyle {
 	private Div header;
 	private Div content;
 	private Div footer;
+	private Div appHeaderInner;
 
 	public ViewFrame() {
 		setClassName(CLASS_NAME);
@@ -38,7 +43,19 @@ public class ViewFrame extends Composite<Div> implements HasStyle {
 		footer = new Div();
 		footer.setClassName(CLASS_NAME + "__footer");
 
+		NaviItem naviItem1 = new NaviItem(VaadinIcon.HOME, "Home", Home.class);
+		NaviItem naviItem2 = new NaviItem(VaadinIcon.INSTITUTION, "About", About.class);
+		NaviItem naviItem3 = new NaviItem(VaadinIcon.DOLLAR, "Benefits", Benefits.class);
+
+		setNaviItems(naviItem1, naviItem2, naviItem3);
+
 		getContent().add(header, content, footer);
+	}
+
+	public void setNaviItems(NaviItem... naviItems){
+		MainLayout mainLayout = new MainLayout();
+		mainLayout.changeNaviItems(naviItems);
+
 	}
 
 	/**
@@ -69,6 +86,15 @@ public class ViewFrame extends Composite<Div> implements HasStyle {
 	protected void onAttach(AttachEvent attachEvent) {
 		super.onAttach(attachEvent);
 		MainLayout.get().getAppBar().reset();
+	}
+
+	private void setAppHeaderInner(Component... components) {
+		if (appHeaderInner == null) {
+			appHeaderInner = new Div();
+			appHeaderInner.addClassName("app-header-inner");
+		}
+		appHeaderInner.removeAll();
+		appHeaderInner.add(components);
 	}
 
 }

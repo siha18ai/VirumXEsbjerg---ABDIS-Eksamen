@@ -77,7 +77,7 @@ public class NaviDrawer extends Div
 	}
 
 	private void initHeader() {
-		mainContent.add(new BrandExpression("Kirk Larsen"));
+		mainContent.add(new BrandExpression(""));
 	}
 
 	private void initSearch() {
