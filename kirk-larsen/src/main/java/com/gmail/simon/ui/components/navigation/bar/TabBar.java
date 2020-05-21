@@ -1,6 +1,6 @@
 package com.gmail.simon.ui.components.navigation.bar;
 
-import com.gmail.simon.ui.views.frontPageView.About;
+import com.gmail.simon.ui.views.About;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEventListener;
 import com.vaadin.flow.component.button.Button;
