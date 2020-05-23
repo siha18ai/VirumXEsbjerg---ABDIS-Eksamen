@@ -1,8 +1,7 @@
 package com.gmail.simon.ui.views.medarbejderView;
 
-import com.gmail.simon.backend.DummyData;
-import com.gmail.simon.backend.Person;
-import com.gmail.simon.ui.views.mainViews.MainLayout;
+import com.gmail.simon.backend.Konsulenter2;
+import com.gmail.simon.backend.database.Data;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.Initials;
 import com.gmail.simon.ui.components.ListItem;
@@ -25,8 +24,8 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Konsulenter")
 public class Konsulenter extends SplitViewFrame {
 
-    private Grid<Person> grid;
-    private ListDataProvider<Person> dataProvider;
+    private Grid<Konsulenter2> grid;
+    private ListDataProvider<Konsulenter2> dataProvider;
 
     public Konsulenter() {
         setViewContent(createContent());
@@ -43,11 +42,11 @@ public class Konsulenter extends SplitViewFrame {
 
     private Grid createGrid() {
         grid = new Grid<>();
-        dataProvider = DataProvider.ofCollection(DummyData.getPersons());
+        dataProvider = DataProvider.ofCollection(Data.getkonsultner());
         grid.setDataProvider(dataProvider);
         grid.setSizeFull();
 
-        grid.addColumn(Person::getId)
+        grid.addColumn(Konsulenter2::getRolle)
                 .setAutoWidth(true)
                 .setFlexGrow(0)
                 .setFrozen(true)
@@ -59,16 +58,16 @@ public class Konsulenter extends SplitViewFrame {
         return grid;
     }
 
-    private Component createUserInfo(Person person) {
+    private Component createUserInfo(Konsulenter2 konsulenter2) {
         ListItem item = new ListItem(
-                new Initials(person.getInitials()), person.getName(), person.getEmail());
+                new Initials(konsulenter2.getUsername()), konsulenter2.getPassword());
         item.setPadding(Vertical.XS);
         item.setSpacing(Right.M);
         return item;
 
     }
     private void filter() {
-        dataProvider.setFilterByValue(Person::getRole, Person.Role.TRADER);
+        dataProvider.setFilterByValue(Konsulenter2::getRolle, Konsulenter2.Role.ADVOKAT);
     }
 
 }

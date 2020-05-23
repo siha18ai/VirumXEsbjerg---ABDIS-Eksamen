@@ -1,6 +1,6 @@
-package com.gmail.simon.ui.views.mainViews;
+package com.gmail.simon.ui;
 
-import com.gmail.simon.ui.views.frontPageView.About;
+import com.gmail.simon.ui.views.About;
 import com.gmail.simon.ui.views.frontPageView.Benefits;
 import com.gmail.simon.ui.views.frontPageView.Home;
 import com.vaadin.flow.component.Component;
@@ -130,9 +130,9 @@ public class MainLayout extends FlexBoxLayout
 	 * Configure the app's inner and outer headers and footers.
 	 */
 	private void initHeadersAndFooters() {
-		// setAppHeaderOuter();
-		// setAppFooterInner();
-		// setAppFooterOuter();
+		setAppHeaderOuter();
+		setAppFooterInner();
+		setAppFooterOuter();
 
 		// Default inner header setup:
 		// - When using tabbed navigation the view title, user avatar and main menu button will appear in the TabBar.

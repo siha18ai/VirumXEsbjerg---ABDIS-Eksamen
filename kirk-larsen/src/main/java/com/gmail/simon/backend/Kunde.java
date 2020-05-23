@@ -72,8 +72,12 @@ public class Kunde {
     private boolean boligLejlighed;
     private int ejendom;
 
+
     public Kunde(int id, String first_name, String last_name, String email, String username, String password,
                  String telefon, String vejnavn, String etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
+
+    public Kunde(int id, String first_name, String last_name, String email, String username, String password, String telefon, String vejnavn, int etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
+
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
