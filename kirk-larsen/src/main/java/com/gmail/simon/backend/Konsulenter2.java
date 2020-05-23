@@ -1,6 +1,10 @@
 package com.gmail.simon.backend;
 
 public class Konsulenter2 {
+
+    public enum Role {
+        ADVOKAT, KONSULENT
+    }
     public String getRolle() {
         return rolle;
     }

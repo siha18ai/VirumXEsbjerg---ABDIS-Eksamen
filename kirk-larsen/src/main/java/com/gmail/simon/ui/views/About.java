@@ -64,8 +64,6 @@ public class About extends ViewFrame {
         content.setPadding(Uniform.RESPONSIVE_L);
 
 
-
-
         return content;
 
 
