@@ -1,33 +1,6 @@
 package com.gmail.simon.backend;
 
 public class Ejendom2 {
-    public Ejendom2(int person_id1, int ejd_nr, String kommune, String vej_navn, int nr, int sidedøre_nr, int etage) {
-        this.person_id = person_id1;
-        Ejd_nr = ejd_nr;
-        this.kommune = kommune;
-        this.vej_navn = vej_navn;
-        this.nr = nr;
-        this.sidedøre_nr = sidedøre_nr;
-        this.etage = etage;
-    }
-
-    private int person_id;
-    private int Ejd_nr;
-    private String kommune;
-    private String vej_navn;
-    private int nr;
-    private int sidedøre_nr;
-    private int etage;
-
-
-
-    public int getPerson_id() {
-        return person_id;
-    }
-
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
-    }
 
     public int getEjd_nr() {
         return Ejd_nr;
@@ -37,44 +10,83 @@ public class Ejendom2 {
         Ejd_nr = ejd_nr;
     }
 
-    public String getKommune() {
-        return kommune;
+    public boolean isRegistrering() {
+        return registrering;
     }
 
-    public void setKommune(String kommune) {
-        this.kommune = kommune;
+    public void setRegistrering(boolean registrering) {
+        this.registrering = registrering;
     }
 
-    public String getVej_navn() {
-        return vej_navn;
+    public double getGrundvaerdi() {
+        return grundvaerdi;
     }
 
-    public void setVej_navn(String vej_navn) {
-        this.vej_navn = vej_navn;
+    public void setGrundvaerdi(double grundvaerdi) {
+        this.grundvaerdi = grundvaerdi;
     }
 
-    public int getNr() {
-        return nr;
+    public int getMaksimalBebyggelse() {
+        return maksimalBebyggelse;
     }
 
-    public void setNr(int nr) {
-        this.nr = nr;
+    public void setMaksimalBebyggelse(int maksimalBebyggelse) {
+        this.maksimalBebyggelse = maksimalBebyggelse;
     }
 
-    public int getSidedøre_nr() {
-        return sidedøre_nr;
+    public int getEtageArealPris() {
+        return etageArealPris;
     }
 
-    public void setSidedøre_nr(int sidedøre_nr) {
-        this.sidedøre_nr = sidedøre_nr;
+    public void setEtageArealPris(int etageArealPris) {
+        this.etageArealPris = etageArealPris;
+    }
+
+    public int getSamletAreal() {
+        return samletAreal;
+    }
+
+    public void setSamletAreal(int samletAreal) {
+        this.samletAreal = samletAreal;
+    }
+
+    public int getFaktiskGrundAreal() {
+        return faktiskGrundAreal;
+    }
+
+    public void setFaktiskGrundAreal(int faktiskGrundAreal) {
+        this.faktiskGrundAreal = faktiskGrundAreal;
+    }
+
+    public int getGrundskyldPromille() {
+        return grundskyldPromille;
+    }
+
+    public void setGrundskyldPromille(int grundskyldPromille) {
+        this.grundskyldPromille = grundskyldPromille;
+    }
+
+    private int Ejd_nr;
+    private boolean registrering;
+    private double grundvaerdi;
+    private int maksimalBebyggelse;
+    private int etageArealPris;
+    private int samletAreal;
+    private int faktiskGrundAreal;
+
+    public Ejendom2(int ejd_nr, boolean registrering, double grundvaerdi, int maksimalBebyggelse, int etageArealPris, int samletAreal, int faktiskGrundAreal, int grundskyldPromille) {
+        Ejd_nr = ejd_nr;
+        this.registrering = registrering;
+        this.grundvaerdi = grundvaerdi;
+        this.maksimalBebyggelse = maksimalBebyggelse;
+        this.etageArealPris = etageArealPris;
+        this.samletAreal = samletAreal;
+        this.faktiskGrundAreal = faktiskGrundAreal;
+        this.grundskyldPromille = grundskyldPromille;
     }
     public Ejendom2(){}
 
-    public int getEtage() {
-        return etage;
-    }
+    private int grundskyldPromille;
 
-    public void setEtage(int etage) {
-        this.etage = etage;
-    }
+
 }

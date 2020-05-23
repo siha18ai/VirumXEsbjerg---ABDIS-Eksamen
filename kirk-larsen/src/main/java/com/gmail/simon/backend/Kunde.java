@@ -67,11 +67,17 @@ public class Kunde {
     private String password;
     private String telefon;
     private String vejnavn;
-    private int etage;
+    private String etage;
     private int husnummer;
     private boolean boligLejlighed;
+    private int ejendom;
+
+
+    public Kunde(int id, String first_name, String last_name, String email, String username, String password,
+                 String telefon, String vejnavn, String etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
 
     public Kunde(int id, String first_name, String last_name, String email, String username, String password, String telefon, String vejnavn, int etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
+
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -105,11 +111,11 @@ public class Kunde {
         this.vejnavn = vejnavn;
     }
 
-    public int getEtage() {
+    public String getEtage() {
         return etage;
     }
 
-    public void setEtage(int etage) {
+    public void setEtage(String etage) {
         this.etage = etage;
     }
 
@@ -144,6 +150,4 @@ public class Kunde {
     public void setEjendom(int ejendom) {
         this.ejendom = ejendom;
     }
-
-    private int ejendom;
 }

@@ -155,14 +155,14 @@ public class Ejendomme extends SplitViewFrame {
     public void filter() {
         Tab selectedTab = MainLayout.get().getAppBar().getSelectedTab();
         if (selectedTab != null) {
-            dataProvider.setFilterByValue(Ejendom2::getPerson_id, Ejendom.Status
+            dataProvider.setFilterByValue(Ejendom2::getEjd_nr, Ejendom.Status
                     .valueOf(selectedTab.getLabel().toUpperCase()));
         }
     }
     public void filterEjer() {
         Tab selectedTab = MainLayout.get().getAppBar().getSelectedTab();
         if (selectedTab != null) {
-            dataProvider.setFilterByValue(Ejendom2::getPerson_id, Ejendom.Status
+            dataProvider.setFilterByValue(Ejendom2::getEjd_nr, Ejendom.Status
                     .valueOf(selectedTab.getLabel().toUpperCase()));
         }
     }

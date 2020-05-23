@@ -5,8 +5,10 @@ import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -15,12 +17,10 @@ import java.util.*;
 @PageTitle("page 1")
 @Route(value = "page1")
 public class page1 extends SignupFrame {
-    private TextField vejnavn, etage;
-    private NumberField husnr;
     public page1(){
         changeContent(createLabel(), createHorizontal1(), createHorizontal2(), createHorizontal3());
         removeRegistration();
-        changeButtonSettings("sign-up-frame", "page2",  vejnavn);
+        changeButtonSettings("sign-up-frame", "page2", null, null,  vejnavn, etage);
         setProgressBar(getProcent(1));
     }
     public Label createLabel(){
@@ -33,17 +33,23 @@ public class page1 extends SignupFrame {
         vejnavn = new TextField("Vejnavn");
         vejnavn.setClearButtonVisible(true);
         vejnavn.setRequired(true);
+        vejnavn.addValueChangeListener(e ->
+                setVejnavnS(e.getValue()));
         etage = new TextField("Etage");
         etage.setClearButtonVisible(true);
         etage.setPattern("[0-9.,]*");
         etage.setPreventInvalidInput(true);
+        etage.addValueChangeListener(e ->
+                setEtageS(e.getValue()));
         h1.add(vejnavn, etage);
         return h1;
     }
     public HorizontalLayout createHorizontal2(){
         HorizontalLayout h1 = new HorizontalLayout();
-        husnr = new NumberField("Hus nr.");
+        husnr = new IntegerField("Hus nr.");
         husnr.setHasControls(true);
+        husnr.addValueChangeListener(e ->
+                setHusnrS(e.getValue()));
         ComboBox<String> kommune = new ComboBox("Kommune");
         List<String> kommuner = Arrays.asList("Brønderslev", "Frederikshavn", "Hjørring","Jammerbugt","Læsø","Mariagerfjord","Morsø",
                 "Rebild","Thisted","Vesthimmerlands", "Aalborg", "Favrskov","Hedensted","Herning","Holstebro","Horsens",
