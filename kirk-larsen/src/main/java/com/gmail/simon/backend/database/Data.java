@@ -48,18 +48,19 @@ public class Data {
         ArrayList<Ejendom2> ejendomme = new ArrayList<>();
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            PreparedStatement ps = getConnection().prepareStatement("select * FROM kirk_larsen.adresse");
+            PreparedStatement ps = getConnection().prepareStatement("select * FROM kirk_larsen.ejendomme");
             resultSet = ps.executeQuery();
 
             while (resultSet.next()){
                 Ejendom2 ejendom = new Ejendom2();
-                ejendom.setPerson_id(resultSet.getInt("Person_Id"));
-                ejendom.setEjd_nr(resultSet.getInt("Ejd_nr"));
-                ejendom.setKommune(resultSet.getString("Kommune"));
-                ejendom.setVej_navn(resultSet.getString("Vej_navn"));
-                ejendom.setNr(resultSet.getInt("Nr"));
-                ejendom.setEtage(resultSet.getInt("Etage"));
-                ejendom.setSidedøre_nr(resultSet.getInt("Side_doer_nr"));
+                ejendom.setEjd_nr(resultSet.getInt("ejendom_nr"));
+                ejendom.setRegistrering(resultSet.getBoolean("registrering"));
+                ejendom.setGrundvaerdi(resultSet.getInt("grundvaerdi"));
+                ejendom.setMaksimalBebyggelse(resultSet.getInt("maksimalBebyggelse"));
+                ejendom.setEtageArealPris(resultSet.getInt("etageArealPris"));
+                ejendom.setSamletAreal(resultSet.getInt("samletAreal"));
+                ejendom.setFaktiskGrundAreal(resultSet.getInt("faktiskGrundAreal"));
+                ejendom.setGrundskyldPromille(resultSet.getInt("grundskyldPromille"));
                 ejendomme.add(ejendom);
             }
         }catch (SQLException | ClassNotFoundException e){
@@ -77,17 +78,65 @@ public class Data {
 
             while (resultSet.next()){
                 Kunde kunde = new Kunde();
-                kunde.setId(resultSet.getInt("Id"));
-                kunde.setFirst_name(resultSet.getString("First_name"));
-                kunde.setLast_name(resultSet.getString("Last_name"));
-                kunde.setEmail(resultSet.getString("Email"));
-                kunde.setUsername(resultSet.getString("Username"));
-                kunde.setPassword(resultSet.getString("Password"));
+                kunde.setId(resultSet.getInt("id"));
+                kunde.setFirst_name(resultSet.getString("fornavn"));
+                kunde.setLast_name(resultSet.getString("efternavn"));
+                kunde.setEmail(resultSet.getString("email"));
+                kunde.setUsername(resultSet.getString("username"));
+                kunde.setPassword(resultSet.getString("password"));
+                kunde.setEtage(resultSet.getString("etage"));
+                kunde.setHusnummer(resultSet.getInt("husnr"));
+                kunde.setBoligLejlighed(resultSet.getBoolean("boligLejlighed"));
+                kunde.setEjendomGodkendt(resultSet.getBoolean("ejendomGodkendt"));
+                kunde.setEjendom(resultSet.getInt("ejendom"));
+                kunde.setTelefon(resultSet.getString("telefon"));
                 kunder.add(kunde);
             }
         }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }
         return kunder;
+    }
+    public boolean createEjendom() throws IllegalArgumentException {
+        try {
+            PreparedStatement createEjendom = getConnection().prepareStatement("INSERT INTO `kirk_larsen`.`ejendomme` " +
+                    "(`registrering`, `grundvaerdi`, `maksimalBebyggelse`, `etageArealPris`, `samletAreal`, " +
+                    "`faktiskGrundAreal`, `grundskyldPromille`) VALUES ('0', '0', '0', '0', '0', '0', '0');");
+
+            int rowAffected = createEjendom.executeUpdate();
+            if (rowAffected == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean createKunde(Kunde kunde) throws IllegalArgumentException {
+        try {
+            PreparedStatement createKunde = getConnection().prepareStatement("INSERT INTO `kirk_larsen`.`kunde` " +
+                    "(`username`, `password`, `fornavn`, `efternavn`, `telefon`, `vejnavn`, `email`, `etage`, `husnr`, " +
+                    "`boligLejlighed`, `ejendomGodkendt`, `ejendom`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+
+            createKunde.setString(1, kunde.getUsername());
+            createKunde.setString(2, kunde.getPassword());
+            createKunde.setString(3, kunde.getFirst_name());
+            createKunde.setString(4, kunde.getLast_name());
+            createKunde.setString(5, kunde.getTelefon());
+            createKunde.setString(6, kunde.getVejnavn());
+            createKunde.setString(7, kunde.getEmail());
+            createKunde.setString(8, kunde.getEtage());
+            createKunde.setInt(9, kunde.getHusnummer());
+            createKunde.setBoolean(10, kunde.isBoligLejlighed());
+            createKunde.setBoolean(11, kunde.isEjendomGodkendt());
+            createKunde.setInt(12, kunde.getEjendom());
+            int rowAffected = createKunde.executeUpdate();
+            if (rowAffected == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }
