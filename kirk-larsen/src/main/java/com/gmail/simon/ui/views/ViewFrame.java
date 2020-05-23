@@ -1,23 +1,12 @@
 package com.gmail.simon.ui.views;
 
-import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
-import com.gmail.simon.ui.views.frontPageView.About;
-import com.gmail.simon.ui.views.frontPageView.Benefits;
-import com.gmail.simon.ui.views.frontPageView.Home;
-import com.gmail.simon.ui.views.mainViews.MainLayout;
-import com.gmail.simon.ui.views.medarbejderView.Accountants;
-import com.gmail.simon.ui.views.medarbejderView.Ejendomme;
-import com.gmail.simon.ui.views.medarbejderView.Konsulenter;
-import com.gmail.simon.ui.views.medarbejderView.Managers;
+import com.gmail.simon.ui.MainLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.HasStyle;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.icon.VaadinIcon;
-
-import java.util.ArrayList;
 
 /**
  * A view frame that establishes app design guidelines. It consists of three

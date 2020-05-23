@@ -1,7 +1,7 @@
 package com.gmail.simon.ui.views;
 
 import com.gmail.simon.ui.components.navigation.drawer.NaviItem;
-import com.gmail.simon.ui.views.kundeView.KundeOplysninger;
+import com.gmail.simon.ui.views.kundeView.UserOplysninger;
 import com.gmail.simon.ui.views.mainViews.KundeLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
@@ -12,7 +12,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
 
 @CssImport("./styles/components/view-frame.css")
-public class ViewFrameKunde extends Composite<Div> implements HasStyle {
+public class ViewFrameUser extends Composite<Div> implements HasStyle {
 
     private String CLASS_NAME = "view-frame";
 
@@ -21,7 +21,7 @@ public class ViewFrameKunde extends Composite<Div> implements HasStyle {
     private Div footer;
     private Div appHeaderInner;
 
-    public ViewFrameKunde() {
+    public ViewFrameUser() {
 
         setClassName(CLASS_NAME);
 
@@ -34,7 +34,7 @@ public class ViewFrameKunde extends Composite<Div> implements HasStyle {
         footer = new Div();
         footer.setClassName(CLASS_NAME + "__footer");
 
-        NaviItem naviItem = new NaviItem(VaadinIcon.HOME, "Ejendomme", KundeOplysninger.class);
+        NaviItem naviItem = new NaviItem(VaadinIcon.HOME, "Ejendomme", UserOplysninger.class);
 
         setNaviItems(naviItem);
 

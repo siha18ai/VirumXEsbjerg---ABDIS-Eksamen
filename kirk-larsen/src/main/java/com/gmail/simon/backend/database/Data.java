@@ -1,4 +1,5 @@
 package com.gmail.simon.backend.database;
+import com.gmail.simon.backend.Artikler;
 import com.gmail.simon.backend.Ejendom2;
 import com.gmail.simon.backend.Konsulenter2;
 import com.gmail.simon.backend.Kunde;
@@ -90,4 +91,27 @@ public class Data {
         }
         return kunder;
     }
+    public static ArrayList<Artikler> getArtikler() {
+        ResultSet resultSet = null;
+        ArrayList<Artikler> artikler = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            PreparedStatement ps = getConnection().prepareStatement("SELECT*FROM kirk_larsen.artikler");
+            resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                Artikler artikler1 = new Artikler();
+                artikler1.setArtikel_id(resultSet.getInt("artikel_id"));
+                artikler1.setEmne(resultSet.getString("emne"));
+                artikler1.setTekst(resultSet.getString("tekst"));
+                artikler1.setDato(resultSet.getTimestamp("dato"));
+                artikler.add(artikler1);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return artikler;
+    }
+
+
 }

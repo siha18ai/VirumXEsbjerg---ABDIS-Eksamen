@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.util;
 
+import com.gmail.simon.backend.Kunde;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -10,8 +11,6 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.component.textfield.TextFieldVariant;
-import com.gmail.simon.backend.Address;
-import com.gmail.simon.backend.DummyData;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.layout.size.Right;
 import com.gmail.simon.ui.util.css.*;
@@ -279,10 +278,6 @@ public class UIUtils {
 
 	/* === MISC === */
 
-	public static String formatAddress(Address address) {
-		return address.getStreet() + "\n" + address.getCity() + ", "
-				+ address.getCity() + " " + address.getZip();
-	}
 
 	public static Button createFloatingActionButton(VaadinIcon icon) {
 		Button button = createPrimaryButton(icon);
@@ -291,17 +286,19 @@ public class UIUtils {
 	}
 
 	public static FlexLayout createPhoneLayout() {
+		Kunde kunde = new Kunde();
 		TextField prefix = new TextField();
-		prefix.setValue("+358");
+		prefix.setValue("+45");
 		prefix.setWidth("80px");
 
 		TextField number = new TextField();
-		number.setValue(DummyData.getPhoneNumber());
+		//number.setValue(kunde.getTelefon());
 
 		FlexBoxLayout layout = new FlexBoxLayout(prefix, number);
 		layout.setFlexGrow(1, number);
 		layout.setSpacing(Right.S);
 		return layout;
+
 	}
 
 	/* === NUMBERS === */

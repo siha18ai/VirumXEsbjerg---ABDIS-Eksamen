@@ -1,8 +1,9 @@
-package com.gmail.simon.ui.views.kundeView;
+package com.gmail.simon.ui.views.medarbejderView;
 
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.layout.size.Bottom;
 import com.gmail.simon.ui.layout.size.Horizontal;
+import com.gmail.simon.ui.layout.size.Left;
 import com.gmail.simon.ui.layout.size.Right;
 import com.gmail.simon.ui.util.IconSize;
 import com.gmail.simon.ui.util.LumoStyles;
@@ -11,12 +12,14 @@ import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.BorderRadius;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Shadow;
-import com.gmail.simon.ui.views.ViewFrameKunde;
-import com.gmail.simon.ui.views.mainViews.KundeLayout;
+import com.gmail.simon.ui.views.ViewFrameUser;
+import com.gmail.simon.ui.views.mainViews.MedarbejderLayout;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.board.Row;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.tabs.Tab;
@@ -25,55 +28,54 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
 @CssImport("./styles/views/statistics.css")
-@PageTitle("Ordre")
-@Route(value = "ordre", layout = KundeLayout.class)
-public class Ordre extends ViewFrameKunde {
+@PageTitle("Artikler")
+@Route(value = "artiklermedarbejder", layout = MedarbejderLayout.class)
+public class ArtiklerMedarbejder extends ViewFrameUser {
 
-    private static final String CLASS_NAME = "ordre";
+    private Button artikel;
+    private static final String CLASS_NAME = "artikler";
     public static final String MAX_WIDTH = "1024px";
 
-    public Ordre() {
+    public ArtiklerMedarbejder() {
         setViewContent(createContent());
     }
+    private Component createContent(){
+        Component docs = createDocs();
 
-    private Component createContent() {
-
-        Component ordre = createDocs();
-
-        FlexBoxLayout content = new FlexBoxLayout(ordre);
+        FlexBoxLayout content = new FlexBoxLayout(docs);
         content.setAlignItems(FlexComponent.Alignment.CENTER);
         content.setFlexDirection(FlexDirection.COLUMN);
         return content;
     }
 
-    private Component createDocs(){
-        Component ordre = createOrdre();
+    private Component createDocs() {
+        Component artikler = createArtikler();
 
-        Row docs = new Row(ordre);
+        Row docs = new Row(artikler);
         docs.addClassName(LumoStyles.Margin.Top.XL);
         UIUtils.setMaxWidth(MAX_WIDTH, docs);
         docs.setWidthFull();
 
         return docs;
     }
-
-    private Component createOrdre() {
-        FlexBoxLayout header = createHeader(VaadinIcon.EDIT, "Ordre");
+    private Component createArtikler() {
+        FlexBoxLayout header = createHeader(VaadinIcon.RECORDS, "Artikler");
 
         Tabs tabs = new Tabs();
-        for (String label : new String[]{"Nye", "Gamle"}) {
+        for (String label : new String[]{"2020", "2019", "2018"}) {
             tabs.add(new Tab(label));
         }
+
         Div card = new Div(tabs);
         UIUtils.setBackgroundColor(LumoStyles.Color.BASE_COLOR, card);
         UIUtils.setBorderRadius(BorderRadius.S, card);
         UIUtils.setShadow(Shadow.XS, card);
 
-        FlexBoxLayout ordre = new FlexBoxLayout(header, card);
-        ordre.setClassName(CLASS_NAME + "__ordre");
-        ordre.setFlexDirection(FlexDirection.COLUMN);
-        ordre.setPadding(Bottom.XL, Right.RESPONSIVE_L);
-        return ordre;
+        FlexBoxLayout artikler = new FlexBoxLayout(header, card);
+        artikler.addClassName(CLASS_NAME + "__artikler");
+        artikler.setFlexDirection(FlexDirection.COLUMN);
+        artikler.setPadding(Bottom.XL, Left.RESPONSIVE_L);
+        return artikler;
     }
 
     private FlexBoxLayout createHeader(VaadinIcon icon, String title) {
@@ -85,4 +87,20 @@ public class Ordre extends ViewFrameKunde {
         header.setSpacing(Right.L);
         return header;
     }
+/*
+    public Button createArtikelButton() {
+        artikel = new Button("Ny artikel", new Icon(VaadinIcon.PLUS));
+        artikel.setIconAfterText(true);
+        return artikel;
+    }
+    /*
+    public void changeButtonSettings() {
+        artikel.addClickListener(this)
+
+    }
+     */
+
+
+
+
 }

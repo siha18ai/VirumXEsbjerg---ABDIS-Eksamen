@@ -9,9 +9,10 @@ import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
-import com.gmail.simon.ui.views.kundeView.Artikler;
-import com.gmail.simon.ui.views.kundeView.KundeOplysninger;
-import com.gmail.simon.ui.views.kundeView.Ordre;
+import com.gmail.simon.ui.views.kundeView.ArtiklerUser;
+import com.gmail.simon.ui.views.kundeView.UserEjendom;
+import com.gmail.simon.ui.views.kundeView.UserOplysninger;
+import com.gmail.simon.ui.views.kundeView.BrugerOrdre;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -121,9 +122,10 @@ public class KundeLayout extends FlexBoxLayout
     }
     private void initNaviItems() {
         NaviMenu menu = naviDrawer.getMenu();
-        menu.addNaviItem(VaadinIcon.INFO, "Oplysninger", KundeOplysninger.class);
-        menu.addNaviItem(VaadinIcon.RECORDS, "Artikler", Artikler.class);
-        menu.addNaviItem(VaadinIcon.CASH, "Ordre", Ordre.class);
+        menu.addNaviItem(VaadinIcon.INFO, "Oplysninger", UserOplysninger.class);
+        menu.addNaviItem(VaadinIcon.HOME, "Ejendom", UserEjendom.class);
+        menu.addNaviItem(VaadinIcon.RECORDS, "Artikler", ArtiklerUser.class);
+        menu.addNaviItem(VaadinIcon.CASH, "Ordre", BrugerOrdre.class);
     }
     private void initHeaderAndFooters(){
         setAppHeaderOuter();
@@ -194,7 +196,7 @@ public class KundeLayout extends FlexBoxLayout
         NaviItem naviItem = getActiveItem(e);
         if (naviItem == null) {
             if (tabBar.getTabCount() == 0) {
-                tabBar.addClosableTab("", KundeOplysninger.class);
+                tabBar.addClosableTab("", UserOplysninger.class);
             }
         } else {
             if (tabBar.getTabCount() > 0) {
