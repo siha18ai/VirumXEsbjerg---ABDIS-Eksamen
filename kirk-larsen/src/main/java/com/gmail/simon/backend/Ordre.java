@@ -17,6 +17,10 @@ public class Ordre {
 
     }
 
+    public Ordre() {
+
+    }
+
     public String getNavn() {
         return navn;
     }

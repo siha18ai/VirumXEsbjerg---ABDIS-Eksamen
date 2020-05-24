@@ -76,6 +76,8 @@ public class Kunde {
     public Kunde(int id, String first_name, String last_name, String email, String username, String password,
                  String telefon, String vejnavn, String etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
 
+    }
+
     public Kunde(int id, String first_name, String last_name, String email, String username, String password, String telefon, String vejnavn, int etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
 
         this.id = id;
@@ -86,7 +88,6 @@ public class Kunde {
         this.password = password;
         this.telefon = telefon;
         this.vejnavn = vejnavn;
-        this.etage = etage;
         this.husnummer = husnummer;
         this.boligLejlighed = boligLejlighed;
         this.ejendomGodkendt = ejendomGodkendt;

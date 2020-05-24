@@ -1,11 +1,16 @@
 package com.gmail.simon.ui.views.kundeView;
 
+import com.gmail.simon.backend.Ejendom2;
 import com.gmail.simon.ui.components.FlexBoxLayout;
+import com.gmail.simon.ui.layout.size.Bottom;
 import com.gmail.simon.ui.layout.size.Horizontal;
+import com.gmail.simon.ui.layout.size.Left;
 import com.gmail.simon.ui.layout.size.Uniform;
 import com.gmail.simon.ui.util.LumoStyles;
 import com.gmail.simon.ui.util.UIUtils;
+import com.gmail.simon.ui.util.css.BorderRadius;
 import com.gmail.simon.ui.util.css.FlexDirection;
+import com.gmail.simon.ui.util.css.Shadow;
 import com.gmail.simon.ui.views.ViewFrameUser;
 import com.gmail.simon.ui.views.mainViews.KundeLayout;
 import com.vaadin.flow.component.Component;
@@ -13,16 +18,19 @@ import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.IntegerField;
+import com.vaadin.flow.component.textfield.NumberField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.theme.lumo.Lumo;
 
 
 @Route(value = "kunde", layout = KundeLayout.class)
@@ -30,15 +38,28 @@ import com.vaadin.flow.router.Route;
 public class UserOplysninger extends ViewFrameUser {
 
     private Button save;
+    private Ejendom2 ejendom;
 
     public UserOplysninger(){
         setId("startpage");
 
-        setViewContent(createContent(), createDetailContentPerson(), createDetailContentHome());
+        setViewContent(createContent(), createAccordionComposition());
         //setViewContent(createContent(), createDetails(), createButton());
         changeButtonSettings();
     }
 
+    private Component createAccordionComposition() {
+        Div card = new Div(createDetailContentPerson(), createDetailContentHome(),
+                createDetailContentEjendom());
+        UIUtils.setBackgroundColor(LumoStyles.Color.BASE_COLOR, card);
+        UIUtils.setBorderRadius(BorderRadius.S, card);
+        UIUtils.setShadow(Shadow.XS, card);
+
+        FlexBoxLayout accordions = new FlexBoxLayout(card);
+        accordions.setFlexDirection(FlexDirection.COLUMN);
+        accordions.setPadding(Bottom.XL, Left.RESPONSIVE_L);
+        return accordions;
+    }
     private Component createDetailContentPerson(){
         FormLayout content = createDetailsPerson();
         Accordion accordion = new Accordion();
@@ -55,6 +76,15 @@ public class UserOplysninger extends ViewFrameUser {
         VerticalLayout verticalLayout = new VerticalLayout();
         verticalLayout.add(content);
         accordion.add("Adresse information", verticalLayout);
+        return accordion;
+    }
+    private Component createDetailContentEjendom() {
+        FormLayout content = createDetailsEjendomme();
+        Accordion accordion = new Accordion();
+
+        VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.add(content);
+        accordion.add("Ejendom detaljer", verticalLayout);
         return accordion;
     }
 
@@ -79,6 +109,9 @@ public class UserOplysninger extends ViewFrameUser {
         return content;
     }
 
+    /*
+    Personlige Oplysninger
+     */
     private FormLayout createDetailsPerson() {
         TextField email = new TextField();
         //email.setValue(kunde.getEmail());
@@ -115,6 +148,9 @@ public class UserOplysninger extends ViewFrameUser {
         UIUtils.setColSpan(2, emailItem, telefonItem, navnItem);
         return formLayout;
     }
+    /*
+    Adresse oplysninger
+     */
     private FormLayout createDetailsHome(){
 
         TextField vejnavn = new TextField();
@@ -140,6 +176,49 @@ public class UserOplysninger extends ViewFrameUser {
 
     }
 
+    private FormLayout createDetailsEjendomme() {
+
+        IntegerField id_nr = new IntegerField();
+        //id_nr.setValue(ejendom.getEjd_nr());
+        id_nr.setWidthFull();
+
+        NumberField grundvaerdi = new NumberField();
+        //grundvaerdi.setValue(ejendom.getGrundvaerdi());
+        grundvaerdi.setWidthFull();
+
+        IntegerField maksimalBebyggelse = new IntegerField();
+        //maksimalBebyggelse.setValue(ejendom.getMaksimalBebyggelse());
+        maksimalBebyggelse.setWidthFull();
+
+        IntegerField etageArealPris = new IntegerField();
+        //etageArealPris.setValue(ejendom.getEtageArealPris());
+        etageArealPris.setWidthFull();
+
+        IntegerField samletAreal = new IntegerField();
+        //samletAreal.setValue(ejendom.getSamletAreal());
+        samletAreal.setWidthFull();
+
+        IntegerField faktiskGrundAreal = new IntegerField();
+        //faktiskGrundAreal.setValue(ejendom.getFaktiskGrundAreal());
+        faktiskGrundAreal.setWidthFull();
+
+        IntegerField grundskyldPromille = new IntegerField();
+        //grundskyldPromille.setValue(ejendom.getGrundskyldPromille());
+        grundskyldPromille.setWidthFull();
+
+        FormLayout formLayout = new FormLayout();
+        formLayout.addClassNames(LumoStyles.Padding.Bottom.L,
+                LumoStyles.Padding.Horizontal.L, LumoStyles.Padding
+        .Top.S);
+        formLayout.addFormItem(id_nr, "Id");
+        formLayout.addFormItem(grundvaerdi, "Grundværdi");
+        formLayout.addFormItem(maksimalBebyggelse, "Maksimal bebyggelse");
+        formLayout.addFormItem(etageArealPris, "Etageareal pris");
+        formLayout.addFormItem(samletAreal, "Samlet areal");
+        formLayout.addFormItem(faktiskGrundAreal, "Faktisk grundareal");
+        formLayout.addFormItem(grundskyldPromille, "Grundskyld promille");
+        return formLayout;
+    }
 
 
     public Button saveButton() {

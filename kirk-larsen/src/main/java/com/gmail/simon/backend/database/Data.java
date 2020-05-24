@@ -1,8 +1,6 @@
 package com.gmail.simon.backend.database;
-import com.gmail.simon.backend.Artikler;
-import com.gmail.simon.backend.Ejendom2;
-import com.gmail.simon.backend.Konsulenter2;
-import com.gmail.simon.backend.Kunde;
+import com.gmail.simon.backend.*;
+import com.vaadin.flow.component.html.Pre;
 
 import java.sql.*;
 import java.util.*;
@@ -114,6 +112,7 @@ public class Data {
         }
         return false;
     }
+
     public boolean createKunde(Kunde kunde) throws IllegalArgumentException {
         try {
             PreparedStatement createKunde = getConnection().prepareStatement("INSERT INTO `kirk_larsen`.`kunde` " +
@@ -141,6 +140,55 @@ public class Data {
         }
         return false;
     }
+    public boolean createOrdre(Ordre ordre) throws IllegalArgumentException {
+        try {
+            PreparedStatement createOrdre = getConnection().prepareStatement("INSERT INTO kirk_larsen.ordre" +
+                    " ('brugernavn', 'emne', 'beskrivelse', 'telefon') VALUES (?, ?, ?, ?)");
+
+            createOrdre.setString(1, ordre.getNavn());
+            createOrdre.setString(2, ordre.getEmne());
+            createOrdre.setString(3, ordre.getBeskrivelse());
+            createOrdre.setString(4, ordre.getTelefon());
+            int rowAffected = createOrdre.executeUpdate();
+            if (rowAffected == 1) {
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static ArrayList<Ejendom2> getEjendom() {
+        ResultSet resultSet = null;
+        ArrayList<Ejendom2> ejendom2s = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            PreparedStatement ps = getConnection().prepareStatement("SELECT ejendomme.ejendom_nr, ejendomme.grundvaerdi, " +
+                    "ejendomme.maksimalBebyggelse, ejendomme.etageArealPris, ejendomme.samletAreal, ejendomme.faktiskGrundAreal, " +
+                    "ejendomme.grundskyldPromille" +
+                    "\nFROM ejendomme" +
+                    "\nINNER JOIN kunde" +
+                    "\nON ejendomme.ejendom_nr = kunde.id" +
+                    "\nWHERE kunde.id = ?");
+            resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                Ejendom2 ejendom2 = new Ejendom2();
+                ejendom2.setEjd_nr(resultSet.getInt("Ejendom_nr"));
+                ejendom2.setGrundvaerdi(resultSet.getDouble("grundvaerdi"));
+                ejendom2.setMaksimalBebyggelse(resultSet.getInt("maksimalBebyggelse"));
+                ejendom2.setEtageArealPris(resultSet.getInt("etageArealPris"));
+                ejendom2.setSamletAreal(resultSet.getInt("samletAreal"));
+                ejendom2.setFaktiskGrundAreal(resultSet.getInt("faktiskGrundAreal"));
+                ejendom2.setGrundskyldPromille(resultSet.getInt("grundskyldPromille"));
+                ejendom2s.add(ejendom2);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ejendom2s;
+
+    }
 
     public static ArrayList<Artikler> getArtikler() {
         ResultSet resultSet = null;
@@ -162,5 +210,27 @@ public class Data {
             e.printStackTrace();
         }
         return artikler;
+    }
+
+    public static ArrayList<Ordre> getOrdre(){
+        ResultSet resultSet = null;
+        ArrayList<Ordre> ordres = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            PreparedStatement ps = getConnection().prepareStatement("SELECT*FROM kirk_larsen.ordre");
+            resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                Ordre ordre = new Ordre();
+                ordre.setNavn(resultSet.getString("brugernavn"));
+                ordre.setEmne(resultSet.getString("emne"));
+                ordre.setBeskrivelse(resultSet.getString("beskrivelse"));
+                ordre.setTelefon(resultSet.getString("telefon"));
+                ordres.add(ordre);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ordres;
     }
 }

@@ -51,6 +51,7 @@ public class ArtiklerUser extends ViewFrameUser {
         return content;
     }
 
+
     private Component createGridContent() {
         FlexBoxLayout content = new FlexBoxLayout(createGrid());
         content.setAlignItems(FlexComponent.Alignment.CENTER);
@@ -64,6 +65,7 @@ public class ArtiklerUser extends ViewFrameUser {
         UIUtils.setMaxWidth(MAX_WIDTH, content);
         return content;
     }
+
 
     private Component createDocs() {
         Component artikler = createArtikler();

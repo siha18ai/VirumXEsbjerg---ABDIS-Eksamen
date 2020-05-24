@@ -10,7 +10,6 @@ import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
 import com.gmail.simon.ui.util.css.Overflow;
 import com.gmail.simon.ui.views.kundeView.ArtiklerUser;
-import com.gmail.simon.ui.views.kundeView.UserEjendom;
 import com.gmail.simon.ui.views.kundeView.UserOplysninger;
 import com.gmail.simon.ui.views.kundeView.BrugerOrdre;
 import com.vaadin.flow.component.Component;
@@ -123,7 +122,6 @@ public class KundeLayout extends FlexBoxLayout
     private void initNaviItems() {
         NaviMenu menu = naviDrawer.getMenu();
         menu.addNaviItem(VaadinIcon.INFO, "Oplysninger", UserOplysninger.class);
-        menu.addNaviItem(VaadinIcon.HOME, "Ejendom", UserEjendom.class);
         menu.addNaviItem(VaadinIcon.RECORDS, "Artikler", ArtiklerUser.class);
         menu.addNaviItem(VaadinIcon.CASH, "Ordre", BrugerOrdre.class);
     }
