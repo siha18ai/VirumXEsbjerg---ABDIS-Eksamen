@@ -1,11 +1,9 @@
 package com.gmail.simon.ui.views.kundeView;
 
 import com.gmail.simon.backend.Ordre;
+import com.gmail.simon.backend.database.Data;
 import com.gmail.simon.ui.components.FlexBoxLayout;
-import com.gmail.simon.ui.layout.size.Bottom;
-import com.gmail.simon.ui.layout.size.Horizontal;
-import com.gmail.simon.ui.layout.size.Right;
-import com.gmail.simon.ui.layout.size.Top;
+import com.gmail.simon.ui.layout.size.*;
 import com.gmail.simon.ui.util.IconSize;
 import com.gmail.simon.ui.util.LumoStyles;
 import com.gmail.simon.ui.util.TextColor;
@@ -27,6 +25,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -45,7 +44,7 @@ public class BrugerOrdre extends ViewFrameUser {
     public static final String MAX_WIDTH = "1024px";
 
     public BrugerOrdre() {
-        setViewContent(createContent());
+        setViewContent(createContent(), createContentGrid());
         changeButtonSettings("nyordre");
     }
 
@@ -60,16 +59,22 @@ public class BrugerOrdre extends ViewFrameUser {
     }
     private Component createContentGrid() {
         FlexBoxLayout content = new FlexBoxLayout(createGrid());
-        content.setBoxSizing(BoxSizing.BORDER_BOX);
+        content.setAlignItems(FlexComponent.Alignment.CENTER);
+        content.setFlexDirection(FlexDirection.COLUMN);
         content.setHeightFull();
-        content.setPadding(Horizontal.RESPONSIVE_X, Top.RESPONSIVE_X);
+        content.setPadding(Bottom.XL, Left.RESPONSIVE_L, Right.RESPONSIVE_L);
+        content.setMargin(Left.RESPONSIVE_X, Right.RESPONSIVE_X);
+        UIUtils.setBackgroundColor(LumoStyles.Color.BASE_COLOR, content);
+        UIUtils.setBorderRadius(BorderRadius.S, content);
+        UIUtils.setShadow(Shadow.XS, content);
+        UIUtils.setMaxWidth(MAX_WIDTH, content);
         return content;
     }
 
 
     private Grid createGrid() {
         grid = new Grid<>();
-        //dataProvider = DataProvider.ofCollection();
+        dataProvider = DataProvider.ofCollection(Data.getOrdre());
         grid.setDataProvider(dataProvider);
         grid.setHeightFull();
 
@@ -87,10 +92,7 @@ public class BrugerOrdre extends ViewFrameUser {
                 .setSortable(true);
         grid.addColumn(Ordre::getBeskrivelse)
                 .setAutoWidth(true)
-                .setFlexGrow(0)
-                .setFrozen(true)
-                .setHeader("Beskrivelse")
-                .setSortable(true);
+                .setHeader("Beskrivelse");
         grid.addColumn(Ordre::getTelefon)
                 .setAutoWidth(true)
                 .setFlexGrow(0)
