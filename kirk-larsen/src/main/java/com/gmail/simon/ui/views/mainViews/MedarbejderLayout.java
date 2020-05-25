@@ -1,9 +1,7 @@
 package com.gmail.simon.ui.views.mainViews;
 
 import com.gmail.simon.ui.views.frontPageView.Home;
-import com.gmail.simon.ui.views.medarbejderView.Advokater;
-import com.gmail.simon.ui.views.medarbejderView.Ejendomme;
-import com.gmail.simon.ui.views.medarbejderView.Konsulenter;
+import com.gmail.simon.ui.views.medarbejderView.*;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
 import com.vaadin.flow.component.UI;
@@ -124,6 +122,8 @@ public class MedarbejderLayout extends FlexBoxLayout
         menu.addNaviItem(VaadinIcon.HOME, "Ejendomme", Ejendomme.class);
         menu.addNaviItem(VaadinIcon.INSTITUTION, "Konsulenter", Konsulenter.class);
         menu.addNaviItem(VaadinIcon.CLIPBOARD, "Adovkater", Advokater.class);
+        menu.addNaviItem(VaadinIcon.NEWSPAPER, "Artikler", ArtiklerView.class);
+        menu.addNaviItem(VaadinIcon.PAPERCLIP, "Ordrer", OrdreView.class);
     }
 
     /**

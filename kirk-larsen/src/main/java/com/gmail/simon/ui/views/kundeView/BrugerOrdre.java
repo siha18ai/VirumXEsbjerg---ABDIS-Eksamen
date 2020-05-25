@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.views.kundeView;
 
+import com.gmail.simon.backend.Kunde;
 import com.gmail.simon.backend.Ordre;
 import com.gmail.simon.backend.database.Data;
 import com.gmail.simon.ui.components.FlexBoxLayout;
@@ -30,6 +31,8 @@ import com.vaadin.flow.data.provider.ListDataProvider;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
+import java.util.ArrayList;
+
 @CssImport("./styles/views/statistics.css")
 @PageTitle("BrugerOrdre")
 @Route(value = "Ordre", layout = KundeLayout.class)
@@ -42,8 +45,12 @@ public class BrugerOrdre extends ViewFrameUser {
 
     private static final String CLASS_NAME = "ordre";
     public static final String MAX_WIDTH = "1024px";
+    private Kunde currentKunde;
+    private Data data;
 
     public BrugerOrdre() {
+        this.data = new Data();
+        initKunde();
         setViewContent(createContent(), createContentGrid());
         changeButtonSettings("nyordre");
     }
@@ -56,6 +63,19 @@ public class BrugerOrdre extends ViewFrameUser {
         content.setAlignItems(FlexComponent.Alignment.CENTER);
         content.setFlexDirection(FlexDirection.COLUMN);
         return content;
+    }
+    private Kunde getKunde(){
+        ArrayList<Kunde> kunder = data.getKunder();
+        Kunde kunde = new Kunde();
+        for(Kunde kunde1 : kunder){
+            if (kunde1.isLogedin() == true){
+                kunde = kunde1;
+            }
+        }
+        return kunde;
+    }
+    private void initKunde(){
+        this.currentKunde = getKunde();
     }
     private Component createContentGrid() {
         FlexBoxLayout content = new FlexBoxLayout(createGrid());
@@ -74,16 +94,10 @@ public class BrugerOrdre extends ViewFrameUser {
 
     private Grid createGrid() {
         grid = new Grid<>();
-        dataProvider = DataProvider.ofCollection(Data.getOrdre());
+        dataProvider = DataProvider.ofCollection(Data.getOrdreforKunde(currentKunde));
         grid.setDataProvider(dataProvider);
         grid.setHeightFull();
 
-        grid.addColumn(Ordre::getNavn)
-                .setAutoWidth(true)
-                .setFlexGrow(0)
-                .setFrozen(true)
-                .setHeader("Navn")
-                .setSortable(true);
         grid.addColumn(Ordre::getEmne)
                 .setAutoWidth(true)
                 .setFlexGrow(0)

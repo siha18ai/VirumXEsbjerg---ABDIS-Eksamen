@@ -3,6 +3,12 @@ package com.gmail.simon.ui.views.medarbejderView;
 import com.gmail.simon.backend.Ejendom;
 import com.gmail.simon.backend.Ejendom2;
 import com.gmail.simon.backend.database.Data;
+import com.gmail.simon.ui.components.detailsdrawer.DetailsDrawer;
+import com.gmail.simon.ui.components.detailsdrawer.DetailsDrawerHeader;
+import com.gmail.simon.ui.util.FontSize;
+import com.gmail.simon.ui.util.LumoStyles;
+import com.gmail.simon.ui.util.TextColor;
+import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.views.SplitViewFrame;
 import com.gmail.simon.ui.MainLayout;
 import com.gmail.simon.ui.components.FlexBoxLayout;
@@ -16,9 +22,14 @@ import com.gmail.simon.ui.views.mainViews.MedarbejderLayout;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.contextmenu.GridMenuItem;
+import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
+import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.provider.DataProvider;
 import com.vaadin.flow.data.provider.ListDataProvider;
@@ -30,7 +41,7 @@ import com.vaadin.flow.router.Route;
 public class Ejendomme extends SplitViewFrame {
 
     private Grid<Ejendom2> grid;
-    //private DetailsDrawer detailsDrawer;
+    private DetailsDrawer detailsDrawer;
     private ListDataProvider<Ejendom2> dataProvider;
     private com.vaadin.flow.component.textfield.TextField searchBox;
     private MainLayout mainLayout;
@@ -38,6 +49,8 @@ public class Ejendomme extends SplitViewFrame {
     public Ejendomme(){
         grid = new Grid<>(Ejendom2.class);
         this.mainLayout = new MainLayout();
+        createDetailsDrawer();
+        setViewContent(createContent());
     }
 
     @Override
@@ -45,8 +58,6 @@ public class Ejendomme extends SplitViewFrame {
         super.onAttach(attachEvent);
         initAppBar();
         initSearchBar();
-        setViewContent(createContent());
-
         //setViewContent(createDetailsDrawer());
         //filter();
     }
@@ -81,7 +92,11 @@ public class Ejendomme extends SplitViewFrame {
     private Grid createGrid() {
         dataProvider = DataProvider.ofCollection(Data.getEjendomme());
         grid.setDataProvider(dataProvider);
-        grid.setHeightFull();/*
+        grid.setHeightFull();
+        grid.addSelectionListener(e ->{
+                detailsDrawer.setContent(createHistory());
+        });
+        /*
         grid.addColumn("person_id")
                 .setAutoWidth(true)
                 .setFlexGrow(0)
@@ -124,34 +139,16 @@ public class Ejendomme extends SplitViewFrame {
         return item;
     }
 
-/*
+
     private DetailsDrawer createDetailsDrawer() {
         detailsDrawer = new DetailsDrawer(DetailsDrawer.Position.RIGHT);
-
-        //Header
-        Tab details = new Tab("Detaljer");
-        Tab attachments = new Tab("Vedhæftet");
-        Tab history = new Tab("Historie");
-
-        Tabs tabs = new Tabs(details, attachments, history);
-        tabs.addThemeVariants(TabsVariant.LUMO_EQUAL_WIDTH_TABS);
-        tabs.addSelectedChangeListener(e -> {
-            Tab selectedTab = tabs.getSelectedTab();
-            if (selectedTab.equals(details)){
-                detailsDrawer.setContent(createDetails(grid.getSelectionModel().getFirstSelectedItem().get()));
-            } else if (selectedTab.equals(attachments)) {
-                detailsDrawer.setContent(createAttachments());
-            } else if (selectedTab.equals(history)) {
-                detailsDrawer.setContent(createHistory());
-            }
-        });
-        DetailsDrawerHeader detailsDrawerHeader = new DetailsDrawerHeader("Ejendom detaljer", tabs);
+        DetailsDrawerHeader detailsDrawerHeader = new DetailsDrawerHeader("Ejendom detaljer");
         detailsDrawerHeader.addCloseListener(buttonClickEvent -> detailsDrawer.hide());
         detailsDrawer.setHeader(detailsDrawerHeader);
 
         return detailsDrawer;
     }
-*/
+
     public void filter() {
         Tab selectedTab = MainLayout.get().getAppBar().getSelectedTab();
         if (selectedTab != null) {
@@ -206,11 +203,13 @@ public class Ejendomme extends SplitViewFrame {
         message.addClassNames(LumoStyles.Padding.Responsive.Horizontal.L, LumoStyles.Padding.Vertical.L);
         return message;
     }
+
+ */
     private Component createHistory() {
         Label message = UIUtils.createLabel(FontSize.S, TextColor.SECONDARY, "Ikke implementeret endnu");
         message.addClassNames(LumoStyles.Padding.Responsive.Horizontal.L, LumoStyles.Padding.Vertical.L);
         return message;
     }
 
- */
+
 }

@@ -72,13 +72,26 @@ public class Kunde {
     private boolean boligLejlighed;
     private int ejendom;
 
+    public boolean isLogedin() {
+        return logedin;
+    }
+
+    public void setLogedin(boolean logedin) {
+        this.logedin = logedin;
+    }
+
+    private boolean logedin;
+
 
     public Kunde(int id, String first_name, String last_name, String email, String username, String password,
-                 String telefon, String vejnavn, String etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
+                 String telefon, String vejnavn, String etage, int husnummer, boolean boligLejlighed,
+                 boolean ejendomGodkendt, int ejendom, boolean logedin) {
 
     }
 
-    public Kunde(int id, String first_name, String last_name, String email, String username, String password, String telefon, String vejnavn, int etage, int husnummer, boolean boligLejlighed, boolean ejendomGodkendt, int ejendom) {
+    public Kunde(int id, String first_name, String last_name, String email, String username, String password,
+                 String telefon, String vejnavn, int etage, int husnummer, boolean boligLejlighed,
+                 boolean ejendomGodkendt, int ejendom, boolean logedin) {
 
         this.id = id;
         this.first_name = first_name;
@@ -92,6 +105,7 @@ public class Kunde {
         this.boligLejlighed = boligLejlighed;
         this.ejendomGodkendt = ejendomGodkendt;
         this.ejendom = ejendom;
+        this.logedin = logedin;
     }
 
     private boolean ejendomGodkendt;

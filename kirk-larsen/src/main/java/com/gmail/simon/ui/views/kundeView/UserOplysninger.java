@@ -1,6 +1,8 @@
 package com.gmail.simon.ui.views.kundeView;
 
 import com.gmail.simon.backend.Ejendom2;
+import com.gmail.simon.backend.Kunde;
+import com.gmail.simon.backend.database.Data;
 import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.layout.size.Bottom;
 import com.gmail.simon.ui.layout.size.Horizontal;
@@ -19,6 +21,7 @@ import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
@@ -32,19 +35,24 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.theme.lumo.Lumo;
 
+import java.util.ArrayList;
+
 
 @Route(value = "kunde", layout = KundeLayout.class)
 @PageTitle("Kunde")
 public class UserOplysninger extends ViewFrameUser {
 
     private Button save;
-    private Ejendom2 ejendom;
+    private Ejendom2 currentEjendom;
+    private Data data;
+    private Kunde currentKunde;
 
     public UserOplysninger(){
+        this.data = new Data();
         setId("startpage");
-
+        initKunde();
+        initEjendom();
         setViewContent(createContent(), createAccordionComposition());
-        //setViewContent(createContent(), createDetails(), createButton());
         changeButtonSettings();
     }
 
@@ -59,6 +67,32 @@ public class UserOplysninger extends ViewFrameUser {
         accordions.setFlexDirection(FlexDirection.COLUMN);
         accordions.setPadding(Bottom.XL, Left.RESPONSIVE_L);
         return accordions;
+    }
+    private Kunde getKunde(){
+        ArrayList<Kunde> kunder = data.getKunder();
+        Kunde kunde = new Kunde();
+        for(Kunde kunde1 : kunder){
+            if(kunde1.isLogedin() == true){
+                kunde = kunde1;
+            }
+        }
+        return kunde;
+    }
+    private void initKunde(){
+        this.currentKunde = getKunde();
+    }
+    private Ejendom2 getEjendom(){
+        ArrayList<Ejendom2> ejendomme = data.getEjendomme();
+        Ejendom2 ejendom = new Ejendom2();
+        for(Ejendom2 ejendom1 : ejendomme){
+            if(ejendom1.getEjd_nr() == currentKunde.getEjendom()){
+                ejendom = ejendom1;
+            }
+        }
+        return ejendom;
+    }
+    private void initEjendom(){
+        this.currentEjendom = getEjendom();
     }
     private Component createDetailContentPerson(){
         FormLayout content = createDetailsPerson();
@@ -114,21 +148,27 @@ public class UserOplysninger extends ViewFrameUser {
      */
     private FormLayout createDetailsPerson() {
         TextField email = new TextField();
-        //email.setValue(kunde.getEmail());
+        email.setValue(currentKunde.getEmail());
         email.setWidthFull();
 
-        FlexLayout telefon = UIUtils.createPhoneLayout();
+        TextField telefon = new TextField();
+        telefon.setPrefixComponent(new Span("+45 "));
+        telefon.setPattern("[0-9.,]*");
+        telefon.setClearButtonVisible(true);
+        telefon.setPreventInvalidInput(true);
+        telefon.setValue(currentKunde.getTelefon());
+        telefon.setWidthFull();
 
         TextField navn = new TextField();
-        //navn.setValue(kunde.getUsername());
+        navn.setValue(currentKunde.getUsername());
         navn.setWidthFull();
 
         TextField brugernavn = new TextField();
-        //brugernavn.setValue(kunde.getUsername());
+        brugernavn.setValue(currentKunde.getUsername());
         brugernavn.setWidthFull();
 
         PasswordField adgangskode = new PasswordField();
-        //adgangskode.setValue(kunde.getPassword());
+        adgangskode.setValue(currentKunde.getPassword());
         adgangskode.setWidthFull();
 
         FormLayout formLayout = new FormLayout();
@@ -154,15 +194,15 @@ public class UserOplysninger extends ViewFrameUser {
     private FormLayout createDetailsHome(){
 
         TextField vejnavn = new TextField();
-        //vejnavn.setValue(kunde.getVejnavn());
+        vejnavn.setValue(currentKunde.getVejnavn());
         vejnavn.setWidthFull();
 
-        IntegerField etage = new IntegerField();
-        //etage.setValue(kunde.getEtage());
+        TextField etage = new TextField();
+        etage.setValue(currentKunde.getEtage());
         etage.setWidthFull();
 
         IntegerField husnr = new IntegerField();
-        //husnr.setValue(kunde.getHusnummer());
+        husnr.setValue(currentKunde.getHusnummer());
         husnr.setWidthFull();
 
         FormLayout formLayout = new FormLayout();
@@ -179,31 +219,31 @@ public class UserOplysninger extends ViewFrameUser {
     private FormLayout createDetailsEjendomme() {
 
         IntegerField id_nr = new IntegerField();
-        //id_nr.setValue(ejendom.getEjd_nr());
+        id_nr.setValue(currentEjendom.getEjd_nr());
         id_nr.setWidthFull();
 
         NumberField grundvaerdi = new NumberField();
-        //grundvaerdi.setValue(ejendom.getGrundvaerdi());
+        grundvaerdi.setValue(currentEjendom.getGrundvaerdi());
         grundvaerdi.setWidthFull();
 
         IntegerField maksimalBebyggelse = new IntegerField();
-        //maksimalBebyggelse.setValue(ejendom.getMaksimalBebyggelse());
+        maksimalBebyggelse.setValue(currentEjendom.getMaksimalBebyggelse());
         maksimalBebyggelse.setWidthFull();
 
         IntegerField etageArealPris = new IntegerField();
-        //etageArealPris.setValue(ejendom.getEtageArealPris());
+        etageArealPris.setValue(currentEjendom.getEtageArealPris());
         etageArealPris.setWidthFull();
 
         IntegerField samletAreal = new IntegerField();
-        //samletAreal.setValue(ejendom.getSamletAreal());
+        samletAreal.setValue(currentEjendom.getSamletAreal());
         samletAreal.setWidthFull();
 
         IntegerField faktiskGrundAreal = new IntegerField();
-        //faktiskGrundAreal.setValue(ejendom.getFaktiskGrundAreal());
+        faktiskGrundAreal.setValue(currentEjendom.getFaktiskGrundAreal());
         faktiskGrundAreal.setWidthFull();
 
         IntegerField grundskyldPromille = new IntegerField();
-        //grundskyldPromille.setValue(ejendom.getGrundskyldPromille());
+        grundskyldPromille.setValue(currentEjendom.getGrundskyldPromille());
         grundskyldPromille.setWidthFull();
 
         FormLayout formLayout = new FormLayout();

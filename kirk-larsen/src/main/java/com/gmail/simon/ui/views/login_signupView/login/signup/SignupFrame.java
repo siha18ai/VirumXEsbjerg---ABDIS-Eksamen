@@ -2,18 +2,23 @@ package com.gmail.simon.ui.views.login_signupView.login.signup;
 
 import com.gmail.simon.backend.Kunde;
 import com.gmail.simon.backend.database.Data;
+import com.gmail.simon.ui.views.frontPageView.Home;
 import com.gmail.simon.ui.views.login_signupView.login.FrontPageLayout;
+import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.*;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
+
 import java.text.DecimalFormat;
 
 /**
@@ -25,16 +30,16 @@ import java.text.DecimalFormat;
 @PageTitle("Signup Frame")
 @Route(value = "sign-up-frame")
 public class SignupFrame extends FrontPageLayout {
-    public Button back, forward, submit;
+    public Button back1, forward1,back2, forward2,back3, forward3,back4, submit;
     private Label label;
-    private ProgressBar progressBar;
-    public Registration registration1;
-    public Registration registration2;
-    public Registration registration3;
     public TextField fornavn, efternavn, telefon, vejnavn, etage, brugernavn;
     public PasswordField adgangskode;
     public String fornavnS, efternavnS, telefonS, vejnavnS, etageS, brugernavnS, adgangskodeS, emailS;
+    public String password;
     public int husnrS;
+    private ProgressBar progressBar;
+    public Registration registration1;
+    public Registration registration2;
     private EmailField email;
     public IntegerField husnr;
     private Span span;
@@ -47,48 +52,70 @@ public class SignupFrame extends FrontPageLayout {
         changeProgressAndLabel(initLabel(), initProgressBar());
         changeContent(createLabel(), createHorizonatal1(), createHorizonatal2());
         changeFooter(initBack(), initForward());
-        removeRegistration();
-        changeButtonSettings("", "page1", email, null, fornavn, efternavn, telefon);
+        changeButtonSettings(Home.class, page1.class, email, fornavn, efternavn, telefon);
         setProgressBar(0);
+        initTextfields();
         initSpan();
+    }
+    public void initTextfields(){
+        brugernavn = new TextField("Brugernavn");
+        brugernavnS = "";
+        brugernavn.setValue(brugernavnS);
+        brugernavn.setClearButtonVisible(true);
+        brugernavn.setRequired(true);
+        brugernavn.addValueChangeListener(e -> {
+            setBrugernavnS(e.getValue());
+            brugernavn.setValue(e.getValue());
+        });
+        adgangskode = new PasswordField("Adgangskode");
+        adgangskode.setClearButtonVisible(true);
+        adgangskode.setRequired(true);
+        adgangskode.addValueChangeListener(e ->
+                setPassword(e.getValue()));
+    }
+    public String password(){
+        if(brugernavnS == null){
+            brugernavnS = "";
+            return brugernavnS;
+        }
+        else
+            return password;
     }
 
     public Button initBack() {
-        back = new Button("Tilbage", new Icon(VaadinIcon.ARROW_LEFT));
-        return back;
-    }
-    public TextField parseEmail(){
-        TextField textField = new TextField();
-        textField.setValue(email.getValue());
-        return textField;
+        back1 = new Button("Tilbage", new Icon(VaadinIcon.ARROW_LEFT));
+        return back1;
     }
 
     public Button initForward() {
-        forward = new Button("Videre", new Icon(VaadinIcon.ARROW_RIGHT));
-        forward.setIconAfterText(true);
-        return forward;
+        forward1 = new Button("Videre", new Icon(VaadinIcon.ARROW_RIGHT));
+        forward1.setIconAfterText(true);
+        return forward1;
     }
 
-    public void changeButtonSettings(String backString, String forwardString, EmailField email, PasswordField password,
+    public void changeButtonSettings(Class<? extends Component> navigationTarget, Class<? extends Component> forwardString, EmailField email,
                                      TextField... textFields) {
-        registration1 = back.addClickListener(e -> back.getUI().ifPresent(ui -> ui.navigate(backString)));
-        registration2 = forward.addClickListener(e -> {
-            if (textfields(password,email, textFields)) {
-                //setValuesForKunde();
-                forward.getUI().ifPresent(ui -> ui.navigate(forwardString));
+        back1.addClickListener(e -> UI.getCurrent().navigate(navigationTarget));
+        forward1.addClickListener(e -> {
+            if (textfields(email, textFields)) {
+                Kunde kunde = new Kunde();
+                kunde.setEmail(email.getValue());
+                kunde.setFirst_name(fornavn.getValue());
+                kunde.setLast_name(efternavn.getValue());
+                kunde.setTelefon(telefon.getValue());
+                kunde.setEjendom(1);
+                if(data.createKunde(kunde)){
+                    Notification.show("user created");
+                }
+                forward1.getUI().ifPresent(ui -> UI.getCurrent().navigate(forwardString));
             } else {
                 getCenter1().add(span);
             }
         });
     }
 
-    public boolean textfields(PasswordField password, EmailField email, TextField... textFields){
+    public boolean textfields(EmailField email, TextField... textFields){
         boolean isempty = true;
-        if(password != null){
-            if(password.getValue() == ""){
-                isempty = false;
-            }
-        }
         if(email != null){
             if(email.getValue() == ""){
                 isempty = false;
@@ -137,7 +164,6 @@ public class SignupFrame extends FrontPageLayout {
         HorizontalLayout h1 = new HorizontalLayout();
         fornavn = new TextField("Fornavn");
         fornavn.setClearButtonVisible(true);
-        fornavn.setClearButtonVisible(true);
         fornavn.setRequired(true);
         fornavn.setErrorMessage("Udfyld venligst alle påkrævede texbokse");
         fornavn.addValueChangeListener(evenet ->
@@ -173,15 +199,6 @@ public class SignupFrame extends FrontPageLayout {
         double antalSider = 3;
         double procent = progress/antalSider;
         return procent;
-    }
-    public void removeRegistration(){
-        if(registration1 != null && registration2 != null) {
-            registration1.remove();
-            registration2.remove();
-        }
-        if(registration3 != null){
-            registration3.remove();
-        }
     }
     public void initSpan(){
         span = new Span("Please fill all required textfields or lease enter a valid phone number");
@@ -256,5 +273,11 @@ public class SignupFrame extends FrontPageLayout {
 
     public void setHusnrS(int husnrS) {
         this.husnrS = husnrS;
+    }
+    public String getPassword(){
+        return password;
+    }
+    public void setPassword(String password){
+        this.password = password;
     }
 }
