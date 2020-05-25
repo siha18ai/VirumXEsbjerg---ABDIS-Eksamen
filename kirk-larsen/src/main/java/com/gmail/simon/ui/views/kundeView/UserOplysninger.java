@@ -24,6 +24,7 @@ import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -43,9 +44,12 @@ import java.util.ArrayList;
 public class UserOplysninger extends ViewFrameUser {
 
     private Button save;
+    private TextField brugernavn, navn, telefon, email;
+    private PasswordField adgangskode;
     private Ejendom2 currentEjendom;
     private Data data;
     private Kunde currentKunde;
+
 
     public UserOplysninger(){
         this.data = new Data();
@@ -55,6 +59,7 @@ public class UserOplysninger extends ViewFrameUser {
         setViewContent(createContent(), createAccordionComposition());
         changeButtonSettings();
     }
+
 
     private Component createAccordionComposition() {
         Div card = new Div(createDetailContentPerson(), createDetailContentHome(),
@@ -69,7 +74,7 @@ public class UserOplysninger extends ViewFrameUser {
         return accordions;
     }
     private Kunde getKunde(){
-        ArrayList<Kunde> kunder = data.getKunder();
+        ArrayList<Kunde> kunder = Data.getKunder();
         Kunde kunde = new Kunde();
         for(Kunde kunde1 : kunder){
             if(kunde1.isLogedin() == true){
@@ -147,29 +152,34 @@ public class UserOplysninger extends ViewFrameUser {
     Personlige Oplysninger
      */
     private FormLayout createDetailsPerson() {
-        TextField email = new TextField();
+        email = new TextField();
         email.setValue(currentKunde.getEmail());
         email.setWidthFull();
+        email.addValueChangeListener(e -> currentKunde.setEmail(e.getValue()));
 
-        TextField telefon = new TextField();
+        telefon = new TextField();
         telefon.setPrefixComponent(new Span("+45 "));
         telefon.setPattern("[0-9.,]*");
         telefon.setClearButtonVisible(true);
         telefon.setPreventInvalidInput(true);
         telefon.setValue(currentKunde.getTelefon());
         telefon.setWidthFull();
+        telefon.addValueChangeListener(e -> currentKunde.setTelefon(e.getValue()));
 
-        TextField navn = new TextField();
-        navn.setValue(currentKunde.getUsername());
+        navn = new TextField();
+        navn.setValue(currentKunde.getFirst_name());
         navn.setWidthFull();
+        navn.addValueChangeListener(e -> currentKunde.setFirst_name(e.getValue()));
 
-        TextField brugernavn = new TextField();
+        brugernavn = new TextField();
         brugernavn.setValue(currentKunde.getUsername());
         brugernavn.setWidthFull();
+        brugernavn.addValueChangeListener(e -> currentKunde.setUsername(e.getValue()));
 
-        PasswordField adgangskode = new PasswordField();
+        adgangskode = new PasswordField();
         adgangskode.setValue(currentKunde.getPassword());
         adgangskode.setWidthFull();
+        adgangskode.addValueChangeListener(e -> currentKunde.setPassword(e.getValue()));
 
         FormLayout formLayout = new FormLayout();
         formLayout.addClassNames(LumoStyles.Padding.Bottom.L,
@@ -268,8 +278,11 @@ public class UserOplysninger extends ViewFrameUser {
 
     public void changeButtonSettings() {
         save.addClickListener(e -> {
-            save.getElement().setAttribute("open", false);
-            UIUtils.showNotification("Ændringer gemt");
+            if(data.updateKundeInformation(currentKunde)){
+                initKunde();
+                setViewContent(createContent(), createAccordionComposition());
+                Notification.show("User updated");
+            }
         });
     }
 
