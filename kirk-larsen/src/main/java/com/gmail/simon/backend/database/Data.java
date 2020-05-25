@@ -21,8 +21,7 @@ public class Data {
         return myCon;
     }
 
-
-    public static ArrayList<Konsulenter2> getkonsultner(){
+    public static ArrayList<Konsulenter2> getmedarbejdere(){
         ResultSet resultSet = null;
         ArrayList<Konsulenter2> konsulenters = new ArrayList<>();
         try {
@@ -32,9 +31,11 @@ public class Data {
 
             while (resultSet.next()){
                 Konsulenter2 konsulenter2 = new Konsulenter2();
-                konsulenter2.setRolle(resultSet.getString("Role"));
-                konsulenter2.setUsername(resultSet.getString("Username"));
-                konsulenter2.setPassword(resultSet.getString("Password"));
+                konsulenter2.setUsername(resultSet.getString("username"));
+                konsulenter2.setPassword(resultSet.getString("password"));
+                konsulenter2.setAnsat(resultSet.getBoolean("ansat"));
+                konsulenter2.setArtikel(resultSet.getInt("artikel"));
+                konsulenter2.setKonsulentEllerAdvokat(resultSet.getBoolean("konsulentEllerAdvokat"));
                 konsulenters.add(konsulenter2);
             }
         }catch (SQLException | ClassNotFoundException e){
@@ -42,6 +43,7 @@ public class Data {
         }
         return konsulenters;
     }
+
     public static ArrayList<Ejendom2> getEjendomme(){
         ResultSet resultSet = null;
         ArrayList<Ejendom2> ejendomme = new ArrayList<>();
@@ -89,12 +91,77 @@ public class Data {
                 kunde.setEjendomGodkendt(resultSet.getBoolean("ejendomGodkendt"));
                 kunde.setEjendom(resultSet.getInt("ejendom"));
                 kunde.setTelefon(resultSet.getString("telefon"));
+                kunde.setLogedin(resultSet.getBoolean("logedin"));
+                kunde.setVejnavn(resultSet.getString("vejnavn"));
                 kunder.add(kunde);
             }
         }catch (SQLException | ClassNotFoundException e){
             e.printStackTrace();
         }
         return kunder;
+    }
+    public boolean updateKunde(Kunde kunde) throws IllegalArgumentException{
+        try{
+            PreparedStatement updateCustomer = getConnection().prepareStatement("UPDATE `kirk_larsen`.`kunde` SET " +
+                    "`vejnavn` = ?, `etage` = ?, `husnr` = ? WHERE (`id` = ?);");
+            updateCustomer.setString(1, kunde.getVejnavn());
+            updateCustomer.setString(2, kunde.getEtage());
+            updateCustomer.setInt(3, kunde.getHusnummer());
+            updateCustomer.setInt(4, kunde.getId());
+            int roweffected = updateCustomer.executeUpdate();
+            if(roweffected == 1){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean updateKunde2(Kunde kunde) throws IllegalArgumentException{
+        try{
+            PreparedStatement updateCustomer = getConnection().prepareStatement("UPDATE `kirk_larsen`.`kunde` SET " +
+                    "`username` = ?, `password` = ? WHERE (`id` = ?);");
+            updateCustomer.setString(1, kunde.getUsername());
+            updateCustomer.setString(2, kunde.getPassword());
+            updateCustomer.setInt(3, kunde.getId());
+            int roweffected = updateCustomer.executeUpdate();
+            if(roweffected == 1){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean updateKunde3(Kunde kunde) throws IllegalArgumentException{
+        try {
+            PreparedStatement setEjendom = getConnection().prepareStatement("UPDATE `kirk_larsen`.`kunde` SET " +
+                    "`ejendom` = ? WHERE (`id` = ?);");
+            setEjendom.setInt(1, kunde.getEjendom());
+            setEjendom.setInt(2, kunde.getId());
+            int rowaffected = setEjendom.executeUpdate();
+            if(rowaffected == 1){
+                return true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean setLoggedin (Kunde kunde, boolean logedin) {
+        try {
+            PreparedStatement setLogedIn = getConnection().prepareStatement("UPDATE `kirk_larsen`.`kunde` SET " +
+                    "`logedin` = ? WHERE (`id` = ?);");
+            setLogedIn.setBoolean(1, logedin);
+            setLogedIn.setInt(2, kunde.getId());
+            int rowAffected = setLogedIn.executeUpdate();
+            if(rowAffected == 1){
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public boolean createEjendom() throws IllegalArgumentException {
@@ -117,7 +184,8 @@ public class Data {
         try {
             PreparedStatement createKunde = getConnection().prepareStatement("INSERT INTO `kirk_larsen`.`kunde` " +
                     "(`username`, `password`, `fornavn`, `efternavn`, `telefon`, `vejnavn`, `email`, `etage`, `husnr`, " +
-                    "`boligLejlighed`, `ejendomGodkendt`, `ejendom`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+                    "`boligLejlighed`, `ejendomGodkendt`, `ejendom`, `logedin`) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?);");
 
             createKunde.setString(1, kunde.getUsername());
             createKunde.setString(2, kunde.getPassword());
@@ -131,6 +199,7 @@ public class Data {
             createKunde.setBoolean(10, kunde.isBoligLejlighed());
             createKunde.setBoolean(11, kunde.isEjendomGodkendt());
             createKunde.setInt(12, kunde.getEjendom());
+            createKunde.setBoolean(13, kunde.isLogedin());
             int rowAffected = createKunde.executeUpdate();
             if (rowAffected == 1) {
                 return true;
@@ -142,15 +211,17 @@ public class Data {
     }
     public boolean createOrdre(Ordre ordre) throws IllegalArgumentException {
         try {
-            PreparedStatement createOrdre = getConnection().prepareStatement("INSERT INTO kirk_larsen.ordre" +
-                    " ('brugernavn', 'emne', 'beskrivelse', 'telefon') VALUES (?, ?, ?, ?)");
+            PreparedStatement createOrdre = getConnection().prepareStatement("INSERT INTO `kirk_larsen`.`ordre` " +
+                    "(`emne`, `beskrivelse`, `telefon`, `kunde`) VALUES (?,?,?,?);");
 
-            createOrdre.setString(1, ordre.getNavn());
-            createOrdre.setString(2, ordre.getEmne());
-            createOrdre.setString(3, ordre.getBeskrivelse());
-            createOrdre.setString(4, ordre.getTelefon());
+            createOrdre.setString(1, ordre.getEmne());
+            createOrdre.setString(2, ordre.getBeskrivelse());
+            createOrdre.setString(3, ordre.getTelefon());
+            createOrdre.setInt(4, ordre.getKunde());
+
             int rowAffected = createOrdre.executeUpdate();
-            if (rowAffected == 1) {
+
+            if (rowAffected == 1 ) {
                 return true;
             }
         } catch (SQLException e) {
@@ -222,10 +293,36 @@ public class Data {
 
             while (resultSet.next()) {
                 Ordre ordre = new Ordre();
-                ordre.setNavn(resultSet.getString("brugernavn"));
+                ordre.setId(resultSet.getInt("ordre_nr"));
                 ordre.setEmne(resultSet.getString("emne"));
                 ordre.setBeskrivelse(resultSet.getString("beskrivelse"));
                 ordre.setTelefon(resultSet.getString("telefon"));
+                ordre.setKunde(resultSet.getInt("kunde"));
+                ordre.setMedarbejder(resultSet.getInt("medarbejder"));
+                ordres.add(ordre);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return ordres;
+    }
+    public static ArrayList<Ordre> getOrdreforKunde(Kunde kunde){
+        ResultSet resultSet = null;
+        ArrayList<Ordre> ordres = new ArrayList<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            PreparedStatement ps = getConnection().prepareStatement("SELECT*FROM kirk_larsen.ordre WHERE kunde = ?");
+            ps.setInt(1, kunde.getId());
+            resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                Ordre ordre = new Ordre();
+                ordre.setId(resultSet.getInt("ordre_nr"));
+                ordre.setEmne(resultSet.getString("emne"));
+                ordre.setBeskrivelse(resultSet.getString("beskrivelse"));
+                ordre.setTelefon(resultSet.getString("telefon"));
+                ordre.setKunde(resultSet.getInt("kunde"));
+                ordre.setMedarbejder(resultSet.getInt("medarbejder"));
                 ordres.add(ordre);
             }
         } catch (SQLException | ClassNotFoundException e) {

@@ -11,8 +11,11 @@ import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.polymertemplate.Id;
+import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouterLayout;
 import com.vaadin.flow.templatemodel.TemplateModel;
 import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
@@ -27,7 +30,7 @@ import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 @JsModule("./front-page-again.js")
 @PageTitle("Forside")
 @Route("forside")
-public class FrontPageLayout extends PolymerTemplate<FrontPageLayout.FrontPageAgainModel> {
+public class FrontPageLayout extends PolymerTemplate<FrontPageLayout.FrontPageAgainModel> implements RouterLayout {
 
     @Id("Header")
     private HorizontalLayout header;

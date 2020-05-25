@@ -1,5 +1,6 @@
 package com.gmail.simon.ui.views.kundeView;
 
+import com.gmail.simon.backend.Kunde;
 import com.gmail.simon.backend.Ordre;
 import com.gmail.simon.backend.database.Data;
 import com.gmail.simon.ui.components.FlexBoxLayout;
@@ -13,11 +14,15 @@ import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.Html;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.shared.Registration;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 @PageTitle("Ny ordre")
@@ -30,11 +35,28 @@ public class nyOrdre extends ViewFrameUser {
     private String brugernavnS, emneS, beskrivelseS, telefonS;
     private Data data;
     private Registration registration;
+    private Kunde currentKunde;
+    private Ordre ordre;
 
     public nyOrdre() {
+        this.data = new Data();
+        this.ordre = new Ordre();
+        initKunde();
         setViewContent(createHeader(), createContent());
-        removeRegistration();
         changeButtonSettings("Ordre");
+    }
+    private Kunde getKunde(){
+        ArrayList<Kunde> kunder = data.getKunder();
+        Kunde kunde = new Kunde();
+        for(Kunde kunde1 : kunder){
+            if (kunde1.isLogedin() == true){
+                kunde = kunde1;
+            }
+        }
+        return kunde;
+    }
+    private void initKunde(){
+        this.currentKunde = getKunde();
     }
 
     private Component createHeader() {
@@ -72,29 +94,26 @@ public class nyOrdre extends ViewFrameUser {
 
     private FormLayout createDetails() {
         brugernavn = new TextField();
-        brugernavn.setPlaceholder("Sir");
-        brugernavn.setPreventInvalidInput(true);
-        brugernavn.setClearButtonVisible(true);
-        brugernavn.addValueChangeListener(event -> setBrugernavnS(
-                event.getValue()));
+        brugernavn.setValue(currentKunde.getUsername());
+        brugernavn.setReadOnly(true);
 
         emne = new TextField();
         emne.setPlaceholder("Fx. Ejendomsbeskatning");
-        emne.addValueChangeListener(event -> setEmneS(event.getValue()));
+        emne.setRequired(true);
+        emne.addValueChangeListener(event -> ordre.setEmne(event.getValue()));
 
-        beskrivelse= new TextField();
+        beskrivelse = new TextField();
         beskrivelse.setPlaceholder("Fx. Jeg ønsker hjælp til min grundskyld");
         beskrivelse.setWidthFull();
+        beskrivelse.setRequired(true);
         beskrivelse.setHeightFull();
-        beskrivelse.addValueChangeListener(event -> setBeskrivelseS(event.getValue()));
+        beskrivelse.addValueChangeListener(event -> ordre.setBeskrivelse(event.getValue()));
+
 
         telefon = new TextField();
-        telefon.setPlaceholder("Skriv dit Telefonnummer her");
-        telefon.setPattern("[0-9.,]*");
-        telefon.setClearButtonVisible(true);
-        telefon.setPreventInvalidInput(true);
-        telefon.addValueChangeListener(event -> setTelefonS(event.getValue()));
-
+        telefon.setPrefixComponent(new Span("+45 "));
+        telefon.setValue(currentKunde.getTelefon());
+        telefon.setReadOnly(true);
 
         FormLayout form = new FormLayout();
         form.addClassNames(LumoStyles.Padding.Bottom.L,
@@ -105,9 +124,9 @@ public class nyOrdre extends ViewFrameUser {
                 new FormLayout.ResponsiveStep("21em", 2,
                         FormLayout.ResponsiveStep.LabelsPosition.TOP));
         form.addFormItem(brugernavn, "Dit brugernavn");
+        form.addFormItem(telefon, "Telefon");
         form.addFormItem(emne, "Emne");
         form.addFormItem(beskrivelse, "Beskrivelse");
-        form.addFormItem(telefon, "Telefon");
 
         return form;
     }
@@ -117,27 +136,31 @@ public class nyOrdre extends ViewFrameUser {
         return create;
     }
     public void changeButtonSettings(String createString) {
-        Ordre ordre = new Ordre();
-        ordre.setNavn(getBrugernavnS());
-        ordre.setEmne(getEmneS());
-        ordre.setBeskrivelse(getBeskrivelseS());
-        ordre.setTelefon(getTelefonS());
-
-        registration = create.addClickListener(e -> {
-            if (data.createOrdre(ordre)) {
-                Notification.show("Ordre oprettet");
-                create.getUI().ifPresent(ui -> ui.navigate(createString));
-            } else {
-                Notification.show("Kan ikke oprette ordre");
+        ordre.setBeskrivelse(beskrivelse.getValue());
+        ordre.setTelefon(currentKunde.getTelefon());
+        ordre.setKunde(currentKunde.getId());
+        create.addClickListener(e -> {
+            if (textfields(emne, beskrivelse)) {
+                if (data.createOrdre(ordre)) {
+                    Notification.show("Ordre oprettet");
+                    create.getUI().ifPresent(ui -> ui.navigate(createString));
+                } else {
+                    Notification.show("Kan ikke oprette ordre");
+                }
             }
-        });
+            else {
+                Notification.show("Udfyld venligst alle påkrævede fetler");
+            }
+        }  );
     }
-    public void removeRegistration(){
-        if(registration != null) {
-            registration.remove();
+    public boolean textfields(TextField... textFields){
+        boolean isempty = true;
+        for(TextField textField : textFields){
+            if(textField.getValue() == "")
+                isempty = false;
         }
+        return isempty;
     }
-
 
     public String getBrugernavnS() {
         return brugernavnS;

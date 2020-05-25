@@ -42,15 +42,21 @@ public class Konsulenter extends SplitViewFrame {
 
     private Grid createGrid() {
         grid = new Grid<>();
-        dataProvider = DataProvider.ofCollection(Data.getkonsultner());
+        dataProvider = DataProvider.ofCollection(Data.getmedarbejdere());
         grid.setDataProvider(dataProvider);
         grid.setSizeFull();
 
-        grid.addColumn(Konsulenter2::getRolle)
+        grid.addColumn(Konsulenter2::getUsername)
                 .setAutoWidth(true)
                 .setFlexGrow(0)
                 .setFrozen(true)
-                .setHeader("ID")
+                .setHeader("Username")
+                .setSortable(true);
+        grid.addColumn(Konsulenter2::getPassword)
+                .setAutoWidth(true)
+                .setFlexGrow(0)
+                .setFrozen(true)
+                .setHeader("Password")
                 .setSortable(true);
         grid.addColumn(new ComponentRenderer<>(this::createUserInfo))
                 .setAutoWidth(true)
@@ -67,7 +73,7 @@ public class Konsulenter extends SplitViewFrame {
 
     }
     private void filter() {
-        dataProvider.setFilterByValue(Konsulenter2::getRolle, Konsulenter2.Role.ADVOKAT);
+        //dataProvider.setFilterByValue(Konsulenter2::getRolle, Konsulenter2.Role.ADVOKAT);
     }
 
 }

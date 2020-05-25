@@ -2,15 +2,12 @@ package com.gmail.simon.backend;
 
 public class Konsulenter2 {
 
-    public enum Role {
-        ADVOKAT, KONSULENT
-    }
-    public String getRolle() {
-        return rolle;
+    public int getId() {
+        return id;
     }
 
-    public void setRolle(String rolle) {
-        this.rolle = rolle;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getPassword() {
@@ -29,14 +26,44 @@ public class Konsulenter2 {
         this.username = username;
     }
 
-    public Konsulenter2(String rolle, String password, String username) {
-        this.rolle = rolle;
+    public boolean isAnsat() {
+        return ansat;
+    }
+
+    public void setAnsat(boolean ansat) {
+        this.ansat = ansat;
+    }
+
+    public int getArtikel() {
+        return artikel;
+    }
+
+    public void setArtikel(int artikel) {
+        this.artikel = artikel;
+    }
+
+    public boolean isKonsulentEllerAdvokat() {
+        return konsulentEllerAdvokat;
+    }
+
+    public void setKonsulentEllerAdvokat(boolean konsulentEllerAdvokat) {
+        this.konsulentEllerAdvokat = konsulentEllerAdvokat;
+    }
+
+    public Konsulenter2(int id, String password, String username, boolean ansat, int artikel, boolean konsulentEllerAdvokat) {
+        this.id = id;
         this.password = password;
         this.username = username;
+        this.ansat = ansat;
+        this.artikel = artikel;
+        this.konsulentEllerAdvokat = konsulentEllerAdvokat;
     }
     public Konsulenter2(){}
 
-    private String rolle;
+    private int id;
     private String password;
     private String username;
+    private boolean ansat;
+    private int artikel;
+    private boolean konsulentEllerAdvokat;
 }

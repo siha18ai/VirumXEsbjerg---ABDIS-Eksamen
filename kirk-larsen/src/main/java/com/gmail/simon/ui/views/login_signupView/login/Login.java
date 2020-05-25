@@ -31,10 +31,12 @@ public class Login extends FrontPageLayout {
     private Span span;
     private LoginForm loginForm;
     private Button back;
+    private Data data;
     /**
      * Creates a new LoginAgain.
      */
     public Login() throws SQLException {
+        this.data = new Data();
         initLogin();
         initLogin2();
         changeContent(initButton(), backButton());
@@ -50,17 +52,25 @@ public class Login extends FrontPageLayout {
             boolean isAuthenticated = false;
             boolean brugerAuthenticate = false;
 
+            Kunde kunde = new Kunde();
+
+            ArrayList<Kunde> kunder = data.getKunder();
+            for(Kunde kunde1 : kunder){
+                data.setLoggedin(kunde1, false);
+            }
+            kunde = getKunde(e, kunder);
+
             isAuthenticated = authenticate(e);
             brugerAuthenticate = authenticate2(e);
 
             if(isAuthenticated){
-               Notification.show("Successfully logged in");
+                Notification.show("Successfully logged in");
               loginForm.getUI().ifPresent(ui -> ui.navigate("ejendomme"));
 
            }
-            else if(brugerAuthenticate){
+            else if(brugerAuthenticate && data.setLoggedin(kunde, true)){
                 Notification.show("User logged in");
-                loginForm.getUI().ifPresent(ui -> ui.navigate("kunde-ejendom"));
+                loginForm.getUI().ifPresent(ui -> ui.navigate("kunde"));
             }
             else{
                 loginForm.setError(true);
@@ -74,10 +84,10 @@ public class Login extends FrontPageLayout {
         return back;
     }
     public void initLogin2(){
-        konsulenters = Data.getkonsultner();
+        konsulenters = data.getmedarbejdere();
     }
     public void initLogin(){
-        kunder = Data.getKunder();
+        kunder = data.getKunder();
     }
 
     public boolean authenticate(AbstractLogin.LoginEvent loginEvent){
@@ -92,6 +102,15 @@ public class Login extends FrontPageLayout {
             }
         }
         return loginEventboolean;
+    }
+    public Kunde getKunde(AbstractLogin.LoginEvent loginEvent, ArrayList<Kunde> kunder){
+        Kunde kunde = new Kunde();
+        for(Kunde kunde1 : kunder){
+            if(kunde1.getUsername().toLowerCase().equals(loginEvent.getUsername().toLowerCase())){
+                kunde = kunde1;
+            }
+        }
+        return kunde;
     }
     public boolean authenticate2(AbstractLogin.LoginEvent loginEvent){
         boolean brugerLogin = false;
