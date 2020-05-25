@@ -330,4 +330,63 @@ public class Data {
         }
         return ordres;
     }
+    public boolean createArtikel(Artikler artikel)throws IllegalArgumentException{
+        try {
+            PreparedStatement createArtikel = getConnection().prepareStatement("INSERT INTO `kirk_larsen`.`artikler` " +
+                    "(`emne`, `tekst`, `dato`) VALUES (?, ?, CURDATE());");
+
+            createArtikel.setString(1, artikel.getEmne());
+            createArtikel.setString(2, artikel.getTekst());
+
+            int rowAffected = createArtikel.executeUpdate();
+
+            if(rowAffected == 1){
+                return true;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean deleteArtikel(Artikler artikler) throws IllegalArgumentException{
+        try {
+            PreparedStatement deleteArtikel = getConnection().prepareStatement("DELETE FROM artikler where artikel_id = ?;");
+
+            deleteArtikel.setInt(1, artikler.getArtikel_id());
+
+            int rowAffected = deleteArtikel.executeUpdate();
+
+            if(rowAffected == 1){
+                return true;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public boolean updateKundeInformation(Kunde kunde)throws IllegalArgumentException{
+        try {
+            PreparedStatement updateKunde = getConnection().prepareStatement("UPDATE `kirk_larsen`.`kunde` SET " +
+                    "`username` = ?, `password` = ?, `fornavn` = ?, `telefon` = ?, `email` " +
+                    "= ? WHERE (`id` = ?);");
+
+            updateKunde.setString(1, kunde.getUsername());
+            updateKunde.setString(2, kunde.getPassword());
+            updateKunde.setString(3, kunde.getFirst_name());
+            updateKunde.setString(4, kunde.getTelefon());
+            updateKunde.setString(5, kunde.getEmail());
+            updateKunde.setInt(6, kunde.getId());
+
+            int rowAffected = updateKunde.executeUpdate();
+            if(rowAffected == 1){
+                return true;
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

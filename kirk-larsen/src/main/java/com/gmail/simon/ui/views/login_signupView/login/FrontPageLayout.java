@@ -4,6 +4,7 @@ import com.gmail.simon.ui.components.FlexBoxLayout;
 import com.gmail.simon.ui.components.navigation.drawer.NaviMenu;
 import com.gmail.simon.ui.util.UIUtils;
 import com.gmail.simon.ui.util.css.FlexDirection;
+import com.gmail.simon.ui.views.About;
 import com.vaadin.flow.component.*;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Image;
@@ -78,7 +79,7 @@ public class FrontPageLayout extends PolymerTemplate<FrontPageLayout.FrontPageAg
         NaviMenu naviMenu = new NaviMenu();
         Image image = new Image();
         image.setSrc(UIUtils.IMG_PATH + "logos/Kirk-Larsen-logo.png");
-        naviMenu.addNaviItem(image, "", FrontPageLayout.class);
+        naviMenu.addNaviItem(image, "", About.class);
         FlexBoxLayout flexBoxLayout = new FlexBoxLayout(naviMenu);
         flexBoxLayout.setFlexDirection(FlexDirection.COLUMN);
         flexBoxLayout.setAlignItems(FlexComponent.Alignment.CENTER);

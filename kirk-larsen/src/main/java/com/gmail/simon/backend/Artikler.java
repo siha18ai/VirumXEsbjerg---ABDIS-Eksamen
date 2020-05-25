@@ -1,5 +1,7 @@
 package com.gmail.simon.backend;
 
+import com.vaadin.flow.component.button.Button;
+
 import java.sql.Timestamp;
 
 public class Artikler {
