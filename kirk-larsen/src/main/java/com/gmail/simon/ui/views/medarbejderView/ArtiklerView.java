@@ -47,7 +47,7 @@ public class ArtiklerView extends SplitViewFrame {
     private ListDataProvider<Artikler> dataProvider;
     private Button update;
 
-    private static final String CLASS_NAME = "ordre";
+    private static final String CLASS_NAME = "artikel";
     public static final String MAX_WIDTH = "1024px";
     private Kunde currentKunde;
     private Data data;
@@ -123,7 +123,7 @@ public class ArtiklerView extends SplitViewFrame {
     }
 
     private Component createOrdre() {
-        FlexBoxLayout header = createHeader(VaadinIcon.EDIT, "Ordre");
+        FlexBoxLayout header = createHeader(VaadinIcon.EDIT, "Artikel");
         Button nyOrdre = createOrdreButton();
 
         Tabs tabs = new Tabs();
@@ -143,7 +143,7 @@ public class ArtiklerView extends SplitViewFrame {
         return ordre;
     }
     public Button createOrdreButton() {
-        artikel = new Button("Ny ordre", new Icon(VaadinIcon.PLUS));
+        artikel = new Button("Ny artikel", new Icon(VaadinIcon.PLUS));
         artikel.setIconAfterText(true);
         return artikel;
     }

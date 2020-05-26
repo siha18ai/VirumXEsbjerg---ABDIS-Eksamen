@@ -2,6 +2,7 @@ package com.gmail.simon.ui;
 
 import com.gmail.simon.ui.views.About;
 import com.gmail.simon.ui.views.frontPageView.Benefits;
+import com.gmail.simon.ui.views.frontPageView.Grundskyld;
 import com.gmail.simon.ui.views.frontPageView.Home;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.HasElement;
@@ -124,6 +125,7 @@ public class MainLayout extends FlexBoxLayout
 		menu.addNaviItem(VaadinIcon.HOME, "Home", Home.class);
 		menu.addNaviItem(VaadinIcon.INSTITUTION, "About", About.class);
 		menu.addNaviItem(VaadinIcon.DOLLAR, "Benefits", Benefits.class);
+		menu.addNaviItem(VaadinIcon.EXCHANGE, "Grundskyld", Grundskyld.class);
 	}
 
 	/**

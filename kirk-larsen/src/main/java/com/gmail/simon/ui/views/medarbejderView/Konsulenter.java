@@ -48,16 +48,10 @@ public class Konsulenter extends SplitViewFrame {
 
         grid.addColumn(Konsulenter2::getUsername)
                 .setAutoWidth(true)
-                .setFlexGrow(0)
-                .setFrozen(true)
-                .setHeader("Username")
-                .setSortable(true);
+                .setHeader("Username");
         grid.addColumn(Konsulenter2::getPassword)
                 .setAutoWidth(true)
-                .setFlexGrow(0)
-                .setFrozen(true)
-                .setHeader("Password")
-                .setSortable(true);
+                .setHeader("Password");
         grid.addColumn(new ComponentRenderer<>(this::createUserInfo))
                 .setAutoWidth(true)
                 .setHeader("Name");
@@ -65,11 +59,11 @@ public class Konsulenter extends SplitViewFrame {
     }
 
     private Component createUserInfo(Konsulenter2 konsulenter2) {
-        ListItem item = new ListItem(
-                new Initials(konsulenter2.getUsername()), konsulenter2.getPassword());
-        item.setPadding(Vertical.XS);
-        item.setSpacing(Right.M);
-        return item;
+            ListItem item = new ListItem(
+                    new Initials(konsulenter2.getUsername()), konsulenter2.getPassword());
+            item.setPadding(Vertical.XS);
+            item.setSpacing(Right.M);
+            return item;
 
     }
     private void filter() {
