@@ -71,6 +71,7 @@ public class Kunde {
     private int husnummer;
     private boolean boligLejlighed;
     private int ejendom;
+    private boolean randomBoolean;
 
     public boolean isLogedin() {
         return logedin;
@@ -91,7 +92,7 @@ public class Kunde {
 
     public Kunde(int id, String first_name, String last_name, String email, String username, String password,
                  String telefon, String vejnavn, int etage, int husnummer, boolean boligLejlighed,
-                 boolean ejendomGodkendt, int ejendom, boolean logedin) {
+                 boolean ejendomGodkendt, int ejendom, boolean logedin, boolean randomBoolean) {
 
         this.id = id;
         this.first_name = first_name;
@@ -106,6 +107,7 @@ public class Kunde {
         this.ejendomGodkendt = ejendomGodkendt;
         this.ejendom = ejendom;
         this.logedin = logedin;
+        this.randomBoolean = randomBoolean;
     }
 
     private boolean ejendomGodkendt;
@@ -164,5 +166,9 @@ public class Kunde {
 
     public void setEjendom(int ejendom) {
         this.ejendom = ejendom;
+    }
+
+    public boolean isRandomBoolean() {
+        return randomBoolean;
     }
 }
